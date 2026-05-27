@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelulusan SMP Negeri 4 Amlapura</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4ecef 100%);
+            --primary: #4a90e2;
+            --primary-hover: #357abd;
+            --text-main: #2c3e50;
+            --text-muted: #7f8c8d;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 10px 30px rgba(168, 180, 194, 0.3);
+            --success: #2ecc71;
+            --danger: #e74c3c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-main);
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        /* Bagian Identitas Sekolah */
+        .header-school {
+            margin-bottom: 30px;
+        }
+
+        .logo-sekolah {
+            width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1a365d;
+            line-height: 1.3;
+        }
+
+        .sub-title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        /* Form Input */
+        .search-box {
+            margin-top: 25px;
+            position: relative;
+        }
+
+        .input-nisn {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            letter-spacing: 2px;
+            color: #2d3748;
+            background-color: #f8fafc;
+        }
+
+        .input-nisn:focus {
+            border-color: var(--primary);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.15);
+        }
+
+        .btn-periksa {
+            width: 100%;
+            margin-top: 15px;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            background-color: var(--primary);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+
+        .btn-periksa:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        .btn-periksa:active {
+            transform: translateY(0);
+        }
+
+        /* Panel Hasil Pengumuman */
+        .result-panel {
+            display: none;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px dashed #e2e8f0;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .table-result {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .table-result td {
+            padding: 10px 5px;
+            font-size: 0.95rem;
+        }
+
+        .table-result td.label {
+            color: var(--text-muted);
+            font-weight: 500;
+            width: 30%;
+        }
+
+        .table-result td.value {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Status Badge */
+        .badge-status {
+            display: inline-block;
+            padding: 10px 25px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 12px;
+            margin: 10px 0 20px 0;
+            letter-spacing: 1px;
+        }
+
+        .badge-status.lulus {
+            background-color: rgba(46, 204, 113, 0.15);
+            color: var(--success);
+            border: 2px solid var(--success);
+        }
+
+        .badge-status.tidak-lulus {
+            background-color: rgba(231, 76, 60, 0.15);
+            color: var(--danger);
+            border: 2px solid var(--danger);
+        }
+
+        .pesan-box {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: #4a5568;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+            text-align: left;
+        }
+
+        .btn-download {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #2d3748;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background-color: #1a202c;
+            transform: scale(1.02);
+        }
+
+        /* Notifikasi Error */
+        .error-message {
+            display: none;
+            margin-top: 20px;
+            padding: 12px;
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--danger);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(231, 76, 60, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-school">
+        <img class="logo-sekolah" src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Logo_Tut_Wuri_Handayani.png" alt="Logo SMP Negeri 4 Amlapura">
+        <h1>SMP NEGERI 4 AMLAPURA</h1>
+        <div class="sub-title">Sistem Informasi Pengumuman Kelulusan Siswa</div>
+    </div>
+
+    <div class="search-box">
+        <input type="text" id="inputNisn" class="input-nisn" placeholder="MASUKKAN NISN ANDA" maxlength="10" autocomplete="off">
+        <button type="button" class="btn-periksa" onclick="periksaKelulusan()">PERIKSA KELULUSAN</button>
+    </div>
+
+    <div id="errorBox" class="error-message"></div>
+
+    <div id="resultPanel" class="result-panel">
+        <table class="table-result">
+            <tr>
+                <td class="label">Nama</td>
+                <td class="value" id="resNama">-</td>
+            </tr>
+            <tr>
+                <td class="label">NISN</td>
+                <td class="value" id="resNisn">-</td>
+            </tr>
+            <tr>
+                <td class="label">Kelas</td>
+                <td class="value" id="resKelas">-</td>
+            </tr>
+        </table>
+
+        <div id="resStatus" class="badge-status">-</div>
+        <div id="resPesan" class="pesan-box">-</div>
+        
+        <a id="resLink" href="#" target="_blank" class="btn-download">⬇️ DOWNLOAD SURAT KETERANGAN LULUS (SKL)</a>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 SMP Negeri 4 Amlapura. All Rights Reserved.
+    </div>
+</div>
+
+<script>
+    // DATA KELULUSAN SISWA (Disinkronkan langsung dari Spreadsheet Anda)
+    // Format kolom: NIS, NISN, NAMA, KELAS, STATUS, PESAN, LINK_SKL
+    const dataSiswa = [
+        {
+            nis: "8012",
+            nisn: "0081919125",
+            nama: "RAHMADANTI ZALFA SETIYAWAN",
+            kelas: "XII DKV 1",
+            status: "LULUS",
+            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
+            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
+        },
+        {
+            nis: "8013",
+            nisn: "0081919126",
+            nama: "VARISHA ASTILA SETIYAWAN",
+            kelas: "XII DKV 1",
+            status: "LULUS",
+            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
+            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
+        },
+        {
+            nis: "8014",
+            nisn: "0081919127",
+            nama: "WAHYU NUR HIDAYAT",
+            kelas: "XII DKV 1",
+            status: "LULUS",
+            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
+            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
+        }
+    ];
+
+    function periksaKelulusan() {
+        const inputNisn = document.getElementById('inputNisn').value.trim();
+        const errorBox = document.getElementById('errorBox');
+        const resultPanel = document.getElementById('resultPanel');
+
+        // Sembunyikan panel hasil dan error terlebih dahulu saat memeriksa ulang
+        errorBox.style.display = 'none';
+        resultPanel.style.display = 'none';
+
+        // Validasi input kosong
+        if (inputNisn === "") {
+            errorBox.innerText = "⚠️ Mohon masukkan NISN terlebih dahulu!";
+            errorBox.style.display = 'block';
+            return;
+        }
+
+        // Cari data berdasarkan NISN
+        const siswa = dataSiswa.find(s => s.nisn === inputNisn);
+
+        if (siswa) {
+            // Isi data ke elemen HTML hasil
+            document.getElementById('resNama').innerText = siswa.nama;
+            document.getElementById('resNisn').innerText = siswa.nisn;
+            document.getElementById('resKelas').innerText = siswa.kelas;
+            document.getElementById('resPesan').innerText = siswa.pesan;
+            
+            // Konfigurasi Link SKL
+            const linkBtn = document.getElementById('resLink');
+            if(siswa.link_skl && siswa.link_skl !== "#") {
+                linkBtn.href = siswa.link_skl;
+                linkBtn.style.display = 'inline-block';
+            } else {
+                linkBtn.style.display = 'none';
+            }
+
+            // Atur Badge Status
+            const statusBadge = document.getElementById('resStatus');
+            statusBadge.innerText = siswa.status.toUpperCase();
+            
+            if (siswa.status.toUpperCase() === "LULUS") {
+                statusBadge.className = "badge-status lulus";
+            } else {
+                statusBadge.className = "badge-status tidak-lulus";
+            }
+
+            // Tampilkan Panel Hasil
+            resultPanel.style.display = 'block';
+
+        } else {
+            // Jika NISN tidak ditemukan
+            errorBox.innerText = "❌ Data NISN tidak ditemukan. Periksa kembali nomor yang Anda masukkan atau hubungi pihak sekolah.";
+            errorBox.style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>
