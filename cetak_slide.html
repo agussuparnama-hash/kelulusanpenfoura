@@ -3,24 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selebrasi Kelulusan Kelas IX</title>
+    <title>Slide Selebrasi Kelulusan Kelas IX</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
         :root {
-            --primary: #0f172a;
-            --accent: #fbbf24; /* Gold */
-            --rose: #e11d48;
-            --glass: rgba(255, 255, 255, 0.05);
-            --slide-duration: 17143ms; /* Total 60 Menit / 210 Siswa */
+            --bg-dark: #090d16;
+            --panel-glass: rgba(255, 255, 255, 0.03);
+            --accent-gold: #fbbf24;
+            --accent-rose: #e11d48;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --slide-duration: 17143ms; /* Durasi otomatis agar 210 siswa pas 60 menit */
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
 
         body {
-            background-color: #020617;
+            background-color: var(--bg-dark);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,195 +36,245 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* 1. STAGE & BACKGROUND */
-        .stage {
+        /* CONTAINER UTAMA (BENTUK SLIDE LANDSCAPE) */
+        .slide-container {
             width: 1280px;
             height: 720px;
             position: relative;
             background: #0f172a;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid rgba(255,255,255,0.1);
+            border: 3px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
         }
 
-        /* Mesh Gradient Background */
-        .mesh-bg {
+        /* CORAK BACKGROUND MESH GRADIENT YANG DIPERINDAH */
+        .background-pattern {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.5) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(159, 18, 57, 0.3) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(251, 191, 36, 0.1) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, rgba(88, 28, 135, 0.4) 0px, transparent 50%);
-            z-index: 0;
+                radial-gradient(at 10% 10%, rgba(30, 64, 175, 0.6) 0px, transparent 45%),
+                radial-gradient(at 90% 10%, rgba(159, 18, 57, 0.4) 0px, transparent 45%),
+                radial-gradient(at 90% 90%, rgba(251, 191, 36, 0.15) 0px, transparent 45%),
+                radial-gradient(at 10% 90%, rgba(88, 28, 135, 0.5) 0px, transparent 45%);
+            z-index: 1;
         }
 
-        .floating-shape {
+        /* DEKORASI PARTIKEL MELAYANG */
+        .glow-orb {
             position: absolute;
-            background: linear-gradient(45deg, var(--rose), var(--accent));
-            filter: blur(80px);
+            background: linear-gradient(45deg, var(--accent-rose), var(--accent-gold));
+            filter: blur(90px);
             border-radius: 50%;
-            opacity: 0.2;
-            z-index: 0;
-            animation: move 20s infinite alternate;
+            opacity: 0.15;
+            z-index: 1;
+            animation: floatingEffect 25s infinite alternate ease-in-out;
         }
 
-        @keyframes move {
-            from { transform: translate(0, 0); }
-            to { transform: translate(100px, 50px); }
+        @keyframes floatingEffect {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(120px, -60px) scale(1.2); }
         }
 
-        /* 2. SLIDE ANIMATION (TRANSLATION) */
-        .slide {
-            position: absolute;
+        /* WRAPPER UNTUK INJEKSI DATA */
+        #slide-wrapper {
             width: 100%;
             height: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            padding: 50px 80px;
-            gap: 40px;
-            align-items: center;
-            z-index: 2;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-            visibility: hidden;
-        }
-
-        .slide.active {
-            opacity: 1;
-            transform: translateY(0);
-            visibility: visible;
-        }
-
-        /* 3. CONTENT STYLING */
-        .text-content {
-            display: flex;
-            flex-direction: column;
-            z-index: 5;
-        }
-
-        .badge {
-            background: var(--rose);
-            color: white;
-            padding: 6px 20px;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            width: fit-content;
-            margin-bottom: 20px;
-        }
-
-        .student-name {
-            font-family: 'Poppins', sans-serif;
-            font-size: 42px;
-            color: #fff;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 30px;
-        }
-
-        /* Info Grid - Clean & Elegant */
-        .info-card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        .info-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .info-item:last-child { border: none; }
-
-        .label { color: #94a3b8; font-weight: 400; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
-        .value { color: var(--accent); font-weight: 600; font-size: 18px; text-align: right; }
-
-        .motivation {
-            font-style: italic;
-            color: #cbd5e1;
-            font-size: 17px;
-            line-height: 1.6;
-            border-left: 3px solid var(--accent);
-            padding-left: 20px;
-        }
-
-        /* 4. PHOTO STYLING */
-        .photo-frame {
-            width: 480px;
-            height: 520px;
-            margin: 0 auto;
             position: relative;
             z-index: 5;
         }
 
-        .photo-frame::before {
-            content: "";
+        /* STRUKTUR LAYOUT GRID 50:50 (KIRI IDENTITAS, KANAN FOTO) */
+        .slide-content {
             position: absolute;
-            top: -15px; left: -15px; right: 15px; bottom: 15px;
-            border: 2px solid var(--accent);
-            border-radius: 20px;
-            z-index: -1;
+            width: 100%;
+            height: 100%;
+            display: table; /* Fallback support browser tua, dioptimasi dengan table-cell */
+            padding: 55px 70px;
+            
+            /* Efek Animasi Translasi / Peralihan */
+            opacity: 0;
+            transform: translateY(25px) scale(0.99);
+            transition: opacity 1000ms ease-out, transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .photo-frame img {
+        /* Trigger Aktif Slide */
+        .slide-content.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .left-column {
+            display: table-cell;
+            width: 55%;
+            vertical-align: middle;
+            padding-right: 50px;
+        }
+
+        .right-column {
+            display: table-cell;
+            width: 45%;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        /* SEBELAH KIRI: KOMPONEN TEKS & IDENTITAS */
+        .celebration-tag {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--accent-rose), #be123c);
+            color: var(--text-light);
+            padding: 6px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+        }
+
+        .student-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 38px;
+            color: var(--text-light);
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 30px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Desain Tabel Identitas Semi Transparan */
+        .identity-card {
+            background: var(--panel-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 14px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+        }
+
+        .info-row {
+            display: block;
+            padding: 11px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        /* Label Identitas Sebelah Kiri */
+        .info-label {
+            display: inline-block;
+            width: 140px;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* Nilai/Data Sebelah Kanan */
+        .info-value {
+            display: inline-block;
+            color: var(--accent-gold);
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        /* Box Kalimat Mutiara / Motivasi */
+        .quote-box {
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .quote-text {
+            font-style: italic;
+            color: #cbd5e1;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* SEBELAH KANAN: BINGKAI FOTO SIMETRIS */
+        .photo-wrapper {
+            display: inline-block;
+            width: 410px;
+            height: 510px;
+            position: relative;
+        }
+
+        /* Efek Ornamen Bingkai Emas di Belakang Foto */
+        .photo-wrapper::before {
+            content: "";
+            position: absolute;
+            top: -12px; left: -12px; right: 12px; bottom: 12px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 20px;
+            z-index: 1;
+            opacity: 0.7;
+        }
+
+        .photo-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 20px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-            border: 8px solid rgba(255,255,255,0.05);
+            border: 6px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            position: relative;
+            z-index: 2;
         }
 
-        /* 5. UI ELEMENTS */
-        .progress-container {
-            position: absolute; bottom: 0; left: 0;
+        /* INDIKATOR METRIK UI */
+        .progress-line-container {
+            position: absolute;
+            bottom: 0; left: 0;
             width: 100%; height: 6px;
-            background: rgba(255,255,255,0.05); z-index: 100;
+            background: rgba(255, 255, 255, 0.05);
+            z-index: 10;
         }
 
-        .progress-bar {
+        .progress-line-bar {
             height: 100%; width: 0%;
-            background: linear-gradient(90deg, var(--accent), var(--rose));
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-rose));
         }
 
-        .counter {
-            position: absolute; top: 30px; right: 40px;
-            color: rgba(255,255,255,0.2); font-size: 14px; font-weight: 700;
+        .slide-counter {
+            position: absolute;
+            top: 30px; right: 40px;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
-        .bottom-decoration {
-            position: absolute; bottom: 20px; left: 80px;
-            color: rgba(255,255,255,0.1); font-size: 12px; letter-spacing: 2px;
+        .footer-note {
+            position: absolute;
+            bottom: 20px; left: 70px;
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
-<div class="stage" id="stage">
-    <div class="mesh-bg"></div>
-    <div class="floating-shape" style="width: 400px; height: 400px; top: -100px; left: -100px;"></div>
-    <div class="floating-shape" style="width: 300px; height: 300px; bottom: -50px; right: -50px; animation-delay: -5s;"></div>
+<div class="slide-container">
+    <div class="background-pattern"></div>
+    <div class="glow-orb" style="width: 450px; height: 450px; top: -150px; left: -100px;"></div>
+    <div class="glow-orb" style="width: 350px; height: 350px; bottom: -80px; right: -50px; animation-delay: -6s;"></div>
 
-    <div id="slide-injector"></div>
+    <div id="slide-wrapper"></div>
     
-    <div class="progress-container"><div class="progress-bar" id="bar"></div></div>
-    <div class="bottom-decoration">SMP NEGERI - KELULUSAN TAHUN AJARAN 2023/2024</div>
+    <div class="progress-line-container"><div class="progress-line-bar" id="load-bar"></div></div>
+    <div class="footer-note">Acara Pelepasan & Kelulusan Siswa Kelas IX — Tahun Ajaran 2023/2024</div>
 </div>
 
 <script>
-    // DATA LENGKAP 210 SISWA
-    const students = [
+    // DATA DATABASE 210 SISWA LENGKAP
+    const studentsList = [
         { n: "I Gede Bagus Arinata", nis: "5945", nisn: "0108263744", g: "Laki-Laki", ttl: "Karangasem, 16 Mei 2010" },
         { n: "I Gede Putu Aditya Widiadnyana", nis: "5946", nisn: "0116947706", g: "Laki-Laki", ttl: "Karangasem, 23 Juli 2011" },
         { n: "I Kade Aditya", nis: "5947", nisn: "0101334696", g: "Laki-Laki", ttl: "Karangasem, 17 Mei 2010" },
@@ -430,71 +487,93 @@
         { n: "Putu Aditya Pratama", nis: "6134", nisn: "0102375174", g: "Laki-Laki", ttl: "Bugbug, 13 Oktober 2010" }
     ];
 
-    const motivations = [
-        "Pendidikan adalah paspor menuju masa depan, karena hari esok milik mereka yang mempersiapkannya hari ini.",
+    // BANK KATA-KATA MOTIVASI / TRANSLATION MUTIARA INDAH
+    const quotesBank = [
         "Masa depan adalah milik mereka yang percaya pada keindahan impian mereka.",
+        "Pendidikan adalah senjata paling mematikan di dunia, karena dengan itu Anda bisa mengubah dunia.",
         "Hiduplah seolah engkau mati besok. Belajarlah seolah engkau hidup selamanya.",
-        "Kesuksesan bukanlah akhir, kegagalan bukanlah fatal: Keberanian untuk berlanjutlah yang utama.",
-        "Investasi terbaik yang bisa kamu lakukan adalah investasi pada dirimu sendiri melalui pendidikan.",
-        "Tembaklah ke bulan. Bahkan jika kamu meleset, kamu akan mendarat di antara bintang-bintang.",
-        "Jangan biarkan apa yang tidak bisa kamu lakukan menghalangi apa yang bisa kamu lakukan.",
-        "Jadilah yang terbaik dari apa pun kamu saat ini."
+        "Kesuksesan bukanlah akhir dari perjalanan, melainkan sebuah keberanian untuk terus melangkah.",
+        "Investasi terbaik yang bisa kamu berikan untuk masa depanmu adalah melalui lembaran ilmu.",
+        "Gantungkan cita-citamu setinggi langit! Jika engkau jatuh, engkau akan jatuh di antara bintang-bintang.",
+        "Jangan biarkan keterbatasan masa lalu menghalangi kemegahan masa depan yang menantimu.",
+        "Jadilah versi terbaik dari dirimu sendiri dalam setiap babak petualangan barumu."
     ];
 
-    const injector = document.getElementById('slide-injector');
-    const bar = document.getElementById('bar');
-    let idx = 0;
-    const slideDuration = 17143; // 17,143 Detik per siswa (Agar total 210 siswa = 60 menit)
+    const slideWrapper = document.getElementById('slide-wrapper');
+    const loadBar = document.getElementById('load-bar');
+    let currentIdx = 0;
+    const slideInterval = 17143; // 17.143 Detik agar total 210 siswa = Pas 60 Menit
 
-    function render() {
-        const s = students[idx];
-        const m = motivations[idx % motivations.length];
+    function displaySlide() {
+        const student = studentsList[currentIdx];
+        const quote = quotesBank[currentIdx % quotesBank.length];
         
-        injector.innerHTML = `
-            <div class="slide" id="active-slide">
-                <div class="content-side">
-                    <div class="header-tag">Selamat Atas Kelulusan</div>
-                    <h1 class="student-name">${s.n}</h1>
-                    <div class="info-grid">
-                        <div class="info-row"><div class="info-label">Jenis Kelamin</div><div class="info-value">${s.g}</div></div>
-                        <div class="info-row"><div class="info-label">NIS</div><div class="info-value">${s.nis}</div></div>
-                        <div class="info-row"><div class="info-label">NISN</div><div class="info-value">${s.nisn}</div></div>
-                        <div class="info-row"><div class="info-label">TTL</div><div class="info-value">${s.ttl}</div></div>
+        // Injeksi Kode Struktur Dua Kolom Sejajar (Landscape)
+        slideWrapper.innerHTML = `
+            <div class="slide-content" id="current-active-slide">
+                <div class="left-column">
+                    <div class="celebration-tag">Selamat Atas Kelulusan</div>
+                    <h1 class="student-name">${student.n}</h1>
+                    
+                    <div class="identity-card">
+                        <div class="info-row">
+                            <span class="info-label">NIS</span>
+                            <span class="info-value">${student.nis}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">NISN</span>
+                            <span class="info-value">${student.nisn}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Gender</span>
+                            <span class="info-value">${student.g}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">TTL</span>
+                            <span class="info-value">${student.ttl}</span>
+                        </div>
                     </div>
+                    
                     <div class="quote-box">
-                        <p class="quote-text">"${m}"</p>
+                        <p class="quote-text">"${quote}"</p>
                     </div>
                 </div>
-                <div class="photo-side">
-                    <div class="photo-frame">
-                        <img src="images/${s.nisn}.JPG" onerror="this.src='https://via.placeholder.com/500x700/1e1b4b/facc15?text=Foto+Belum+Ada'" alt="${s.n}">
+                
+                <div class="right-column">
+                    <div class="photo-wrapper">
+                        <img src="images/${student.nisn}.JPG" 
+                             onerror="this.src='https://via.placeholder.com/410x510/111827/fbbf24?text=FOTO+SISWA'" 
+                             alt="Foto ${student.n}">
                     </div>
                 </div>
-                <div class="counter">${idx + 1} / ${students.length}</div>
-                <i class="fa-solid fa-graduation-cap decoration-icon"></i>
+
+                <div class="slide-counter">Siswa: ${currentIdx + 1} / ${studentsList.length}</div>
             </div>
         `;
 
-        // Animasi Translation (Slide up + Fade)
+        // Efek Translasi & Fade In Halus melalui penambahan class Active
         setTimeout(() => {
-            const dom = document.getElementById('active-slide');
-            if(dom) dom.classList.add('active');
-        }, 50);
+            const currentSlideDOM = document.getElementById('current-active-slide');
+            if(currentSlideDOM) currentSlideDOM.classList.add('active');
+        }, 60);
 
-        // Progress Bar
-        bar.style.transition = 'none';
-        bar.style.width = '0%';
+        // Reset dan jalankan animasi Progress Bar penunjuk waktu slide
+        loadBar.style.transition = 'none';
+        loadBar.style.width = '0%';
         setTimeout(() => {
-            bar.style.transition = `width ${slideDuration}ms linear`;
-            bar.style.width = '100%';
-        }, 50);
+            loadBar.style.transition = `width ${slideInterval}ms linear`;
+            loadBar.style.width = '100%';
+        }, 60);
     }
 
-    render();
+    // Eksekusi Pertama kali dijalankan
+    displaySlide();
+
+    // Perulangan Otomatis Berdurasi Total 60 Menit
     setInterval(() => {
-        idx = (idx + 1) % students.length;
-        render();
-    }, slideDuration);
+        currentIdx = (currentIdx + 1) % studentsList.length;
+        displaySlide();
+    }, slideInterval);
 </script>
 </body>
 </html>
