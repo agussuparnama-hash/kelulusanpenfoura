@@ -6,24 +6,21 @@
     <title>Slide Selebrasi Kelulusan Kelas IX</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
     
     <style>
+        /* 1. SETUP & VARS */
         :root {
             --bg-dark: #090d16;
             --panel-glass: rgba(255, 255, 255, 0.04);
             --accent-gold: #fbbf24;
             --accent-rose: #e11d48;
             --text-light: #f8fafc;
-            --text-muted: #cbd5e1; /* Membuat teks label sedikit lebih terang agar lebih kontras saat diperbesar */
-            --slide-duration: 17143ms; /* Durasi otomatis agar 210 siswa pas 60 menit */
+            --text-muted: #cbd5e1;
+            --slide-duration: 17143ms; /* Pas 60 menit untuk 210 siswa */
         }
 
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg-dark);
@@ -35,7 +32,7 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* CONTAINER UTAMA (BENTUK SLIDE LANDSCAPE) */
+        /* 2. CONTAINER SLIDE */
         .slide-container {
             width: 1280px;
             height: 720px;
@@ -46,7 +43,7 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
         }
 
-        /* CORAK BACKGROUND MESH GRADIENT */
+        /* BACKGROUND MESH GRADIENT */
         .background-pattern {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -58,7 +55,6 @@
             z-index: 1;
         }
 
-        /* DEKORASI PARTIKEL MELAYANG */
         .glow-orb {
             position: absolute;
             background: linear-gradient(45deg, var(--accent-rose), var(--accent-gold));
@@ -74,164 +70,145 @@
             100% { transform: translate(120px, -60px) scale(1.2); }
         }
 
-        /* WRAPPER UNTUK INJEKSI DATA */
-        #slide-wrapper {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            z-index: 5;
-        }
+        /* 3. LAYOUT STRUCTURE */
+        #slide-wrapper { width: 100%; height: 100%; position: relative; z-index: 5; }
 
-        /* STRUKTUR LAYOUT GRID 58:42 (KIRI IDENTITAS BESAR, KANAN FOTO) */
         .slide-content {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            display: table;
-            padding: 50px 65px;
-            
-            /* Efek Animasi Translasi / Peralihan */
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: row;
+            padding: 50px 75px;
+            align-items: center;
             opacity: 0;
-            transform: translateY(25px) scale(0.99);
+            transform: translateY(30px);
             transition: opacity 1000ms ease-out, transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+            visibility: hidden;
         }
 
-        /* Trigger Aktif Slide */
-        .slide-content.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        .slide-content.active { opacity: 1; transform: translateY(0); visibility: visible; }
 
-        .left-column {
-            display: table-cell;
-            width: 58%;
-            vertical-align: middle;
-            padding-right: 40px;
-        }
+        .left-column { width: 60%; padding-right: 40px; }
+        .right-column { width: 40%; text-align: center; }
 
-        .right-column {
-            display: table-cell;
-            width: 42%;
-            vertical-align: middle;
-            text-align: center;
-        }
-
-        /* SEBELAH KIRI: KOMPONEN TEKS & IDENTITAS SKALA BESAR */
-        .celebration-tag {
-            display: inline-block;
-            background: linear-gradient(90deg, var(--accent-rose), #be123c);
-            color: var(--text-light);
-            padding: 6px 18px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 700;
+        /* 4. TYPOGRAPHY (ESTETIK & BESAR) */
+        .ucapan-selamat {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px; /* DIPERBESAR */
+            font-weight: 800;
+            color: var(--accent-gold);
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+            letter-spacing: 6px; /* LEBIH ESTETIK */
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .garis-ucapan {
+            width: 80px;
+            height: 5px;
+            background: var(--accent-rose);
+            margin-bottom: 25px;
+            border-radius: 2px;
         }
 
         .student-name {
             font-family: 'Poppins', sans-serif;
-            font-size: 46px; /* DI PERBESAR */
-            color: var(--text-light);
+            font-size: 52px; /* SANGAT BESAR */
+            color: #ffffff;
             font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 25px;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            line-height: 1.1;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        /* Desain Tabel Identitas Ukuran Besar */
+        .student-class {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px; /* DIPERBESAR */
+            color: var(--accent-gold);
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            display: block;
+        }
+
         .identity-card {
             background: var(--panel-glass);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 25px 30px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .info-row {
-            display: block;
-            padding: 14px 0; /* Jarak baris diperlonggar */
+            display: flex;
+            padding: 12px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.07);
         }
 
-        .info-row:last-child {
-            border-bottom: none;
-        }
+        .info-row:last-child { border-bottom: none; }
 
-        /* Label Identitas Sebelah Kiri (DI PERBESAR) */
         .info-label {
-            display: inline-block;
-            width: 160px; /* Ditambah agar muat teks lebih besar */
+            width: 170px;
             color: var(--text-muted);
-            font-size: 18px; /* DI PERBESAR */
+            font-size: 18px; /* BESAR */
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
         }
 
-        /* Nilai/Data Sebelah Kanan (DI PERBESAR DAN DIPERTEGAS) */
         .info-value {
-            display: inline-block;
-            color: var(--accent-gold);
-            font-size: 22px; /* DI PERBESAR NYATA */
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            color: var(--text-light);
+            font-size: 22px; /* BESAR */
+            font-weight: 600;
         }
 
-        /* Box Kalimat Mutiara */
-        .quote-box {
-            border-left: 4px solid var(--accent-gold);
-            padding-left: 20px;
-            margin-top: 10px;
+        .slogan-box {
+            border-left: 5px solid var(--accent-gold);
+            padding-left: 25px;
+            margin-top: 15px;
         }
 
-        .quote-text {
+        .slogan-text {
+            font-family: 'Playfair Display', serif; /* LEBIH ESTETIK */
             font-style: italic;
-            color: #e2e8f0;
-            font-size: 16px;
-            line-height: 1.6;
+            color: #cbd5e1;
+            font-size: 24px; /* DIPERBESAR */
+            line-height: 1.4;
         }
 
-        /* SEBELAH KANAN: BINGKAI FOTO */
+        /* 5. PHOTO FRAME */
         .photo-wrapper {
             display: inline-block;
-            width: 390px; /* Disesuaikan sedikit agar seimbang dengan teks yang membesar */
-            height: 490px;
+            width: 400px;
+            height: 520px;
             position: relative;
         }
 
         .photo-wrapper::before {
             content: "";
             position: absolute;
-            top: -12px; left: -12px; right: 12px; bottom: 12px;
-            border: 2px solid var(--accent-gold);
-            border-radius: 20px;
+            top: -15px; left: -15px; right: 15px; bottom: 15px;
+            border: 3px solid var(--accent-gold);
+            border-radius: 22px;
             z-index: 1;
-            opacity: 0.7;
         }
 
         .photo-wrapper img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             border-radius: 20px;
-            border: 6px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            border: 8px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
             position: relative;
             z-index: 2;
         }
 
-        /* INDIKATOR METRIK UI */
+        /* 6. UI ELEMENTS */
         .progress-line-container {
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%; height: 6px;
-            background: rgba(255, 255, 255, 0.05);
-            z-index: 10;
+            position: absolute; bottom: 0; left: 0;
+            width: 100%; height: 8px;
+            background: rgba(255, 255, 255, 0.05); z-index: 10;
         }
 
         .progress-line-bar {
@@ -240,21 +217,8 @@
         }
 
         .slide-counter {
-            position: absolute;
-            top: 30px; right: 40px;
-            color: rgba(255, 255, 255, 0.25);
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .footer-note {
-            position: absolute;
-            bottom: 20px; left: 65px;
-            color: rgba(255, 255, 255, 0.15);
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            position: absolute; top: 35px; right: 45px;
+            color: rgba(255, 255, 255, 0.2); font-size: 16px; font-weight: 700;
         }
     </style>
 </head>
@@ -268,311 +232,313 @@
     <div id="slide-wrapper"></div>
     
     <div class="progress-line-container"><div class="progress-line-bar" id="load-bar"></div></div>
-    <div class="footer-note">Acara Pelepasan & Kelulusan Siswa Kelas IX — Tahun Ajaran 2023/2024</div>
+    <div class="slide-counter" id="num-counter">0 / 210</div>
 </div>
 
 <script>
-    // DATA DATABASE 210 SISWA LENGKAP
-    const studentsList = [
-        { n: "I Gede Bagus Arinata", nis: "5945", nisn: "0108263744", g: "Laki-Laki", ttl: "Karangasem, 16 Mei 2010" },
-        { n: "I Gede Putu Aditya Widiadnyana", nis: "5946", nisn: "0116947706", g: "Laki-Laki", ttl: "Karangasem, 23 Juli 2011" },
-        { n: "I Kade Aditya", nis: "5947", nisn: "0101334696", g: "Laki-Laki", ttl: "Karangasem, 17 Mei 2010" },
-        { n: "I Kade Bagus Restu Marta Dwipayana", nis: "5948", nisn: "0107375477", g: "Laki-Laki", ttl: "Karangasem, 21 November 2010" },
-        { n: "I Komang Agus Yudiarta", nis: "5949", nisn: "0105494568", g: "Laki-Laki", ttl: "Karangasem, 12 Maret 2010" },
-        { n: "I Komang Ardi Triadinata", nis: "5950", nisn: "0113617757", g: "Laki-Laki", ttl: "Perasi, 10 Februari 2011" },
-        { n: "I Komang Suardika", nis: "5951", nisn: "0109587925", g: "Laki-Laki", ttl: "Bugbug, 26 Oktober 2010" },
-        { n: "I KOMANG YUDI KRISNA", nis: "5952", nisn: "0112873665", g: "Laki-Laki", ttl: "Karangasem, 8 Januari 2011" },
-        { n: "I Made Rizky Yuda Artana", nis: "5953", nisn: "0119919461", g: "Laki-Laki", ttl: "Sampiyang, 2 Mei 2011" },
-        { n: "I Nengah Nova Ardi Widnyana", nis: "5954", nisn: "0107106374", g: "Laki-Laki", ttl: "Karangasem, 3 November 2010" },
-        { n: "I Nengah Okta Dwi Ardika", nis: "5955", nisn: "0109905386", g: "Laki-Laki", ttl: "Bugbug, 3 Oktober 2010" },
-        { n: "I Putu Aditya Pratidimna", nis: "5956", nisn: "0102327279", g: "Laki-Laki", ttl: "Amlapura, 15 September 2010" },
-        { n: "I Putu Agus Adi Pratama Putra", nis: "5957", nisn: "0107193309", g: "Laki-Laki", ttl: "Bugbug, 9 Juni 2010" },
-        { n: "I Putu Kari Suardiana", nis: "5958", nisn: "0102061731", g: "Laki-Laki", ttl: "Bugbug, 25 Desember 2010" },
-        { n: "I Wayan Agus Mertadana", nis: "5959", nisn: "0102527524", g: "Laki-Laki", ttl: "Perasi, 26 Juni 2010" },
-        { n: "I Wayan Agus Saputra", nis: "5960", nisn: "0104731792", g: "Laki-Laki", ttl: "Perasi, 29 Agustus 2010" },
-        { n: "I Wayan Arta Wiguna", nis: "5961", nisn: "0117540870", g: "Laki-Laki", ttl: "Jasri, 20 Maret 2011" },
-        { n: "Jero Made Patan Adnyana", nis: "5962", nisn: "0111144048", g: "Laki-Laki", ttl: "Karangasem, 26 Januari 2011" },
-        { n: "Ni Kade Dian Sasmita", nis: "5963", nisn: "0118636417", g: "Perempuan", ttl: "Karangasem, 24 Juni 2011" },
-        { n: "Ni Kade Dwi Aulia Stariyani", nis: "5964", nisn: "0118288334", g: "Perempuan", ttl: "Bugbug, 29 Mei 2011" },
-        { n: "Ni Kadek Suci", nis: "5065", nisn: "0103834218", g: "Perempuan", ttl: "Samuh, 1 November 2010" },
-        { n: "Ni Kadek Yunita Dila Putri", nis: "5966", nisn: "0119766877", g: "Perempuan", ttl: "Perasi, 20 Januari 2011" },
-        { n: "Ni Ketut Agustini", nis: "5967", nisn: "0113106148", g: "Perempuan", ttl: "Jasri, 10 Agustus 2011" },
-        { n: "Ni Ketut Catur Febri Angreni", nis: "5968", nisn: "0119208411", g: "Perempuan", ttl: "Bugbug, 27 Februari 2011" },
-        { n: "Ni Ketut Dewi Suprianingsih", nis: "5969", nisn: "0117231591", g: "Perempuan", ttl: "Bugbug, 10 Juli 2011" },
-        { n: "Ni Ketut Melani Putri", nis: "5970", nisn: "0119170100", g: "Perempuan", ttl: "Bugbug, 10 Mei 2011" },
-        { n: "Ni Komang Dwi Puspitayanti", nis: "5971", nisn: "0115754910", g: "Perempuan", ttl: "Amlapura, 23 Maret 2011" },
-        { n: "Ni Komang Nadia Regita Cahyani", nis: "5972", nisn: "0101908480", g: "Perempuan", ttl: "Denpasar, 19 Agustus 2010" },
-        { n: "Ni Komang Yunianingsih", nis: "5973", nisn: "0112170689", g: "Perempuan", ttl: "Sampyang Jasri, 22 Juni 2011" },
-        { n: "Ni Luh Sri Dewi Adnyani", nis: "5974", nisn: "0117271920", g: "Perempuan", ttl: "Bugbug, 16 April 2011" },
-        { n: "Ni Nengah Asti Kharismayani", nis: "5975", nisn: "0114703167", g: "Perempuan", ttl: "Bugbug, 20 Februari 2011" },
-        { n: "Ni Nengah Widiasih", nis: "5976", nisn: "0114472387", g: "Perempuan", ttl: "Perasi, 24 Juli 2011" },
-        { n: "Ni Putu Diah Prista Byan Putri", nis: "5977", nisn: "0111744505", g: "Perempuan", ttl: "Karangasem, 24 April 2011" },
-        { n: "NI WAYAN LISTYANI", nis: "5978", nisn: "0116288194", g: "Perempuan", ttl: "Perasi, 5 Januari 2011" },
-        { n: "I Gede Agus Arimbawa", nis: "5979", nisn: "0108788531", g: "Laki-Laki", ttl: "Bugbug, 13 November 2010" },
-        { n: "I GEDE AGUS SARNATA", nis: "5980", nisn: "0111053829", g: "Laki-Laki", ttl: "Perasi, 26 Februari 2011" },
-        { n: "I Gede Bagia Arta Wijaya", nis: "5981", nisn: "0112061891", g: "Laki-Laki", ttl: "Bugbug, 28 Mei 2011" },
-        { n: "I Gede Supartika", nis: "5982", nisn: "0105616128", g: "Laki-Laki", ttl: "Bugbug, 26 Desember 2010" },
-        { n: "I Gede Surya Darma Wijawan", nis: "5983", nisn: "0114682419", g: "Laki-Laki", ttl: "Karangasem, 1 April 2011" },
-        { n: "I Ketut Taman Ade Pradnyana", nis: "5984", nisn: "0105248352", g: "Laki-Laki", ttl: "Bugbug, 14 Agustus 2010" },
-        { n: "I Komang Budiartawan", nis: "5985", nisn: "0091275470", g: "Laki-Laki", ttl: "Samuh, 21 Mei 2009" },
-        { n: "I Made Andika Agustama", nis: "5986", nisn: "0111562822", g: "Laki-Laki", ttl: "Bugbug, 23 Agustus 2011" },
-        { n: "I Made Bayu Sastera Utama", nis: "5987", nisn: "0118368251", g: "Laki-Laki", ttl: "Samuh, 24 April 2011" },
-        { n: "I Nengah Widi Astra Jaya", nis: "5988", nisn: "0107004900", g: "Laki-Laki", ttl: "Bugbug, 31 Desember 2010" },
-        { n: "I Putu Agus Putra Sentanu", nis: "5989", nisn: "0117774743", g: "Laki-Laki", ttl: "Bugbug, 27 Agustus 2011" },
-        { n: "I Putu Eka Pranata", nis: "5990", nisn: "0114085924", g: "Laki-Laki", ttl: "Karangasem, 21 Januari 2011" },
-        { n: "I Putu Riyan Saputra", nis: "5991", nisn: "0113127648", g: "Laki-Laki", ttl: "Samuh, 12 Juni 2011" },
-        { n: "I Wayan Artha Widi Pratama", nis: "5992", nisn: "0103439058", g: "Laki-Laki", ttl: "Bugbug, 19 Juli 2010" },
-        { n: "I Wayan Bayu Raditya", nis: "5993", nisn: "0102146751", g: "Laki-Laki", ttl: "Perasi, 9 September 2010" },
-        { n: "I Wayan Merta Yasa", nis: "5994", nisn: "0116007542", g: "Laki-Laki", ttl: "Karangasem, 25 Mei 2011" },
-        { n: "I Wayan Sudiartawan", nis: "5995", nisn: "0112366805", g: "Laki-Laki", ttl: "Perasi, 4 Januari 2011" },
-        { n: "Kadek Juli Saputra", nis: "5996", nisn: "0101996276", g: "Laki-Laki", ttl: "Bugbug, 22 Juli 2010" },
-        { n: "Ni Kade Dwi Indah Cahyani", nis: "5997", nisn: "0104647221", g: "Perempuan", ttl: "Sampyang, 31 Mei 2010" },
-        { n: "Ni Kade Mira Permata Devi", nis: "5998", nisn: "0115236655", g: "Perempuan", ttl: "Amlapura, 10 Mei 2011" },
-        { n: "Ni Kade Santi", nis: "5999", nisn: "0104471182", g: "Perempuan", ttl: "Karangasem, 9 September 2010" },
-        { n: "Ni Kadek Ayu Raspa Dewi", nis: "6000", nisn: "0105261543", g: "Perempuan", ttl: "Karangasem, 16 Mei 2010" },
-        { n: "Ni Ketut Ayu Diah Pramesti", nis: "6001", nisn: "0107741660", g: "Perempuan", ttl: "Karangasem, 1 Juli 2010" },
-        { n: "Ni Ketut Eka Nopiantari", nis: "6002", nisn: "0102245316", g: "Perempuan", ttl: "Karangasem, 1 November 2010" },
-        { n: "Ni Ketut Juniantari", nis: "6003", nisn: "0103132565", g: "Perempuan", ttl: "Karangasem, 29 Juni 2010" },
-        { n: "Ni Ketut Yamuna Sahani", nis: "6004", nisn: "0114187104", g: "Perempuan", ttl: "Denpasar, 6 Juni 2011" },
-        { n: "Ni Ketut Yunita Nopi Artini", nis: "6005", nisn: "0114146406", g: "Perempuan", ttl: "Bugbug, 20 Juni 2011" },
-        { n: "Ni Komang Tiara Santika Tri Utami", nis: "6006", nisn: "0116657287", g: "Perempuan", ttl: "Bugbug, 23 Januari 2011" },
-        { n: "Ni Luh Juli Andani", nis: "6007", nisn: "0114471159", g: "Perempuan", ttl: "Bugbug, 2 Juli 2011" },
-        { n: "NI LUH PUTU APRIL LIANI", nis: "6008", nisn: "0111722837", g: "Perempuan", ttl: "Samuh, 11 April 2011" },
-        { n: "Ni Luh Yuniari", nis: "6009", nisn: "0106656885", g: "Perempuan", ttl: "Samuh, 16 Desember 2010" },
-        { n: "Ni Made Mertaningsih", nis: "6010", nisn: "0114611608", g: "Perempuan", ttl: "Perasi Kelod, 25 Maret 2011" },
-        { n: "Ni Nengah Widya Juliantari", nis: "6011", nisn: "0117696853", g: "Perempuan", ttl: "Bugbug, 15 Juli 2011" },
-        { n: "Ni Nyoman Noviantari", nis: "6012", nisn: "0108700745", g: "Perempuan", ttl: "Bugbug, 14 November 2010" },
-        { n: "Ni Putu Ayu Beby Carisa Putri", nis: "6013", nisn: "0118323716", g: "Perempuan", ttl: "Sampiyang, 9 Juni 2011" },
-        { n: "I GUSTI NGURAH ADITYA PRAMANA", nis: "6014", nisn: "0109807538", g: "Laki-Laki", ttl: "Badung, 3 Oktober 2010" },
-        { n: "I Kade Aris Juniarta", nis: "6015", nisn: "0112744461", g: "Laki-Laki", ttl: "Karangasem, 9 Juni 2011" },
-        { n: "I Kade Farel Dwika Agustama", nis: "6016", nisn: "0101601010", g: "Laki-Laki", ttl: "Bugbug, 2 Agustus 2010" },
-        { n: "I Kade Mas Dvesa Shastrawan", nis: "6017", nisn: "0108062697", g: "Laki-Laki", ttl: "Bugbug, 6 November 2010" },
-        { n: "I Kadek Agus Artana Putra", nis: "6018", nisn: "0108084158", g: "Laki-Laki", ttl: "Amlapura, 23 Agustus 2010" },
-        { n: "I Kadek Gohan Yudika Putra", nis: "6019", nisn: "0102626729", g: "Laki-Laki", ttl: "Samuh, 2 Desember 2010" },
-        { n: "I Ketut Aryana", nis: "6020", nisn: "0105254390", g: "Laki-Laki", ttl: "Perasi, 6 April 2010" },
-        { n: "I Ketut Suardana", nis: "6021", nisn: "0106071226", g: "Laki-Laki", ttl: "Bugbug, 12 November 2010" },
-        { n: "I Ketut Sudarsana", nis: "6022", nisn: "0109203210", g: "Laki-Laki", ttl: "Samuh, 11 April 2010" },
-        { n: "I Komang Agus Suyasa", nis: "6023", nisn: "0113933506", g: "Laki-Laki", ttl: "Bugbug, 1 November 2011" },
-        { n: "I Komang Bagus Risky Cipta Purnama", nis: "6024", nisn: "0108799098", g: "Laki-Laki", ttl: "Karangasem, 21 November 2010" },
-        { n: "I KOMANG DARMA MERTAYASA", nis: "2025", nisn: "0105975572", g: "Laki-Laki", ttl: "Perasi, 18 Februari 2010" },
-        { n: "I Made Suardiva", nis: "6026", nisn: "0106893893", g: "Laki-Laki", ttl: "Karangasem, 24 September 2010" },
-        { n: "I Nengah Agustina", nis: "6027", nisn: "0106917476", g: "Laki-Laki", ttl: "Bugbug, 14 Agustus 2010" },
-        { n: "I Nengah Supartawan", nis: "6028", nisn: "0111074391", g: "Laki-Laki", ttl: "Karangasem, 15 Januari 2011" },
-        { n: "I Nengah Wira Surya Adinata", nis: "6029", nisn: "0103295089", g: "Laki-Laki", ttl: "Sampyang, 2 November 2010" },
-        { n: "Kadek Ayu Antari", nis: "6030", nisn: "0109105690", g: "Perempuan", ttl: "Buleleng, 14 November 2010" },
-        { n: "Ketut Purnariani Sintya Dewi", nis: "6031", nisn: "0105534471", g: "Perempuan", ttl: "Bugbug, 16 Agustus 2010" },
-        { n: "Mikha Ananda Rizky Di Patria", nis: "6032", nisn: "0101598530", g: "Perempuan", ttl: "Rembang, 12 Desember 2010" },
-        { n: "Ni Kade Devi Suarmita", nis: "6033", nisn: "0117651247", g: "Perempuan", ttl: "Amlapura, 13 Desember 2011" },
-        { n: "Ni Kadek Sucipta Dewi", nis: "6034", nisn: "0129208854", g: "Perempuan", ttl: "Karangasem, 25 Oktober 2011" },
-        { n: "Ni Ketut Desi Ariantini", nis: "6035", nisn: "0109300681", g: "Perempuan", ttl: "Perasi, 4 Desember 2010" },
-        { n: "Ni Ketut Yeni Puspita", nis: "6036", nisn: "0116049770", g: "Perempuan", ttl: "Bugbug, 1 April 2011" },
-        { n: "Ni Komang Ayu Dinaningsih", nis: "6037", nisn: "0114101209", g: "Perempuan", ttl: "Karangasem, 16 Juli 2011" },
-        { n: "Ni Komang Cika Arista Putri", nis: "6038", nisn: "0102832307", g: "Perempuan", ttl: "Samuh, 18 Agustus 2010" },
-        { n: "Ni Luh Desi Puspita Sari", nis: "6039", nisn: "0104391157", g: "Perempuan", ttl: "Perasi, 29 Desember 2010" },
-        { n: "Ni Luh Putu Sugiantari", nis: "6040", nisn: "0103678882", g: "Perempuan", ttl: "Bugbug, 3 Desember 2010" },
-        { n: "Ni Nengah Apriani", nis: "6041", nisn: "0097797833", g: "Perempuan", ttl: "Babakan, 26 April 2009" },
-        { n: "Ni Nengah Dewi Kertiasih", nis: "6042", nisn: "0118803063", g: "Perempuan", ttl: "Bugbug, 23 Juni 2011" },
-        { n: "NI NYOMAN CINTYA APRILIANI", nis: "6043", nisn: "0114249484", g: "Perempuan", ttl: "Perasi, 25 April 2011" },
-        { n: "Ni Nyoman Yulia Werdiyani", nis: "6044", nisn: "0101895797", g: "Perempuan", ttl: "Perasi, 14 Juli 2010" },
-        { n: "Ni Putu Chintya Fani", nis: "6045", nisn: "0114478470", g: "Perempuan", ttl: "Denpasar, 30 Mei 2011" },
-        { n: "Ni Putu Lia Prasini", nis: "6046", nisn: "0111460890", g: "Perempuan", ttl: "Bugbug, 28 April 2011" },
-        { n: "Ni Putu Metriani", nis: "6047", nisn: "0111106967", g: "Perempuan", ttl: "Perasi, 29 Mei 2011" },
-        { n: "Ni Wayan Devi Antari", nis: "6048", nisn: "0102457931", g: "Perempuan", ttl: "Bugbug, 18 Desember 2010" },
-        { n: "Putu Diara Maheswari", nis: "6049", nisn: "0105233020", g: "Perempuan", ttl: "Bugbug, 6 Desember 2010" },
-        { n: "I Gede Agus Widiarsa", nis: "6050", nisn: "0108889028", g: "Laki-Laki", ttl: "Bugbug, 18 Oktober 2010" },
-        { n: "I Gede Nova Sukajaya", nis: "6051", nisn: "0107257041", g: "Laki-Laki", ttl: "Karangasem, 8 November 2010" },
-        { n: "I Gede Sutama", nis: "6052", nisn: "0116981846", g: "Laki-Laki", ttl: "Karangasem, 18 Januari 2011" },
-        { n: "I Gede Teguh Satria", nis: "6053", nisn: "0102015519", g: "Laki-Laki", ttl: "Bugbug, 22 November 2010" },
-        { n: "I GUSTI AGUNG DWI RAHAYU", nis: "6054", nisn: "0108244253", g: "Perempuan", ttl: "Denpasar, 8 Agustus 2010" },
-        { n: "I Kade Dava Bramestya Putra", nis: "6055", nisn: "0114235451", g: "Laki-Laki", ttl: "Bugbug, 25 Maret 2011" },
-        { n: "I Kade Pradita Resta Wibawa", nis: "6056", nisn: "0106531386", g: "Laki-Laki", ttl: "Bugbug, 28 Agustus 2010" },
-        { n: "I Ketut Astina Jaya", nis: "6057", nisn: "0105033754", g: "Laki-Laki", ttl: "Bugbug, 10 Juni 2010" },
-        { n: "I Ketut Wardana", nis: "5058", nisn: "0098569530", g: "Laki-Laki", ttl: "Jasri, 10 Maret 2009" },
-        { n: "I Komang Suardana", nis: "6059", nisn: "0101556135", g: "Laki-Laki", ttl: "Samuh, 26 September 2010" },
-        { n: "I Made Angga Wijaya", nis: "6060", nisn: "0103922204", g: "Laki-Laki", ttl: "Perasi, 10 Agustus 2010" },
-        { n: "I Nengah Agus Widiarta", nis: "6061", nisn: "0111622238", g: "Laki-Laki", ttl: "Karangasem, 7 Maret 2011" },
-        { n: "I Nengah Merta Yasa", nis: "6062", nisn: "0118924237", g: "Laki-Laki", ttl: "Bugbug, 12 Februari 2011" },
-        { n: "I Nengah Sudiarnata", nis: "6063", nisn: "0109236125", g: "Laki-Laki", ttl: "Bugbug, 29 September 2010" },
-        { n: "I Nengah Yuda Rendi Suratmaja", nis: "6064", nisn: "0112090486", g: "Laki-Laki", ttl: "Bugbug, 14 Februari 2011" },
-        { n: "I Nyoman Dhyana Widhi Arta", nis: "6065", nisn: "0117476537", g: "Laki-Laki", ttl: "Bugbug, 17 Februari 2011" },
-        { n: "I Putu Deco Yudika Putra", nis: "6066", nisn: "0104277477", g: "Laki-Laki", ttl: "Karangasem, 17 Agustus 2010" },
-        { n: "I PUTU RENDY ASTAWAN", nis: "6067", nisn: "0105456746", g: "Laki-Laki", ttl: "Perasi, 4 Maret 2010" },
-        { n: "I Wayan Agus Suryatama", nis: "6068", nisn: "0108169042", g: "Laki-Laki", ttl: "Karangasem, 23 Agustus 2010" },
-        { n: "Kadek Feby Dwi Maharani", nis: "6069", nisn: "0118612421", g: "Perempuan", ttl: "Bugbug, 12 Februari 2011" },
-        { n: "Ni Kade Oky Lesintya Dewi", nis: "6070", nisn: "0107979021", g: "Perempuan", ttl: "Bugbug, 28 Oktober 2010" },
-        { n: "NI KADE YUNI LESTARI DEWI", nis: "6071", nisn: "0106797223", g: "Perempuan", ttl: "Bugbug Kaleran, 13 Juni 2010" },
-        { n: "Ni Kadek Nova Widiantari", nis: "6072", nisn: "0119050106", g: "Perempuan", ttl: "Bugbug, 4 September 2011" },
-        { n: "Ni Ketut Jenia Marty Trifarisa", nis: "6073", nisn: "0112051778", g: "Perempuan", ttl: "Perasi, 19 Maret 2011" },
-        { n: "Ni Komang Cahyani", nis: "6074", nisn: "0092597937", g: "Perempuan", ttl: "Bugbug, 23 Agustus 2009" },
-        { n: "Ni Komang Depi Wahyuni", nis: "6075", nisn: "0106674093", g: "Perempuan", ttl: "Karangasem, 18 September 2010" },
-        { n: "Ni Luh Ayu Parwati Putri", nis: "6076", nisn: "0115040871", g: "Perempuan", ttl: "Karangasem, 29 Januari 2011" },
-        { n: "Ni Luh Desy Widiantari", nis: "6077", nisn: "0101989878", g: "Perempuan", ttl: "Bugbug, 18 Desember 2010" },
-        { n: "Ni Nyoman Suryaningsih", nis: "6078", nisn: "0117659778", g: "Perempuan", ttl: "Bugbug, 22 Mei 2011" },
-        { n: "Ni Nyoman Yuli Mentari", nis: "6079", nisn: "0105335373", g: "Perempuan", ttl: "Bugbug, 22 Juli 2010" },
-        { n: "Ni Putu Kristina Dewi", nis: "6080", nisn: "0119119642", g: "Perempuan", ttl: "Karangasem, 13 Februari 2011" },
-        { n: "Ni Putu Sri Wulan Dani", nis: "6081", nisn: "0106703215", g: "Perempuan", ttl: "Karangasem, 5 November 2010" },
-        { n: "NI WAYAN PUJI MORI", nis: "6082", nisn: "0117987322", g: "Perempuan", ttl: "Karangasem, 10 Juli 2011" },
-        { n: "Ni Wayan Sari Daniasih", nis: "6083", nisn: "0102629718", g: "Perempuan", ttl: "Karangasem, 23 Juli 2010" },
-        { n: "Ni Wayan Widhytia Kusuma Pradnyani", nis: "6084", nisn: "0113254548", g: "Perempuan", ttl: "Perasi, 13 Juni 2011" },
-        { n: "Pande Putu Raitusan", nis: "6085", nisn: "0108848086", g: "Laki-Laki", ttl: "Jembrana, 18 Desember 2010" },
-        { n: "I Gede Andy Pratama", nis: "6086", nisn: "0105677556", g: "Laki-Laki", ttl: "Karangasem, 30 September 2010" },
-        { n: "I Gede Dana Jaya", nis: "6087", nisn: "0106010257", g: "Laki-Laki", ttl: "Denpasar, 28 Juni 2010" },
-        { n: "I Gede Danu Arta Widya Guna", nis: "6088", nisn: "0118790106", g: "Laki-Laki", ttl: "Perasi, 7 Juni 2011" },
-        { n: "I Gede Rafa Putra Sugiarta", nis: "6089", nisn: "0105609708", g: "Laki-Laki", ttl: "Denpasar, 11 Agustus 2010" },
-        { n: "I Gede Wira Aditya Mahardika", nis: "6090", nisn: "0114884608", g: "Laki-Laki", ttl: "Bugbug, 1 Maret 2011" },
-        { n: "I Gede Yuda Adi Pratama", nis: "6091", nisn: "0116411315", g: "Laki-Laki", ttl: "Karangasem, 30 Januari 2011" },
-        { n: "I GUSTI AYU INDI PRADNYANDARI", nis: "6092", nisn: "0108314264", g: "Perempuan", ttl: "Perasi Tengah, 19 Agustus 2010" },
-        { n: "I Kade Dwi Aditya Manduang", nis: "6093", nisn: "0109800796", g: "Laki-Laki", ttl: "Bugbug, 28 November 2010" },
-        { n: "I Kadek Edy Arya Tama", nis: "6094", nisn: "0112008079", g: "Laki-Laki", ttl: "Samuh, 24 Januari 2011" },
-        { n: "I Ketut Ardiana Putra", nis: "6095", nisn: "0112006341", g: "Laki-Laki", ttl: "Karangasem, 16 April 2011" },
-        { n: "I Ketut Suastawa", nis: "6096", nisn: "0117977094", g: "Laki-Laki", ttl: "Amlapura, 31 Maret 2011" },
-        { n: "I Komang Artana", nis: "6097", nisn: "0102068311", g: "Laki-Laki", ttl: "Karangasem, 7 Juli 2010" },
-        { n: "I Komang Budindra Prasta Putra", nis: "6098", nisn: "0117319344", g: "Laki-Laki", ttl: "Karangasem, 23 Juni 2011" },
-        { n: "I MADE BRAMASENA KANWA", nis: "6099", nisn: "0109125747", g: "Laki-Laki", ttl: "Karangasem, 18 Juni 2010" },
-        { n: "I Made Wahyu Mahartha Wijaya", nis: "6100", nisn: "0117123401", g: "Laki-Laki", ttl: "Perasi, 4 Juni 2011" },
-        { n: "I Nengah Juli Darmawan", nis: "6101", nisn: "0111974962", g: "Laki-Laki", ttl: "Bugbug, 9 Juli 2011" },
-        { n: "I Putu Aditya Pranata", nis: "6102", nisn: "0112022110", g: "Laki-Laki", ttl: "Bugbug, 26 Februari 2011" },
-        { n: "I Wayan Swadyana", nis: "6103", nisn: "0114718704", g: "Laki-Laki", ttl: "Bugbug, 31 Mei 2011" },
-        { n: "Ni Kade Sri Bumi Ayu Padmi", nis: "6156", nisn: "0112565808", g: "Perempuan", ttl: "Karangasem, 24 Februari 2011" },
-        { n: "Ni Ketut Leoni Sumastiani", nis: "6104", nisn: "0109129938", g: "Perempuan", ttl: "Perasi, 21 Agustus 2010" },
-        { n: "Ni Komang Indrayani Dewi Utami", nis: "6105", nisn: "0116513577", g: "Perempuan", ttl: "Samuh, 2 Mei 2011" },
-        { n: "Ni Komang Juniantari", nis: "6106", nisn: "0108727816", g: "Perempuan", ttl: "Bugbug, 3 Juni 2010" },
-        { n: "Ni Komang Santi Cahyani", nis: "6107", nisn: "0118038525", g: "Perempuan", ttl: "Jasri, 24 April 2011" },
-        { n: "Ni Komang Tania Maheswari Widyandhani", nis: "6108", nisn: "0113021203", g: "Perempuan", ttl: "Bugbug, 6 Januari 2011" },
-        { n: "Ni Luh Putu Ayu Apriliyani", nis: "6109", nisn: "0112640678", g: "Perempuan", ttl: "Semarapura, 12 April 2011" },
-        { n: "Ni Putu Muliartini", nis: "6110", nisn: "0115866448", g: "Perempuan", ttl: "Perasi, 23 Juni 2011" },
-        { n: "Ni Putu Pradnyan Frami Gayatri", nis: "6111", nisn: "0112705205", g: "Perempuan", ttl: "Karangasem, 15 Januari 2011" },
-        { n: "NI PUTU SERI", nis: "6112", nisn: "0109099585", g: "Perempuan", ttl: "Karangasem, 22 Maret 2010" },
-        { n: "Ni Wayan Puspita Dewi", nis: "6113", nisn: "0117661376", g: "Perempuan", ttl: "Karangasem, 9 September 2011" },
-        { n: "Ni Wayan Putri Antari", nis: "6114", nisn: "0106402379", g: "Perempuan", ttl: "Bugbug, 18 Oktober 2010" },
-        { n: "Ni Wayan Sri Dian Septiarini", nis: "6115", nisn: "0108240835", g: "Perempuan", ttl: "Bugbug, 30 September 2011" },
-        { n: "Ni Wayan Sri Wahyuni", nis: "6116", nisn: "0093228984", g: "Perempuan", ttl: "Karangasem, 7 September 2009" },
-        { n: "Putu Ayu Laksmi Dewani Putri", nis: "6117", nisn: "0117627079", g: "Perempuan", ttl: "Karangasem, 19 Juni 2011" },
-        { n: "Putu Dede Apriyantara", nis: "6118", nisn: "0114524712", g: "Laki-Laki", ttl: "Amlapura, 1 April 2011" },
-        { n: "Putu Dina Cahya Meksikori", nis: "6119", nisn: "0117823679", g: "Perempuan", ttl: "Karangasem, 17 Mei 2011" },
-        { n: "Gede Edy Arsana", nis: "6120", nisn: "0117086085", g: "Laki-Laki", ttl: "Karangasem, 2 Mei 2011" },
-        { n: "I Gede Agus Sumanjaya", nis: "6121", nisn: "0108593479", g: "Laki-Laki", ttl: "Karangasem, 28 Agustus 2010" },
-        { n: "I Gede Parta Wijaya", nis: "6122", nisn: "0116135486", g: "Laki-Laki", ttl: "Karangasem, 17 Juli 2011" },
-        { n: "I Gede Suartapa", nis: "6123", nisn: "0113573753", g: "Laki-Laki", ttl: "Karangasem, 29 April 2011" },
-        { n: "I GUSTI AYU INTAN SEPTIARI", nis: "6124", nisn: "0109816668", g: "Perempuan", ttl: "Karangasem, 19 September 2010" },
-        { n: "I Kade Agus Kusumayoga", nis: "6125", nisn: "0105810975", g: "Laki-Laki", ttl: "Bugbug, 2 Agustus 2010" },
-        { n: "I Kade Onxyantara Putra", nis: "6126", nisn: "0108085926", g: "Laki-Laki", ttl: "Karangasem, 15 Oktober 2010" },
-        { n: "I Kadek Mertayasa", nis: "6127", nisn: "0116311915", g: "Laki-Laki", ttl: "Karangasem, 27 Juni 2011" },
-        { n: "I KETUT PURNAWAN ADI SANTOSA", nis: "6128", nisn: "0106534788", g: "Laki-Laki", ttl: "Karangasem, 8 November 2010" },
-        { n: "I KETUT SASA KERTA YASA", nis: "6129", nisn: "0114832299", g: "Laki-Laki", ttl: "Karangasem, 23 Mei 2011" },
-        { n: "I Ketut Wira Adnyana Putra", nis: "6130", nisn: "0115386839", g: "Laki-Laki", ttl: "Perasi, 6 Januari 2011" },
-        { n: "I Komang Krishna Satria Arya Remington", nis: "6131", nisn: "0113784463", g: "Laki-Laki", ttl: "Amlapura, 24 Februari 2011" },
-        { n: "I Komang Widiarsa", nis: "6132", nisn: "0112351501", g: "Laki-Laki", ttl: "Bugbug, 27 Mei 2011" },
-        { n: "I Nengah Radit Saputra", nis: "6133", nisn: "0116016454", g: "Laki-Laki", ttl: "Jasri, 27 Maret 2011" },
-        { n: "I Putu Riski satya Kusumanata", nis: "6135", nisn: "0112614763", g: "Laki-Laki", ttl: "Amlapura, 22 Februari 2011" },
-        { n: "I Putu Wahyu Mahendra Jaya", nis: "6136", nisn: "0113287104", g: "Laki-Laki", ttl: "Bugbug, 1 Februari 2011" },
-        { n: "I Wayan Eka Agustina", nis: "6137", nisn: "0104178901", g: "Laki-Laki", ttl: "Samuh, 25 Agustus 2010" },
-        { n: "Kade Dodi Artana", nis: "6139", nisn: "0102304864", g: "Laki-Laki", ttl: "Bugbug, 5 November 2010" },
-        { n: "Ni Kade Ari Susanti", nis: "6140", nisn: "0111271171", g: "Perempuan", ttl: "Karangasem, 18 Februari 2011" },
-        { n: "Ni Kadek Ayu Dwi Pratiwi", nis: "6141", nisn: "0101266771", g: "Perempuan", ttl: "Karangasem, 30 September 2010" },
-        { n: "Ni Kadek Chintya Indah Sari", nis: "6142", nisn: "0113836350", g: "Perempuan", ttl: "Bugbug, 1 Juni 2011" },
-        { n: "Ni Kadek Sintya Cahyani", nis: "6143", nisn: "0119480150", g: "Perempuan", ttl: "Karangasem, 30 Agustus 2011" },
-        { n: "Ni Ketut Juliani", nis: "6145", nisn: "0116787779", g: "Perempuan", ttl: "Amlapura, 5 Juli 2011" },
-        { n: "Ni Ketut Rani Virginia Valentina", nis: "6146", nisn: "0118764514", g: "Perempuan", ttl: "Karangasem, 14 Februari 2011" },
-        { n: "Ni Ketut Triani Susila", nis: "6147", nisn: "0116355150", g: "Perempuan", ttl: "Karangasem, 27 Mei 2011" },
-        { n: "Ni Luh Putu Listia Dewi", nis: "6148", nisn: "0104551910", g: "Perempuan", ttl: "Samuh, 10 April 2010" },
-        { n: "Ni Luh Savitri Saktiari", nis: "6149", nisn: "0117346667", g: "Perempuan", ttl: "Amlapura, 29 Mei 2011" },
-        { n: "Ni Luh Yara Cahya Dervani", nis: "6150", nisn: "0109244704", g: "Perempuan", ttl: "Karangasem, 16 September 2010" },
-        { n: "Ni Nengah Ita Febriani", nis: "6151", nisn: "0113992987", g: "Perempuan", ttl: "Karangasem, 1 Februari 2011" },
-        { n: "Ni Putu Eka Ariani", nis: "6152", nisn: "0103625098", g: "Perempuan", ttl: "Karangasem, 18 Agustus 2010" },
-        { n: "Ni Putu Rosinta", nis: "6153", nisn: "0094389764", g: "Perempuan", ttl: "Bugbug, 14 Juli 2009" },
-        { n: "Ni Wayan Ayudia Pratiwi", nis: "6154", nisn: "0116446148", g: "Perempuan", ttl: "Bugbug, 5 April 2011" },
-        { n: "Ni Wayan Merta Asih", nis: "6155", nisn: "0118672630", g: "Perempuan", ttl: "Karangasem, 14 April 2011" },
-        { n: "Putu Aditya Pratama", nis: "6134", nisn: "0102375174", g: "Laki-Laki", ttl: "Bugbug, 13 Oktober 2010" }
+    // DATA 210 SISWA (LENGKAP DENGAN KELAS)
+    const students = [
+        { n: "I Gede Bagus Arinata", nis: "5945", nisn: "0108263744", k: "IX A", g: "Laki-Laki", ttl: "Karangasem, 16 Mei 2010" },
+        { n: "I Gede Putu Aditya Widiadnyana", nis: "5946", nisn: "0116947706", k: "IX A", g: "Laki-Laki", ttl: "Karangasem, 23 Juli 2011" },
+        { n: "I Kade Aditya", nis: "5947", nisn: "0101334696", k: "IX A", g: "Laki-Laki", ttl: "Karangasem, 17 Mei 2010" },
+        { n: "I Kade Bagus Restu Marta Dwipayana", nis: "5948", nisn: "0107375477", k: "IX A", g: "Laki-Laki", ttl: "Karangasem, 21 November 2010" },
+        { n: "I Komang Agus Yudiarta", nis: "5949", nisn: "0105494568", k: "IX A", g: "Laki-Laki", ttl: "Karangasem, 12 Maret 2010" },
+        { n: "I Komang Ardi Triadinata", nis: "5950", nisn: "0113617757", k: "IX A", g: "Laki-Laki", ttl: "Perasi, 10 Februari 2011" },
+        { n: "I Komang Suardika", nis: "5951", nisn: "0109587925", k: "IX A", g: "Laki-Laki", ttl: "Bugbug, 26 Oktober 2010" },
+        { n: "I KOMANG YUDI KRISNA", nis: "5952", nisn: "0112873665", k: "IX A", g: "Laki-Laki", ttl: "Karangasem, 8 Januari 2011" },
+        { n: "I Made Rizky Yuda Artana", nis: "5953", nisn: "0119919461", k: "IX A", g: "Laki-Laki", ttl: "Sampiyang, 2 Mei 2011" },
+        { n: "I Nengah Nova Ardi Widnyana", nis: "5954", nisn: "0107106374", k: "IX A", g: "Laki-Laki", ttl: "Karangasem, 3 November 2010" },
+        { n: "I Nengah Okta Dwi Ardika", nis: "5955", nisn: "0109905386", k: "IX A", g: "Laki-Laki", ttl: "Bugbug, 3 Oktober 2010" },
+        { n: "I Putu Aditya Pratidimna", nis: "5956", nisn: "0102327279", k: "IX A", g: "Laki-Laki", ttl: "Amlapura, 15 September 2010" },
+        { n: "I Putu Agus Adi Pratama Putra", nis: "5957", nisn: "0107193309", k: "IX A", g: "Laki-Laki", ttl: "Bugbug, 9 Juni 2010" },
+        { n: "I Putu Kari Suardiana", nis: "5958", nisn: "0102061731", k: "IX A", g: "Laki-Laki", ttl: "Bugbug, 25 Desember 2010" },
+        { n: "I Wayan Agus Mertadana", nis: "5959", nisn: "0102527524", k: "IX A", g: "Laki-Laki", ttl: "Perasi, 26 Juni 2010" },
+        { n: "I Wayan Agus Saputra", nis: "5960", nisn: "0104731792", k: "IX A", g: "Laki-Laki", ttl: "Perasi, 29 Agustus 2010" },
+        { n: "I Wayan Arta Wiguna", nis: "5961", nisn: "0117540870", k: "IX A", g: "Laki-Laki", ttl: "Jasri, 20 Maret 2011" },
+        { n: "Jero Made Patan Adnyana", nis: "5962", nisn: "0111144048", k: "IX A", g: "Laki-Laki", ttl: "Karangasem, 26 Januari 2011" },
+        { n: "Ni Kade Dian Sasmita", nis: "5963", nisn: "0118636417", k: "IX A", g: "Perempuan", ttl: "Karangasem, 24 Juni 2011" },
+        { n: "Ni Kade Dwi Aulia Stariyani", nis: "5964", nisn: "0118288334", k: "IX A", g: "Perempuan", ttl: "Bugbug, 29 Mei 2011" },
+        { n: "Ni Kadek Suci", nis: "5065", nisn: "0103834218", k: "IX A", g: "Perempuan", ttl: "Samuh, 1 November 2010" },
+        { n: "Ni Kadek Yunita Dila Putri", nis: "5966", nisn: "0119766877", k: "IX A", g: "Perempuan", ttl: "Perasi, 20 Januari 2011" },
+        { n: "Ni Ketut Agustini", nis: "5967", nisn: "0113106148", k: "IX A", g: "Perempuan", ttl: "Jasri, 10 Agustus 2011" },
+        { n: "Ni Ketut Catur Febri Angreni", nis: "5968", nisn: "0119208411", k: "IX A", g: "Perempuan", ttl: "Bugbug, 27 Februari 2011" },
+        { n: "Ni Ketut Dewi Suprianingsih", nis: "5969", nisn: "0117231591", k: "IX A", g: "Perempuan", ttl: "Bugbug, 10 Juli 2011" },
+        { n: "Ni Ketut Melani Putri", nis: "5970", nisn: "0119170100", k: "IX A", g: "Perempuan", ttl: "Bugbug, 10 Mei 2011" },
+        { n: "Ni Komang Dwi Puspitayanti", nis: "5971", nisn: "0115754910", k: "IX A", g: "Perempuan", ttl: "Amlapura, 23 Maret 2011" },
+        { n: "Ni Komang Nadia Regita Cahyani", nis: "5972", nisn: "0101908480", k: "IX A", g: "Perempuan", ttl: "Denpasar, 19 Agustus 2010" },
+        { n: "Ni Komang Yunianingsih", nis: "5973", nisn: "0112170689", k: "IX A", g: "Perempuan", ttl: "Sampyang Jasri, 22 Juni 2011" },
+        { n: "Ni Luh Sri Dewi Adnyani", nis: "5974", nisn: "0117271920", k: "IX A", g: "Perempuan", ttl: "Bugbug, 16 April 2011" },
+        { n: "Ni Nengah Asti Kharismayani", nis: "5975", nisn: "0114703167", k: "IX A", g: "Perempuan", ttl: "Bugbug, 20 Februari 2011" },
+        { n: "Ni Nengah Widiasih", nis: "5976", nisn: "0114472387", k: "IX A", g: "Perempuan", ttl: "Perasi, 24 Juli 2011" },
+        { n: "Ni Putu Diah Prista Byan Putri", nis: "5977", nisn: "0111744505", k: "IX A", g: "Perempuan", ttl: "Karangasem, 24 April 2011" },
+        { n: "NI WAYAN LISTYANI", nis: "5978", nisn: "0116288194", k: "IX A", g: "Perempuan", ttl: "Perasi, 5 Januari 2011" },
+        { n: "I Gede Agus Arimbawa", nis: "5979", nisn: "0108788531", k: "IX B", g: "Laki-Laki", ttl: "Bugbug, 13 November 2010" },
+        { n: "I GEDE AGUS SARNATA", nis: "5980", nisn: "0111053829", k: "IX B", g: "Laki-Laki", ttl: "Perasi, 26 Februari 2011" },
+        { n: "I Gede Bagia Arta Wijaya", nis: "5981", nisn: "0112061891", k: "IX B", g: "Laki-Laki", ttl: "Bugbug, 28 Mei 2011" },
+        { n: "I Gede Supartika", nis: "5982", nisn: "0105616128", k: "IX B", g: "Laki-Laki", ttl: "Bugbug, 26 Desember 2010" },
+        { n: "I Gede Surya Darma Wijawan", nis: "5983", nisn: "0114682419", k: "IX B", g: "Laki-Laki", ttl: "Karangasem, 1 April 2011" },
+        { n: "I Ketut Taman Ade Pradnyana", nis: "5984", nisn: "0105248352", k: "IX B", g: "Laki-Laki", ttl: "Bugbug, 14 Agustus 2010" },
+        { n: "I Komang Budiartawan", nis: "5985", nisn: "0091275470", k: "IX B", g: "Laki-Laki", ttl: "Samuh, 21 Mei 2009" },
+        { n: "I Made Andika Agustama", nis: "5986", nisn: "0111562822", k: "IX B", g: "Laki-Laki", ttl: "Bugbug, 23 Agustus 2011" },
+        { n: "I Made Bayu Sastera Utama", nis: "5987", nisn: "0118368251", k: "IX B", g: "Laki-Laki", ttl: "Samuh, 24 April 2011" },
+        { n: "I Nengah Widi Astra Jaya", nis: "5988", nisn: "0107004900", k: "IX B", g: "Laki-Laki", ttl: "Bugbug, 31 Desember 2010" },
+        { n: "I Putu Agus Putra Sentanu", nis: "5989", nisn: "0117774743", k: "IX B", g: "Laki-Laki", ttl: "Bugbug, 27 Agustus 2011" },
+        { n: "I Putu Eka Pranata", nis: "5990", nisn: "0114085924", k: "IX B", g: "Laki-Laki", ttl: "Karangasem, 21 Januari 2011" },
+        { n: "I Putu Riyan Saputra", nis: "5991", nisn: "0113127648", k: "IX B", g: "Laki-Laki", ttl: "Samuh, 12 Juni 2011" },
+        { n: "I Wayan Artha Widi Pratama", nis: "5992", nisn: "0103439058", k: "IX B", g: "Laki-Laki", ttl: "Bugbug, 19 Juli 2010" },
+        { n: "I Wayan Bayu Raditya", nis: "5993", nisn: "0102146751", k: "IX B", g: "Laki-Laki", ttl: "Perasi, 9 September 2010" },
+        { n: "I Wayan Merta Yasa", nis: "5994", nisn: "0116007542", k: "IX B", g: "Laki-Laki", ttl: "Karangasem, 25 Mei 2011" },
+        { n: "I Wayan Sudiartawan", nis: "5995", nisn: "0112366805", k: "IX B", g: "Laki-Laki", ttl: "Perasi, 4 Januari 2011" },
+        { n: "Kadek Juli Saputra", nis: "5996", nisn: "0101996276", k: "IX B", g: "Laki-Laki", ttl: "Bugbug, 22 Juli 2010" },
+        { n: "Ni Kade Dwi Indah Cahyani", nis: "5997", nisn: "0104647221", k: "IX B", g: "Perempuan", ttl: "Sampyang, 31 Mei 2010" },
+        { n: "Ni Kade Mira Permata Devi", nis: "5998", nisn: "0115236655", k: "IX B", g: "Perempuan", ttl: "Amlapura, 10 Mei 2011" },
+        { n: "Ni Kade Santi", nis: "5999", nisn: "0104471182", k: "IX B", g: "Perempuan", ttl: "Karangasem, 9 September 2010" },
+        { n: "Ni Kadek Ayu Raspa Dewi", nis: "6000", nisn: "0105261543", k: "IX B", g: "Perempuan", ttl: "Karangasem, 16 Mei 2010" },
+        { n: "Ni Ketut Ayu Diah Pramesti", nis: "6001", nisn: "0107741660", k: "IX B", g: "Perempuan", ttl: "Karangasem, 1 Juli 2010" },
+        { n: "Ni Ketut Eka Nopiantari", nis: "6002", nisn: "0102245316", k: "IX B", g: "Perempuan", ttl: "Karangasem, 1 November 2010" },
+        { n: "Ni Ketut Juniantari", nis: "6003", nisn: "0103132565", k: "IX B", g: "Perempuan", ttl: "Karangasem, 29 Juni 2010" },
+        { n: "Ni Ketut Yamuna Sahani", nis: "6004", nisn: "0114187104", k: "IX B", g: "Perempuan", ttl: "Denpasar, 6 Juni 2011" },
+        { n: "Ni Ketut Yunita Nopi Artini", nis: "6005", nisn: "0114146406", k: "IX B", g: "Perempuan", ttl: "Bugbug, 20 Juni 2011" },
+        { n: "Ni Komang Tiara Santika Tri Utami", nis: "6006", nisn: "0116657287", k: "IX B", g: "Perempuan", ttl: "Bugbug, 23 Januari 2011" },
+        { n: "Ni Luh Juli Andani", nis: "6007", nisn: "0114471159", k: "IX B", g: "Perempuan", ttl: "Bugbug, 2 Juli 2011" },
+        { n: "NI LUH PUTU APRIL LIANI", nis: "6008", nisn: "0111722837", k: "IX B", g: "Perempuan", ttl: "Samuh, 11 April 2011" },
+        { n: "Ni Luh Yuniari", nis: "6009", nisn: "0106656885", k: "IX B", g: "Perempuan", ttl: "Samuh, 16 Desember 2010" },
+        { n: "Ni Made Mertaningsih", nis: "6010", nisn: "0114611608", k: "IX B", g: "Perempuan", ttl: "Perasi Kelod, 25 Maret 2011" },
+        { n: "Ni Nengah Widya Juliantari", nis: "6011", nisn: "0117696853", k: "IX B", g: "Perempuan", ttl: "Bugbug, 15 Juli 2011" },
+        { n: "Ni Nyoman Noviantari", nis: "6012", nisn: "0108700745", k: "IX B", g: "Perempuan", ttl: "Bugbug, 14 November 2010" },
+        { n: "Ni Putu Ayu Beby Carisa Putri", nis: "6013", nisn: "0118323716", k: "IX B", g: "Perempuan", ttl: "Sampiyang, 9 Juni 2011" },
+        { n: "I GUSTI NGURAH ADITYA PRAMANA", nis: "6014", nisn: "0109807538", k: "IX C", g: "Laki-Laki", ttl: "Badung, 3 Oktober 2010" },
+        { n: "I Kade Aris Juniarta", nis: "6015", nisn: "0112744461", k: "IX C", g: "Laki-Laki", ttl: "Karangasem, 9 Juni 2011" },
+        { n: "I Kade Farel Dwika Agustama", nis: "6016", nisn: "0101601010", k: "IX C", g: "Laki-Laki", ttl: "Bugbug, 2 Agustus 2010" },
+        { n: "I Kade Mas Dvesa Shastrawan", nis: "6017", nisn: "0108062697", k: "IX C", g: "Laki-Laki", ttl: "Bugbug, 6 November 2010" },
+        { n: "I Kadek Agus Artana Putra", nis: "6018", nisn: "0108084158", k: "IX C", g: "Laki-Laki", ttl: "Amlapura, 23 Agustus 2010" },
+        { n: "I Kadek Gohan Yudika Putra", nis: "6019", nisn: "0102626729", k: "IX C", g: "Laki-Laki", ttl: "Samuh, 2 Desember 2010" },
+        { n: "I Ketut Aryana", nis: "6020", nisn: "0105254390", k: "IX C", g: "Laki-Laki", ttl: "Perasi, 6 April 2010" },
+        { n: "I Ketut Suardana", nis: "6021", nisn: "0106071226", k: "IX C", g: "Laki-Laki", ttl: "Bugbug, 12 November 2010" },
+        { n: "I Ketut Sudarsana", nis: "6022", nisn: "0109203210", k: "IX C", g: "Laki-Laki", ttl: "Samuh, 11 April 2010" },
+        { n: "I Komang Agus Suyasa", nis: "6023", nisn: "0113933506", k: "IX C", g: "Laki-Laki", ttl: "Bugbug, 1 November 2011" },
+        { n: "I Komang Bagus Risky Cipta Purnama", nis: "6024", nisn: "0108799098", k: "IX C", g: "Laki-Laki", ttl: "Karangasem, 21 November 2010" },
+        { n: "I KOMANG DARMA MERTAYASA", nis: "2025", nisn: "0105975572", k: "IX C", g: "Laki-Laki", ttl: "Perasi, 18 Februari 2010" },
+        { n: "I Made Suardiva", nis: "6026", nisn: "0106893893", k: "IX C", g: "Laki-Laki", ttl: "Karangasem, 24 September 2010" },
+        { n: "I Nengah Agustina", nis: "6027", nisn: "0106917476", k: "IX C", g: "Laki-Laki", ttl: "Bugbug, 14 Agustus 2010" },
+        { n: "I Nengah Supartawan", nis: "6028", nisn: "0111074391", k: "IX C", g: "Laki-Laki", ttl: "Karangasem, 15 Januari 2011" },
+        { n: "I Nengah Wira Surya Adinata", nis: "6029", nisn: "0103295089", k: "IX C", g: "Laki-Laki", ttl: "Sampyang, 2 November 2010" },
+        { n: "Kadek Ayu Antari", nis: "6030", nisn: "0109105690", k: "IX C", g: "Perempuan", ttl: "Buleleng, 14 November 2010" },
+        { n: "Ketut Purnariani Sintya Dewi", nis: "6031", nisn: "0105534471", k: "IX C", g: "Perempuan", ttl: "Bugbug, 16 Agustus 2010" },
+        { n: "Mikha Ananda Rizky Di Patria", nis: "6032", nisn: "0101598530", k: "IX C", g: "Perempuan", ttl: "Rembang, 12 Desember 2010" },
+        { n: "Ni Kade Devi Suarmita", nis: "6033", nisn: "0117651247", k: "IX C", g: "Perempuan", ttl: "Amlapura, 13 Desember 2011" },
+        { n: "Ni Kadek Sucipta Dewi", nis: "6034", nisn: "0129208854", k: "IX C", g: "Perempuan", ttl: "Karangasem, 25 Oktober 2011" },
+        { n: "Ni Ketut Desi Ariantini", nis: "6035", nisn: "0109300681", k: "IX C", g: "Perempuan", ttl: "Perasi, 4 Desember 2010" },
+        { n: "Ni Ketut Yeni Puspita", nis: "6036", nisn: "0116049770", k: "IX C", g: "Perempuan", ttl: "Bugbug, 1 April 2011" },
+        { n: "Ni Komang Ayu Dinaningsih", nis: "6037", nisn: "0114101209", k: "IX C", g: "Perempuan", ttl: "Karangasem, 16 Juli 2011" },
+        { n: "Ni Komang Cika Arista Putri", nis: "6038", nisn: "0102832307", k: "IX C", g: "Perempuan", ttl: "Samuh, 18 Agustus 2010" },
+        { n: "Ni Luh Desi Puspita Sari", nis: "6039", nisn: "0104391157", k: "IX C", g: "Perempuan", ttl: "Perasi, 29 Desember 2010" },
+        { n: "Ni Luh Putu Sugiantari", nis: "6040", nisn: "0103678882", k: "IX C", g: "Perempuan", ttl: "Bugbug, 3 Desember 2010" },
+        { n: "Ni Nengah Apriani", nis: "6041", nisn: "0097797833", k: "IX C", g: "Perempuan", ttl: "Babakan, 26 April 2009" },
+        { n: "Ni Nengah Dewi Kertiasih", nis: "6042", nisn: "0118803063", k: "IX C", g: "Perempuan", ttl: "Bugbug, 23 Juni 2011" },
+        { n: "NI NYOMAN CINTYA APRILIANI", nis: "6043", nisn: "0114249484", k: "IX C", g: "Perempuan", ttl: "Perasi, 25 April 2011" },
+        { n: "Ni Nyoman Yulia Werdiyani", nis: "6044", nisn: "0101895797", k: "IX C", g: "Perempuan", ttl: "Perasi, 14 Juli 2010" },
+        { n: "Ni Putu Chintya Fani", nis: "6045", nisn: "0114478470", k: "IX C", g: "Perempuan", ttl: "Denpasar, 30 Mei 2011" },
+        { n: "Ni Putu Lia Prasini", nis: "6046", nisn: "0111460890", k: "IX C", g: "Perempuan", ttl: "Bugbug, 28 April 2011" },
+        { n: "Ni Putu Metriani", nis: "6047", nisn: "0111106967", k: "IX C", g: "Perempuan", ttl: "Perasi, 29 Mei 2011" },
+        { n: "Ni Wayan Devi Antari", nis: "6048", nisn: "0102457931", k: "IX C", g: "Perempuan", ttl: "Bugbug, 18 Desember 2010" },
+        { n: "Putu Diara Maheswari", nis: "6049", nisn: "0105233020", k: "IX C", g: "Perempuan", ttl: "Bugbug, 6 Desember 2010" },
+        { n: "I Gede Agus Widiarsa", nis: "6050", nisn: "0108889028", k: "IX D", g: "Laki-Laki", ttl: "Bugbug, 18 Oktober 2010" },
+        { n: "I Gede Nova Sukajaya", nis: "6051", nisn: "0107257041", k: "IX D", g: "Laki-Laki", ttl: "Karangasem, 8 November 2010" },
+        { n: "I Gede Sutama", nis: "6052", nisn: "0116981846", k: "IX D", g: "Laki-Laki", ttl: "Karangasem, 18 Januari 2011" },
+        { n: "I Gede Teguh Satria", nis: "6053", nisn: "0102015519", k: "IX D", g: "Laki-Laki", ttl: "Bugbug, 22 November 2010" },
+        { n: "I GUSTI AGUNG DWI RAHAYU", nis: "6054", nisn: "0108244253", k: "IX D", g: "Perempuan", ttl: "Denpasar, 8 Agustus 2010" },
+        { n: "I Kade Dava Bramestya Putra", nis: "6055", nisn: "0114235451", k: "IX D", g: "Laki-Laki", ttl: "Bugbug, 25 Maret 2011" },
+        { n: "I Kade Pradita Resta Wibawa", nis: "6056", nisn: "0106531386", k: "IX D", g: "Laki-Laki", ttl: "Bugbug, 28 Agustus 2010" },
+        { n: "I Ketut Astina Jaya", nis: "6057", nisn: "0105033754", k: "IX D", g: "Laki-Laki", ttl: "Bugbug, 10 Juni 2010" },
+        { n: "I Ketut Wardana", nis: "5058", nisn: "0098569530", k: "IX D", g: "Laki-Laki", ttl: "Jasri, 10 Maret 2009" },
+        { n: "I Komang Suardana", nis: "6059", nisn: "0101556135", k: "IX D", g: "Laki-Laki", ttl: "Samuh, 26 September 2010" },
+        { n: "I Made Angga Wijaya", nis: "6060", nisn: "0103922204", k: "IX D", g: "Laki-Laki", ttl: "Perasi, 10 Agustus 2010" },
+        { n: "I Nengah Agus Widiarta", nis: "6061", nisn: "0111622238", k: "IX D", g: "Laki-Laki", ttl: "Karangasem, 7 Maret 2011" },
+        { n: "I Nengah Merta Yasa", nis: "6062", nisn: "0118924237", k: "IX D", g: "Laki-Laki", ttl: "Bugbug, 12 Februari 2011" },
+        { n: "I Nengah Sudiarnata", nis: "6063", nisn: "0109236125", k: "IX D", g: "Laki-Laki", ttl: "Bugbug, 29 September 2010" },
+        { n: "I Nengah Yuda Rendi Suratmaja", nis: "6064", nisn: "0112090486", k: "IX D", g: "Laki-Laki", ttl: "Bugbug, 14 Februari 2011" },
+        { n: "I Nyoman Dhyana Widhi Arta", nis: "6065", nisn: "0117476537", k: "IX D", g: "Laki-Laki", ttl: "Bugbug, 17 Februari 2011" },
+        { n: "I Putu Deco Yudika Putra", nis: "6066", nisn: "0104277477", k: "IX D", g: "Laki-Laki", ttl: "Karangasem, 17 Agustus 2010" },
+        { n: "I PUTU RENDY ASTAWAN", nis: "6067", nisn: "0105456746", k: "IX D", g: "Laki-Laki", ttl: "Perasi, 4 Maret 2010" },
+        { n: "I Wayan Agus Suryatama", nis: "6068", nisn: "0108169042", k: "IX D", g: "Laki-Laki", ttl: "Karangasem, 23 Agustus 2010" },
+        { n: "Kadek Feby Dwi Maharani", nis: "6069", nisn: "0118612421", k: "IX D", g: "Perempuan", ttl: "Bugbug, 12 Februari 2011" },
+        { n: "Ni Kade Oky Lesintya Dewi", nis: "6070", nisn: "0107979021", k: "IX D", g: "Perempuan", ttl: "Bugbug, 28 Oktober 2010" },
+        { n: "NI KADE YUNI LESTARI DEWI", nis: "6071", nisn: "0106797223", k: "IX D", g: "Perempuan", ttl: "Bugbug Kaleran, 13 Juni 2010" },
+        { n: "Ni Kadek Nova Widiantari", nis: "6072", nisn: "0119050106", k: "IX D", g: "Perempuan", ttl: "Bugbug, 4 September 2011" },
+        { n: "Ni Ketut Jenia Marty Trifarisa", nis: "6073", nisn: "0112051778", k: "IX D", g: "Perempuan", ttl: "Perasi, 19 Maret 2011" },
+        { n: "Ni Komang Cahyani", nis: "6074", nisn: "0092597937", k: "IX D", g: "Perempuan", ttl: "Bugbug, 23 Agustus 2009" },
+        { n: "Ni Komang Depi Wahyuni", nis: "6075", nisn: "0106674093", k: "IX D", g: "Perempuan", ttl: "Karangasem, 18 September 2010" },
+        { n: "Ni Luh Ayu Parwati Putri", nis: "6076", nisn: "0115040871", k: "IX D", g: "Perempuan", ttl: "Karangasem, 29 Januari 2011" },
+        { n: "Ni Luh Desy Widiantari", nis: "6077", nisn: "0101989878", k: "IX D", g: "Perempuan", ttl: "Bugbug, 18 Desember 2010" },
+        { n: "Ni Nyoman Suryaningsih", nis: "6078", nisn: "0117659778", k: "IX D", g: "Perempuan", ttl: "Bugbug, 22 Mei 2011" },
+        { n: "Ni Nyoman Yuli Mentari", nis: "6079", nisn: "0105335373", k: "IX D", g: "Perempuan", ttl: "Bugbug, 22 Juli 2010" },
+        { n: "Ni Putu Kristina Dewi", nis: "6080", nisn: "0119119642", k: "IX D", g: "Perempuan", ttl: "Karangasem, 13 Februari 2011" },
+        { n: "Ni Putu Sri Wulan Dani", nis: "6081", nisn: "0106703215", k: "IX D", g: "Perempuan", ttl: "Karangasem, 5 November 2010" },
+        { n: "NI WAYAN PUJI MORI", nis: "6082", nisn: "0117987322", k: "IX D", g: "Perempuan", ttl: "Karangasem, 10 Juli 2011" },
+        { n: "Ni Wayan Sari Daniasih", nis: "6083", nisn: "0102629718", k: "IX D", g: "Perempuan", ttl: "Karangasem, 23 Juli 2010" },
+        { n: "Ni Wayan Widhytia Kusuma Pradnyani", nis: "6084", nisn: "0113254548", k: "IX D", g: "Perempuan", ttl: "Perasi, 13 Juni 2011" },
+        { n: "Pande Putu Raitusan", nis: "6085", nisn: "0108848086", k: "IX D", g: "Laki-Laki", ttl: "Jembrana, 18 Desember 2010" },
+        { n: "I Gede Andy Pratama", nis: "6086", nisn: "0105677556", k: "IX E", g: "Laki-Laki", ttl: "Karangasem, 30 September 2010" },
+        { n: "I Gede Dana Jaya", nis: "6087", nisn: "0106010257", k: "IX E", g: "Laki-Laki", ttl: "Denpasar, 28 Juni 2010" },
+        { n: "I Gede Danu Arta Widya Guna", nis: "6088", nisn: "0118790106", k: "IX E", g: "Laki-Laki", ttl: "Perasi, 7 Juni 2011" },
+        { n: "I Gede Rafa Putra Sugiarta", nis: "6089", nisn: "0105609708", k: "IX E", g: "Laki-Laki", ttl: "Denpasar, 11 Agustus 2010" },
+        { n: "I Gede Wira Aditya Mahardika", nis: "6090", nisn: "0114884608", k: "IX E", g: "Laki-Laki", ttl: "Bugbug, 1 Maret 2011" },
+        { n: "I Gede Yuda Adi Pratama", nis: "6091", nisn: "0116411315", k: "IX E", g: "Laki-Laki", ttl: "Karangasem, 30 Januari 2011" },
+        { n: "I GUSTI AYU INDI PRADNYANDARI", nis: "6092", nisn: "0108314264", k: "IX E", g: "Perempuan", ttl: "Perasi Tengah, 19 Agustus 2010" },
+        { n: "I Kade Dwi Aditya Manduang", nis: "6093", nisn: "0109800796", k: "IX E", g: "Laki-Laki", ttl: "Bugbug, 28 November 2010" },
+        { n: "I Kadek Edy Arya Tama", nis: "6094", nisn: "0112008079", k: "IX E", g: "Laki-Laki", ttl: "Samuh, 24 Januari 2011" },
+        { n: "I Ketut Ardiana Putra", nis: "6095", nisn: "0112006341", k: "IX E", g: "Laki-Laki", ttl: "Karangasem, 16 April 2011" },
+        { n: "I Ketut Suastawa", nis: "6096", nisn: "0117977094", k: "IX E", g: "Laki-Laki", ttl: "Amlapura, 31 Maret 2011" },
+        { n: "I Komang Artana", nis: "6097", nisn: "0102068311", k: "IX E", g: "Laki-Laki", ttl: "Karangasem, 7 Juli 2010" },
+        { n: "I Komang Budindra Prasta Putra", nis: "6098", nisn: "0117319344", k: "IX E", g: "Laki-Laki", ttl: "Karangasem, 23 Juni 2011" },
+        { n: "I MADE BRAMASENA KANWA", nis: "6099", nisn: "0109125747", k: "IX E", g: "Laki-Laki", ttl: "Karangasem, 18 Juni 2010" },
+        { n: "I Made Wahyu Mahartha Wijaya", nis: "6100", nisn: "0117123401", k: "IX E", g: "Laki-Laki", ttl: "Perasi, 4 Juni 2011" },
+        { n: "I Nengah Juli Darmawan", nis: "6101", nisn: "0111974962", k: "IX E", g: "Laki-Laki", ttl: "Bugbug, 9 Juli 2011" },
+        { n: "I Putu Aditya Pranata", nis: "6102", nisn: "0112022110", k: "IX E", g: "Laki-Laki", ttl: "Bugbug, 26 Februari 2011" },
+        { n: "I Wayan Swadyana", nis: "6103", nisn: "0114718704", k: "IX E", g: "Laki-Laki", ttl: "Bugbug, 31 Mei 2011" },
+        { n: "Ni Kade Sri Bumi Ayu Padmi", nis: "6156", nisn: "0112565808", k: "IX E", g: "Perempuan", ttl: "Karangasem, 24 Februari 2011" },
+        { n: "Ni Ketut Leoni Sumastiani", nis: "6104", nisn: "0109129938", k: "IX E", g: "Perempuan", ttl: "Perasi, 21 Agustus 2010" },
+        { n: "Ni Komang Indrayani Dewi Utami", nis: "6105", nisn: "0116513577", k: "IX E", g: "Perempuan", ttl: "Samuh, 2 Mei 2011" },
+        { n: "Ni Komang Juniantari", nis: "6106", nisn: "0108727816", k: "IX E", g: "Perempuan", ttl: "Bugbug, 3 Juni 2010" },
+        { n: "Ni Komang Santi Cahyani", nis: "6107", nisn: "0118038525", k: "IX E", g: "Perempuan", ttl: "Jasri, 24 April 2011" },
+        { n: "Ni Komang Tania Maheswari Widyandhani", nis: "6108", nisn: "0113021203", k: "IX E", g: "Perempuan", ttl: "Bugbug, 6 Januari 2011" },
+        { n: "Ni Luh Putu Ayu Apriliyani", nis: "6109", nisn: "0112640678", k: "IX E", g: "Perempuan", ttl: "Semarapura, 12 April 2011" },
+        { n: "Ni Putu Muliartini", nis: "6110", nisn: "0115866448", k: "IX E", g: "Perempuan", ttl: "Perasi, 23 Juni 2011" },
+        { n: "Ni Putu Pradnyan Frami Gayatri", nis: "6111", nisn: "0112705205", k: "IX E", g: "Perempuan", ttl: "Karangasem, 15 Januari 2011" },
+        { n: "NI PUTU SERI", nis: "6112", nisn: "0109099585", k: "IX E", g: "Perempuan", ttl: "Karangasem, 22 Maret 2010" },
+        { n: "Ni Wayan Puspita Dewi", nis: "6113", nisn: "0117661376", k: "IX E", g: "Perempuan", ttl: "Karangasem, 9 September 2011" },
+        { n: "Ni Wayan Putri Antari", nis: "6114", nisn: "0106402379", k: "IX E", g: "Perempuan", ttl: "Bugbug, 18 Oktober 2010" },
+        { n: "Ni Wayan Sri Dian Septiarini", nis: "6115", nisn: "0108240835", k: "IX E", g: "Perempuan", ttl: "Bugbug, 30 September 2011" },
+        { n: "Ni Wayan Sri Wahyuni", nis: "6116", nisn: "0093228984", k: "IX E", g: "Perempuan", ttl: "Karangasem, 7 September 2009" },
+        { n: "Putu Ayu Laksmi Dewani Putri", nis: "6117", nisn: "0117627079", k: "IX E", g: "Perempuan", ttl: "Karangasem, 19 Juni 2011" },
+        { n: "Putu Dede Apriyantara", nis: "6118", nisn: "0114524712", k: "IX E", g: "Laki-Laki", ttl: "Amlapura, 1 April 2011" },
+        { n: "Putu Dina Cahya Meksikori", nis: "6119", nisn: "0117823679", k: "IX E", g: "Perempuan", ttl: "Karangasem, 17 Mei 2011" },
+        { n: "Gede Edy Arsana", nis: "6120", nisn: "0117086085", k: "IX F", g: "Laki-Laki", ttl: "Karangasem, 2 Mei 2011" },
+        { n: "I Gede Agus Sumanjaya", nis: "6121", nisn: "0108593479", k: "IX F", g: "Laki-Laki", ttl: "Karangasem, 28 Agustus 2010" },
+        { n: "I Gede Parta Wijaya", nis: "6122", nisn: "0116135486", k: "IX F", g: "Laki-Laki", ttl: "Karangasem, 17 Juli 2011" },
+        { n: "I Gede Suartapa", nis: "6123", nisn: "0113573753", k: "IX F", g: "Laki-Laki", ttl: "Karangasem, 29 April 2011" },
+        { n: "I GUSTI AYU INTAN SEPTIARI", nis: "6124", nisn: "0109816668", k: "IX F", g: "Perempuan", ttl: "Karangasem, 19 September 2010" },
+        { n: "I Kade Agus Kusumayoga", nis: "6125", nisn: "0105810975", k: "IX F", g: "Laki-Laki", ttl: "Bugbug, 2 Agustus 2010" },
+        { n: "I Kade Onxyantara Putra", nis: "6126", nisn: "0108085926", k: "IX F", g: "Laki-Laki", ttl: "Karangasem, 15 Oktober 2010" },
+        { n: "I Kadek Mertayasa", nis: "6127", nisn: "0116311915", k: "IX F", g: "Laki-Laki", ttl: "Karangasem, 27 Juni 2011" },
+        { n: "I KETUT PURNAWAN ADI SANTOSA", nis: "6128", nisn: "0106534788", k: "IX F", g: "Laki-Laki", ttl: "Karangasem, 8 November 2010" },
+        { n: "I KETUT SASA KERTA YASA", nis: "6129", nisn: "0114832299", k: "IX F", g: "Laki-Laki", ttl: "Karangasem, 23 Mei 2011" },
+        { n: "I Ketut Wira Adnyana Putra", nis: "6130", nisn: "0115386839", k: "IX F", g: "Laki-Laki", ttl: "Perasi, 6 Januari 2011" },
+        { n: "I Komang Krishna Satria Arya Remington", nis: "6131", nisn: "0113784463", k: "IX F", g: "Laki-Laki", ttl: "Amlapura, 24 Februari 2011" },
+        { n: "I Komang Widiarsa", nis: "6132", nisn: "0112351501", k: "IX F", g: "Laki-Laki", ttl: "Bugbug, 27 Mei 2011" },
+        { n: "I Nengah Radit Saputra", nis: "6133", nisn: "0116016454", k: "IX F", g: "Laki-Laki", ttl: "Jasri, 27 Maret 2011" },
+        { n: "I Putu Riski satya Kusumanata", nis: "6135", nisn: "0112614763", k: "IX F", g: "Laki-Laki", ttl: "Amlapura, 22 Februari 2011" },
+        { n: "I Putu Wahyu Mahendra Jaya", nis: "6136", nisn: "0113287104", k: "IX F", g: "Laki-Laki", ttl: "Bugbug, 1 Februari 2011" },
+        { n: "I Wayan Eka Agustina", nis: "6137", nisn: "0104178901", k: "IX F", g: "Laki-Laki", ttl: "Samuh, 25 Agustus 2010" },
+        { n: "Kade Dodi Artana", nis: "6139", nisn: "0102304864", k: "IX F", g: "Laki-Laki", ttl: "Bugbug, 5 November 2010" },
+        { n: "Ni Kade Ari Susanti", nis: "6140", nisn: "0111271171", k: "IX F", g: "Perempuan", ttl: "Karangasem, 18 Februari 2011" },
+        { n: "Ni Kadek Ayu Dwi Pratiwi", nis: "6141", nisn: "0101266771", k: "IX F", g: "Perempuan", ttl: "Karangasem, 30 September 2010" },
+        { n: "Ni Kadek Chintya Indah Sari", nis: "6142", nisn: "0113836350", k: "IX F", g: "Perempuan", ttl: "Bugbug, 1 Juni 2011" },
+        { n: "Ni Kadek Sintya Cahyani", nis: "6143", nisn: "0119480150", k: "IX F", g: "Perempuan", ttl: "Karangasem, 30 Agustus 2011" },
+        { n: "Ni Ketut Juliani", nis: "6145", nisn: "0116787779", k: "IX F", g: "Perempuan", ttl: "Amlapura, 5 Juli 2011" },
+        { n: "Ni Ketut Rani Virginia Valentina", nis: "6146", nisn: "0118764514", k: "IX F", g: "Perempuan", ttl: "Karangasem, 14 Februari 2011" },
+        { n: "Ni Ketut Triani Susila", nis: "6147", nisn: "0116355150", k: "IX F", g: "Perempuan", ttl: "Karangasem, 27 Mei 2011" },
+        { n: "Ni Luh Putu Listia Dewi", nis: "6148", nisn: "0104551910", k: "IX F", g: "Perempuan", ttl: "Samuh, 10 April 2010" },
+        { n: "Ni Luh Savitri Saktiari", nis: "6149", nisn: "0117346667", k: "IX F", g: "Perempuan", ttl: "Amlapura, 29 Mei 2011" },
+        { n: "Ni Luh Yara Cahya Dervani", nis: "6150", nisn: "0109244704", k: "IX F", g: "Perempuan", ttl: "Karangasem, 16 September 2010" },
+        { n: "Ni Nengah Ita Febriani", nis: "6151", nisn: "0113992987", k: "IX F", g: "Perempuan", ttl: "Karangasem, 1 Februari 2011" },
+        { n: "Ni Putu Eka Ariani", nis: "6152", nisn: "0103625098", k: "IX F", g: "Perempuan", ttl: "Karangasem, 18 Agustus 2010" },
+        { n: "Ni Putu Rosinta", nis: "6153", nisn: "0094389764", k: "IX F", g: "Perempuan", ttl: "Bugbug, 14 Juli 2009" },
+        { n: "Ni Wayan Ayudia Pratiwi", nis: "6154", nisn: "0116446148", k: "IX F", g: "Perempuan", ttl: "Bugbug, 5 April 2011" },
+        { n: "Ni Wayan Merta Asih", nis: "6155", nisn: "0118672630", k: "IX F", g: "Perempuan", ttl: "Karangasem, 14 April 2011" },
+        { n: "Putu Aditya Pratama", nis: "6134", nisn: "0102375174", k: "IX F", g: "Laki-Laki", ttl: "Bugbug, 13 Oktober 2010" }
     ];
 
-    // BANK KATA-KATA MOTIVASI / MUTIARA INDAH
-    const quotesBank = [
+    // MUTIARA HIKMAH / SLOGAN
+    const slogans = [
         "Masa depan adalah milik mereka yang percaya pada keindahan impian mereka.",
-        "Pendidikan adalah senjata paling mematikan di dunia, karena dengan itu Anda bisa mengubah dunia.",
-        "Hiduplah seolah engkau mati besok. Belajarlah seolah engkau hidup selamanya.",
-        "Kesuksesan bukanlah akhir dari perjalanan, melainkan sebuah keberanian untuk terus melangkah.",
-        "Investasi terbaik yang bisa kamu berikan untuk masa depanmu adalah melalui lembaran ilmu.",
-        "Gantungkan cita-citamu setinggi langit! Jika engkau jatuh, engkau akan jatuh di antara bintang-bintang.",
-        "Jangan biarkan keterbatasan masa lalu menghalangi kemegahan masa depan yang menantimu.",
-        "Jadilah versi terbaik dari dirimu sendiri dalam setiap babak petualangan barumu."
+        "Pendidikan adalah paspor menuju masa depan, hari esok milik mereka yang bersiap hari ini.",
+        "Hiduplah seolah mati besok. Belajarlah seolah hidup selamanya.",
+        "Kesuksesan bukanlah akhir, melainkan keberanian untuk terus melangkah.",
+        "Investasi terbaik bagi masa depanmu adalah lembaran ilmu yang kamu pelajari.",
+        "Gantungkan cita-citamu setinggi langit! Jika jatuh, kau jatuh di antara bintang.",
+        "Jangan biarkan masa lalu menghalangi kemegahan masa depan yang menantimu.",
+        "Jadilah versi terbaik dari dirimu dalam setiap babak petualangan barumu."
     ];
 
     const slideWrapper = document.getElementById('slide-wrapper');
     const loadBar = document.getElementById('load-bar');
+    const counterText = document.getElementById('num-counter');
     let currentIdx = 0;
-    const slideInterval = 17143; // 17.143 Detik agar total 210 siswa = Pas 60 Menit
+    const intervalTime = 17143; // 17.143 detik (Pas 60 Menit)
 
-    function displaySlide() {
-        const student = studentsList[currentIdx];
-        const quote = quotesBank[currentIdx % quotesBank.length];
+    function renderSlide() {
+        const s = students[currentIdx];
+        const slogan = slogans[currentIdx % slogans.length];
         
-        // Injeksi Kode Struktur Dua Kolom Sejajar Skala Besar
         slideWrapper.innerHTML = `
-            <div class="slide-content" id="current-active-slide">
+            <div class="slide-content" id="active-slide">
                 <div class="left-column">
-                    <div class="celebration-tag">Selamat Atas Kelulusan</div>
-                    <h1 class="student-name">${student.n}</h1>
+                    <span class="ucapan-selamat">Selamat Atas Kelulusan</span>
+                    <div class="garis-ucapan"></div>
+                    
+                    <h1 class="student-name">${s.n}</h1>
+                    <span class="student-class">KELAS ${s.k}</span>
                     
                     <div class="identity-card">
                         <div class="info-row">
                             <span class="info-label">NIS</span>
-                            <span class="info-value">${student.nis}</span>
+                            <span class="info-value">${s.nis}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">NISN</span>
-                            <span class="info-value">${student.nisn}</span>
+                            <span class="info-value">${s.nisn}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">Gender</span>
-                            <span class="info-value">${student.g}</span>
+                            <span class="info-value">${s.g}</span>
                         </div>
                         <div class="info-row">
                             <span class="info-label">TTL</span>
-                            <span class="info-value">${student.ttl}</span>
+                            <span class="info-value">${s.ttl}</span>
                         </div>
                     </div>
                     
-                    <div class="quote-box">
-                        <p class="quote-text">"${quote}"</p>
+                    <div class="slogan-box">
+                        <p class="slogan-text">"${slogan}"</p>
                     </div>
                 </div>
                 
                 <div class="right-column">
                     <div class="photo-wrapper">
-                        <img src="images/${student.nisn}.JPG" 
-                             onerror="this.src='https://via.placeholder.com/390x490/111827/fbbf24?text=FOTO+SISWA'" 
-                             alt="Foto ${student.n}">
+                        <img src="images/${s.nisn}.JPG" 
+                             onerror="this.src='https://via.placeholder.com/400x520/111827/fbbf24?text=${s.nisn}.JPG+KOSONG'" 
+                             alt="Foto ${s.n}">
                     </div>
                 </div>
-
-                <div class="slide-counter">Siswa: ${currentIdx + 1} / ${studentsList.length}</div>
             </div>
         `;
 
-        // Efek Translasi & Fade In Halus melalui penambahan class Active
-        setTimeout(() => {
-            const currentSlideDOM = document.getElementById('current-active-slide');
-            if(currentSlideDOM) currentSlideDOM.classList.add('active');
-        }, 60);
+        // Update Counter
+        counterText.innerText = `${currentIdx + 1} / ${students.length}`;
 
-        // Reset dan jalankan animasi Progress Bar penunjuk waktu slide
+        // Aktifkan Efek Translasi & Fade In
+        setTimeout(() => {
+            const dom = document.getElementById('active-slide');
+            if(dom) dom.classList.add('active');
+        }, 50);
+
+        // Reset & Jalankan Progress Bar
         loadBar.style.transition = 'none';
         loadBar.style.width = '0%';
         setTimeout(() => {
-            loadBar.style.transition = `width ${slideInterval}ms linear`;
+            loadBar.style.transition = `width ${intervalTime}ms linear`;
             loadBar.style.width = '100%';
-        }, 60);
+        }, 50);
     }
 
-    // Eksekusi Pertama kali dijalankan
-    displaySlide();
+    renderSlide();
 
-    // Perulangan Otomatis Berdurasi Total 60 Menit
     setInterval(() => {
-        currentIdx = (currentIdx + 1) % studentsList.length;
-        displaySlide();
-    }, slideInterval);
+        currentIdx = (currentIdx + 1) % students.length;
+        renderSlide();
+    }, intervalTime);
 </script>
 </body>
 </html>
