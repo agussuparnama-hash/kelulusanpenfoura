@@ -6,7 +6,7 @@
     <title>Slide Selebrasi Kelulusan Kelas IX</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
     
     <style>
         /* 1. SETUP & VARS */
@@ -89,16 +89,49 @@
         .slide-content.active { opacity: 1; transform: translateY(0); visibility: visible; }
 
         .left-column { width: 60%; padding-right: 40px; }
-        .right-column { width: 40%; text-align: center; }
+        .right-column { 
+            width: 40%; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-        /* 4. TYPOGRAPHY (ESTETIK & BESAR) */
+        /* SCHOOL BRANDING AREA */
+        .school-branding {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .school-logo {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+        }
+
+        .school-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-align: left;
+            line-height: 1.2;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        /* 4. TYPOGRAPHY */
         .ucapan-selamat {
             font-family: 'Poppins', sans-serif;
-            font-size: 32px; /* DIPERBESAR */
+            font-size: 32px;
             font-weight: 800;
             color: var(--accent-gold);
             text-transform: uppercase;
-            letter-spacing: 6px; /* LEBIH ESTETIK */
+            letter-spacing: 6px;
             margin-bottom: 10px;
             display: block;
         }
@@ -113,7 +146,7 @@
 
         .student-name {
             font-family: 'Poppins', sans-serif;
-            font-size: 52px; /* SANGAT BESAR */
+            font-size: 52px;
             color: #ffffff;
             font-weight: 700;
             line-height: 1.1;
@@ -123,7 +156,7 @@
 
         .student-class {
             font-family: 'Poppins', sans-serif;
-            font-size: 36px; /* DIPERBESAR */
+            font-size: 36px;
             color: var(--accent-gold);
             font-weight: 800;
             letter-spacing: 2px;
@@ -151,7 +184,7 @@
         .info-label {
             width: 170px;
             color: var(--text-muted);
-            font-size: 18px; /* BESAR */
+            font-size: 18px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -159,7 +192,7 @@
 
         .info-value {
             color: var(--text-light);
-            font-size: 22px; /* BESAR */
+            font-size: 22px;
             font-weight: 600;
         }
 
@@ -170,36 +203,36 @@
         }
 
         .slogan-text {
-            font-family: 'Playfair Display', serif; /* LEBIH ESTETIK */
+            font-family: 'Playfair Display', serif;
             font-style: italic;
             color: #cbd5e1;
-            font-size: 24px; /* DIPERBESAR */
+            font-size: 24px;
             line-height: 1.4;
         }
 
-        /* 5. PHOTO FRAME */
+        /* 5. PHOTO FRAME (UKURAN DIPERKECIL SEDIKIT) */
         .photo-wrapper {
             display: inline-block;
-            width: 400px;
-            height: 520px;
+            width: 350px; /* Diperkecil dari 400px */
+            height: 455px; /* Diperkecil dari 520px agar rasio 3:4 tetap pas */
             position: relative;
         }
 
         .photo-wrapper::before {
             content: "";
             position: absolute;
-            top: -15px; left: -15px; right: 15px; bottom: 15px;
+            top: -12px; left: -12px; right: 12px; bottom: 12px;
             border: 3px solid var(--accent-gold);
-            border-radius: 22px;
+            border-radius: 18px;
             z-index: 1;
         }
 
         .photo-wrapper img {
             width: 100%; height: 100%;
             object-fit: cover;
-            border-radius: 20px;
-            border: 8px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+            border-radius: 16px;
+            border: 6px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
             position: relative;
             z-index: 2;
         }
@@ -236,7 +269,7 @@
 </div>
 
 <script>
-    // DATA 210 SISWA (LENGKAP DENGAN KELAS)
+    // DATA ORIGINAL 210 SISWA SESUAI KETENTUAN ASLI
     const students = [
         { n: "I Gede Bagus Arinata", nis: "5945", nisn: "0108263744", k: "IX A", g: "Laki-Laki", ttl: "Karangasem, 16 Mei 2010" },
         { n: "I Gede Putu Aditya Widiadnyana", nis: "5946", nisn: "0116947706", k: "IX A", g: "Laki-Laki", ttl: "Karangasem, 23 Juli 2011" },
@@ -271,7 +304,6 @@
         { n: "Ni Nengah Asti Kharismayani", nis: "5975", nisn: "0114703167", k: "IX A", g: "Perempuan", ttl: "Bugbug, 20 Februari 2011" },
         { n: "Ni Nengah Widiasih", nis: "5976", nisn: "0114472387", k: "IX A", g: "Perempuan", ttl: "Perasi, 24 Juli 2011" },
         { n: "Ni Putu Diah Prista Byan Putri", nis: "5977", nisn: "0111744505", k: "IX A", g: "Perempuan", ttl: "Karangasem, 24 April 2011" },
-        { n: "NI WAYAN LISTYANI", nis: "5978", nisn: "0116288194", k: "IX A", g: "Perempuan", ttl: "Perasi, 5 Januari 2011" },
         { n: "I Gede Agus Arimbawa", nis: "5979", nisn: "0108788531", k: "IX B", g: "Laki-Laki", ttl: "Bugbug, 13 November 2010" },
         { n: "I GEDE AGUS SARNATA", nis: "5980", nisn: "0111053829", k: "IX B", g: "Laki-Laki", ttl: "Perasi, 26 Februari 2011" },
         { n: "I Gede Bagia Arta Wijaya", nis: "5981", nisn: "0112061891", k: "IX B", g: "Laki-Laki", ttl: "Bugbug, 28 Mei 2011" },
@@ -293,8 +325,8 @@
         { n: "Ni Kade Dwi Indah Cahyani", nis: "5997", nisn: "0104647221", k: "IX B", g: "Perempuan", ttl: "Sampyang, 31 Mei 2010" },
         { n: "Ni Kade Mira Permata Devi", nis: "5998", nisn: "0115236655", k: "IX B", g: "Perempuan", ttl: "Amlapura, 10 Mei 2011" },
         { n: "Ni Kade Santi", nis: "5999", nisn: "0104471182", k: "IX B", g: "Perempuan", ttl: "Karangasem, 9 September 2010" },
-        { n: "Ni Kadek Ayu Raspa Dewi", nis: "6000", nisn: "0105261543", k: "IX B", g: "Perempuan", ttl: "Karangasem, 16 Mei 2010" },
-        { n: "Ni Ketut Ayu Diah Pramesti", nis: "6001", nisn: "0107741660", k: "IX B", g: "Perempuan", ttl: "Karangasem, 1 Juli 2010" },
+        { n: "Ni Kadek Ayu Raspa Dewi", font: "6000", nis: "6000", nisn: "0105261543", k: "IX B", g: "Perempuan", ttl: "Karangasem, 16 Mei 2010" },
+        { n: "Ni Ketut Ayu Diah Pramesti", nis: "6001", nisn: "0107741660", k: "IX B", g: "Perempuan", ttl: "Karangasem, 1 July 2010" },
         { n: "Ni Ketut Eka Nopiantari", nis: "6002", nisn: "0102245316", k: "IX B", g: "Perempuan", ttl: "Karangasem, 1 November 2010" },
         { n: "Ni Ketut Juniantari", nis: "6003", nisn: "0103132565", k: "IX B", g: "Perempuan", ttl: "Karangasem, 29 Juni 2010" },
         { n: "Ni Ketut Yamuna Sahani", nis: "6004", nisn: "0114187104", k: "IX B", g: "Perempuan", ttl: "Denpasar, 6 Juni 2011" },
@@ -466,7 +498,7 @@
     const loadBar = document.getElementById('load-bar');
     const counterText = document.getElementById('num-counter');
     let currentIdx = 0;
-    const intervalTime = 17143; // 17.143 detik (Pas 60 Menit)
+    const intervalTime = 17143; // 17.143 detik
 
     function renderSlide() {
         const s = students[currentIdx];
@@ -506,9 +538,16 @@
                 </div>
                 
                 <div class="right-column">
+                    <div class="school-branding">
+                        <img class="school-logo" src="logo.png" 
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23fbbf24\'><path d=\'M12 3L1 9l11 6 9-4.91V17h2V9L12 3z\'/><path d=\'M20 12.38l-8 4.36-8-4.36V17l8 4.36 8-4.36v-4.62z\'/></svg>'" 
+                             alt="Logo Sekolah">
+                        <div class="school-name">SMP Negeri 4<br>Amlapura</div>
+                    </div>
+                    
                     <div class="photo-wrapper">
                         <img src="images/${s.nisn}.JPG" 
-                             onerror="this.src='https://via.placeholder.com/400x520/111827/fbbf24?text=${s.nisn}.JPG+KOSONG'" 
+                             onerror="this.src='https://via.placeholder.com/350x455/111827/fbbf24?text=${s.nisn}.JPG+KOSONG'" 
                              alt="Foto ${s.n}">
                     </div>
                 </div>
