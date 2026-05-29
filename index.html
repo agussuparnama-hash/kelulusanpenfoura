@@ -6,17 +6,16 @@
     <title>Slide Selebrasi Kelulusan Kelas IX</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg-dark: #090d16;
-            --panel-glass: rgba(255, 255, 255, 0.03);
+            --panel-glass: rgba(255, 255, 255, 0.04);
             --accent-gold: #fbbf24;
             --accent-rose: #e11d48;
             --text-light: #f8fafc;
-            --text-muted: #94a3b8;
+            --text-muted: #cbd5e1; /* Membuat teks label sedikit lebih terang agar lebih kontras saat diperbesar */
             --slide-duration: 17143ms; /* Durasi otomatis agar 210 siswa pas 60 menit */
         }
 
@@ -47,7 +46,7 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
         }
 
-        /* CORAK BACKGROUND MESH GRADIENT YANG DIPERINDAH */
+        /* CORAK BACKGROUND MESH GRADIENT */
         .background-pattern {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -83,13 +82,13 @@
             z-index: 5;
         }
 
-        /* STRUKTUR LAYOUT GRID 50:50 (KIRI IDENTITAS, KANAN FOTO) */
+        /* STRUKTUR LAYOUT GRID 58:42 (KIRI IDENTITAS BESAR, KANAN FOTO) */
         .slide-content {
             position: absolute;
             width: 100%;
             height: 100%;
-            display: table; /* Fallback support browser tua, dioptimasi dengan table-cell */
-            padding: 55px 70px;
+            display: table;
+            padding: 50px 65px;
             
             /* Efek Animasi Translasi / Peralihan */
             opacity: 0;
@@ -105,26 +104,26 @@
 
         .left-column {
             display: table-cell;
-            width: 55%;
+            width: 58%;
             vertical-align: middle;
-            padding-right: 50px;
+            padding-right: 40px;
         }
 
         .right-column {
             display: table-cell;
-            width: 45%;
+            width: 42%;
             vertical-align: middle;
             text-align: center;
         }
 
-        /* SEBELAH KIRI: KOMPONEN TEKS & IDENTITAS */
+        /* SEBELAH KIRI: KOMPONEN TEKS & IDENTITAS SKALA BESAR */
         .celebration-tag {
             display: inline-block;
             background: linear-gradient(90deg, var(--accent-rose), #be123c);
             color: var(--text-light);
             padding: 6px 18px;
             border-radius: 6px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -134,55 +133,56 @@
 
         .student-name {
             font-family: 'Poppins', sans-serif;
-            font-size: 38px;
+            font-size: 46px; /* DI PERBESAR */
             color: var(--text-light);
             font-weight: 700;
-            line-height: 1.25;
-            margin-bottom: 30px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            line-height: 1.2;
+            margin-bottom: 25px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
 
-        /* Desain Tabel Identitas Semi Transparan */
+        /* Desain Tabel Identitas Ukuran Besar */
         .identity-card {
             background: var(--panel-glass);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 14px;
-            padding: 20px 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px 30px;
             margin-bottom: 25px;
         }
 
         .info-row {
             display: block;
-            padding: 11px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 14px 0; /* Jarak baris diperlonggar */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
         }
 
         .info-row:last-child {
             border-bottom: none;
         }
 
-        /* Label Identitas Sebelah Kiri */
+        /* Label Identitas Sebelah Kiri (DI PERBESAR) */
         .info-label {
             display: inline-block;
-            width: 140px;
+            width: 160px; /* Ditambah agar muat teks lebih besar */
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 18px; /* DI PERBESAR */
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.5px;
         }
 
-        /* Nilai/Data Sebelah Kanan */
+        /* Nilai/Data Sebelah Kanan (DI PERBESAR DAN DIPERTEGAS) */
         .info-value {
             display: inline-block;
             color: var(--accent-gold);
-            font-size: 17px;
-            font-weight: 600;
+            font-size: 22px; /* DI PERBESAR NYATA */
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
-        /* Box Kalimat Mutiara / Motivasi */
+        /* Box Kalimat Mutiara */
         .quote-box {
             border-left: 4px solid var(--accent-gold);
             padding-left: 20px;
@@ -191,20 +191,19 @@
 
         .quote-text {
             font-style: italic;
-            color: #cbd5e1;
-            font-size: 15px;
+            color: #e2e8f0;
+            font-size: 16px;
             line-height: 1.6;
         }
 
-        /* SEBELAH KANAN: BINGKAI FOTO SIMETRIS */
+        /* SEBELAH KANAN: BINGKAI FOTO */
         .photo-wrapper {
             display: inline-block;
-            width: 410px;
-            height: 510px;
+            width: 390px; /* Disesuaikan sedikit agar seimbang dengan teks yang membesar */
+            height: 490px;
             position: relative;
         }
 
-        /* Efek Ornamen Bingkai Emas di Belakang Foto */
         .photo-wrapper::before {
             content: "";
             position: absolute;
@@ -251,7 +250,7 @@
 
         .footer-note {
             position: absolute;
-            bottom: 20px; left: 70px;
+            bottom: 20px; left: 65px;
             color: rgba(255, 255, 255, 0.15);
             font-size: 11px;
             letter-spacing: 2px;
@@ -487,7 +486,7 @@
         { n: "Putu Aditya Pratama", nis: "6134", nisn: "0102375174", g: "Laki-Laki", ttl: "Bugbug, 13 Oktober 2010" }
     ];
 
-    // BANK KATA-KATA MOTIVASI / TRANSLATION MUTIARA INDAH
+    // BANK KATA-KATA MOTIVASI / MUTIARA INDAH
     const quotesBank = [
         "Masa depan adalah milik mereka yang percaya pada keindahan impian mereka.",
         "Pendidikan adalah senjata paling mematikan di dunia, karena dengan itu Anda bisa mengubah dunia.",
@@ -508,7 +507,7 @@
         const student = studentsList[currentIdx];
         const quote = quotesBank[currentIdx % quotesBank.length];
         
-        // Injeksi Kode Struktur Dua Kolom Sejajar (Landscape)
+        // Injeksi Kode Struktur Dua Kolom Sejajar Skala Besar
         slideWrapper.innerHTML = `
             <div class="slide-content" id="current-active-slide">
                 <div class="left-column">
@@ -542,7 +541,7 @@
                 <div class="right-column">
                     <div class="photo-wrapper">
                         <img src="images/${student.nisn}.JPG" 
-                             onerror="this.src='https://via.placeholder.com/410x510/111827/fbbf24?text=FOTO+SISWA'" 
+                             onerror="this.src='https://via.placeholder.com/390x490/111827/fbbf24?text=FOTO+SISWA'" 
                              alt="Foto ${student.n}">
                     </div>
                 </div>
