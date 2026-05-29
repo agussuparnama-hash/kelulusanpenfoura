@@ -3,2244 +3,449 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelulusan SMP Negeri 4 Amlapura</title>
+    <title>Selamat Atas Kelulusan Siswa Kelas IX</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* 1. CORE DESIGN PRINCIPLES */
         :root {
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4ecef 100%);
-            --primary: #4a90e2;
-            --primary-hover: #357abd;
-            --text-main: #2c3e50;
-            --text-muted: #7f8c8d;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --shadow: 0 10px 30px rgba(168, 180, 194, 0.3);
-            --success: #2ecc71;
-            --danger: #e74c3c;
+            --primary-navy: #1e1b4b;
+            --accent-gold: #facc15;
+            --rose-accent: #f43f5e;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --slide-w: 1280px;
+            --slide-h: 720px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background: var(--bg-gradient);
-            background-attachment: fixed;
-            min-height: 100vh;
+            background-color: #020617;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: var(--text-main);
-            padding: 20px;
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: 'Lato', sans-serif;
         }
 
-        .container {
+        /* 2. PRESENTATION STAGE */
+        .stage {
+            width: var(--slide-w);
+            height: var(--slide-h);
+            background: var(--bg-gradient);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Semarak Background Decoration */
+        .stage::before {
+            content: ""; position: absolute; top: -10%; right: -5%;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(250, 204, 21, 0.12) 0%, transparent 70%);
+            border-radius: 50%; z-index: 0;
+        }
+
+        /* 3. SLIDE STRUCTURE */
+        .slide {
+            position: absolute;
+            width: 100%; height: 100%;
+            padding: 60px 80px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            visibility: hidden;
+            z-index: 1;
+        }
+
+        .slide.active { opacity: 1; visibility: visible; z-index: 2; }
+
+        /* Left Side Content */
+        .header-tag {
+            display: inline-block;
+            background: var(--rose-accent);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            font-size: 16px;
+            box-shadow: 0 5px 15px rgba(244, 63, 94, 0.4);
+        }
+
+        .student-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 44px;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .info-grid {
             width: 100%;
-            max-width: 550px;
-            background: var(--card-bg);
-            padding: 40px 30px;
-            border-radius: 24px;
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            text-align: center;
-            transition: all 0.4s ease;
-        }
-
-        /* Bagian Identitas Sekolah */
-        .header-school {
             margin-bottom: 30px;
         }
 
-        .logo-sekolah {
-            width: 100px;
-            height: auto;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        .info-row {
+            display: flex;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 20px;
         }
 
-        h1 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #1a365d;
-            line-height: 1.3;
-        }
+        .info-label { color: #94a3b8; width: 220px; font-weight: 700; }
+        .info-value { color: var(--accent-gold); font-weight: 700; }
 
-        .sub-title {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-top: 5px;
-            font-weight: 500;
-        }
-
-        /* Form Input */
-        .search-box {
-            margin-top: 25px;
-            position: relative;
-        }
-
-        .input-nisn {
-            width: 100%;
-            padding: 16px 20px;
-            font-size: 1rem;
-            font-weight: 600;
-            border: 2px solid #e2e8f0;
-            border-radius: 14px;
-            outline: none;
-            transition: all 0.3s ease;
-            text-align: center;
-            letter-spacing: 2px;
-            color: #2d3748;
-            background-color: #f8fafc;
-        }
-
-        .input-nisn:focus {
-            border-color: var(--primary);
-            background-color: #fff;
-            box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.15);
-        }
-
-        .btn-periksa {
-            width: 100%;
-            margin-top: 15px;
-            padding: 16px;
-            font-size: 1rem;
-            font-weight: 700;
-            color: white;
-            background-color: var(--primary);
-            border: none;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
-        }
-
-        .btn-periksa:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(74, 144, 226, 0.4);
-        }
-
-        .btn-periksa:active {
-            transform: translateY(0);
-        }
-
-        /* Panel Hasil Pengumuman */
-        .result-panel {
-            display: none;
-            margin-top: 30px;
-            padding-top: 25px;
-            border-top: 2px dashed #e2e8f0;
-            animation: fadeInUp 0.5s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .table-result {
-            width: 100%;
-            margin-bottom: 20px;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        .table-result td {
-            padding: 10px 5px;
-            font-size: 0.95rem;
-        }
-
-        .table-result td.label {
-            color: var(--text-muted);
-            font-weight: 500;
-            width: 30%;
-        }
-
-        .table-result td.value {
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        /* Status Badge */
-        .badge-status {
-            display: inline-block;
-            padding: 10px 25px;
-            font-size: 1.2rem;
-            font-weight: 800;
-            border-radius: 12px;
-            margin: 10px 0 20px 0;
-            letter-spacing: 1px;
-        }
-
-        .badge-status.lulus {
-            background-color: rgba(46, 204, 113, 0.15);
-            color: var(--success);
-            border: 2px solid var(--success);
-        }
-
-        .badge-status.tidak-lulus {
-            background-color: rgba(231, 76, 60, 0.15);
-            color: var(--danger);
-            border: 2px solid var(--danger);
-        }
-
-        .pesan-box {
-            background: #f8fafc;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            color: #4a5568;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--primary);
-            text-align: left;
-        }
-
-        .btn-download {
-            display: inline-block;
-            padding: 12px 25px;
-            background-color: #2d3748;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-download:hover {
-            background-color: #1a202c;
-            transform: scale(1.02);
-        }
-
-        /* Notifikasi Error */
-        .error-message {
-            display: none;
+        .quote-box {
             margin-top: 20px;
-            padding: 12px;
-            background-color: rgba(231, 76, 60, 0.1);
-            color: var(--danger);
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border: 1px solid rgba(231, 76, 60, 0.2);
+            padding-left: 20px;
+            border-left: 4px solid var(--accent-gold);
         }
 
-        /* Footer */
-        .footer {
-            margin-top: 30px;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            font-weight: 500;
+        .quote-text {
+            color: #cbd5e1;
+            font-style: italic;
+            font-size: 19px;
+            line-height: 1.5;
+        }
+
+        /* Right Side Photo */
+        .photo-frame {
+            width: 100%;
+            height: 520px;
+            background: rgba(255,255,255,0.03);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 12px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .photo-frame img {
+            width: 100%; height: 100%;
+            object-fit: cover; border-radius: 12px;
+        }
+
+        /* Progress Bar & Counter */
+        .progress-container {
+            position: absolute; bottom: 0; left: 0;
+            width: 100%; height: 6px;
+            background: rgba(255,255,255,0.1); z-index: 10;
+        }
+
+        .progress-bar {
+            height: 100%; background: var(--accent-gold);
+            width: 0%;
+        }
+
+        .counter {
+            position: absolute; top: 30px; right: 40px;
+            color: rgba(255,255,255,0.3); font-weight: 700; font-size: 18px;
+        }
+
+        .decoration-icon {
+            position: absolute; bottom: 30px; right: 40px;
+            font-size: 150px; color: rgba(255,255,255,0.02);
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header-school">
-        <img class="logo-sekolah" src="logo-smpn4.png" alt="Logo SMP Negeri 4 Amlapura">
-        <h1>SMP NEGERI 4 AMLAPURA</h1>
-        <div class="sub-title">Sistem Informasi Pengumuman Kelulusan Siswa</div>
-    </div>
-
-    <div class="search-box">
-        <input type="text" id="inputNisn" class="input-nisn" placeholder="MASUKKAN NISN ANDA" maxlength="10" autocomplete="off">
-        <button type="button" class="btn-periksa" onclick="periksaKelulusan()">PERIKSA KELULUSAN</button>
-    </div>
-
-    <div id="errorBox" class="error-message"></div>
-
-    <div id="resultPanel" class="result-panel">
-        <table class="table-result">
-            <tr>
-                <td class="label">Nama</td>
-                <td class="value" id="resNama">-</td>
-            </tr>
-            <tr>
-                <td class="label">NISN</td>
-                <td class="value" id="resNisn">-</td>
-            </tr>
-            <tr>
-                <td class="label">Kelas</td>
-                <td class="value" id="resKelas">-</td>
-            </tr>
-        </table>
-
-        <div id="resStatus" class="badge-status">-</div>
-        <div id="resPesan" class="pesan-box">-</div>
-        
-        <a id="resLink" href="#" target="_blank" class="btn-download">⬇️ DOWNLOAD SURAT KETERANGAN LULUS (SKL)</a>
-    </div>
-
-    <div class="footer">
-        &copy; 2026 SMP Negeri 4 Amlapura. All Rights Reserved.
-    </div>
+<div class="stage" id="stage">
+    <div id="slide-injector"></div>
+    <div class="progress-container"><div class="progress-bar" id="bar"></div></div>
 </div>
 
 <script>
-    // DATA KELULUSAN SISWA (Disinkronkan langsung dari Spreadsheet Anda)
-    // Format kolom: NIS, NISN, NAMA, KELAS, STATUS, PESAN, LINK_SKL
-    const dataSiswa = [
-        {
-            nis: "5945",
-            nisn: "0108263744",
-            nama: "I GEDE BAGUS ARINATA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5946",
-            nisn: "0116947706",
-            nama: "I GEDE PUTU ADITYA WIDIADNYANA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5947",
-            nisn: "0101334696",
-            nama: "I KADE ADITYA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5948",
-            nisn: "0107375477",
-            nama: "I KADE BAGUS RESTU MARTA DWIPAYANA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5949",
-            nisn: "0105494568",
-            nama: "I KOMANG AGUS YUDIARTA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5950",
-            nisn: "0113617757",
-            nama: "I KOMANG ARDI TRIADINATA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5951",
-            nisn: "0109587925",
-            nama: "I KOMANG SUARDIKA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5952",
-            nisn: "0112873665",
-            nama: "I KOMANG YUDI KRISNA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5953",
-            nisn: "0119919461",
-            nama: "I MADE RIZKY YUDA ARTANA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5954",
-            nisn: "0107106374",
-            nama: "I NENGAH NOVA ARDI WIDNYANA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5955",
-            nisn: "0109905386",
-            nama: "I NENGAH OKTA DWI ARDIKA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5956",
-            nisn: "0102327279",
-            nama: "I PUTU ADITYA PRATIDIMNA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5957",
-            nisn: "0107193309",
-            nama: "I PUTU AGUS ADI PRATAMA PUTRA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5958",
-            nisn: "0102061731",
-            nama: "I PUTU KARI SUARDIANA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5959",
-            nisn: "0102527524",
-            nama: "I WAYAN AGUS MERTADANA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5960",
-            nisn: "0104731792",
-            nama: "I WAYAN AGUS SAPUTRA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5961",
-            nisn: "0117540870",
-            nama: "I WAYAN ARTA WIGUNA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5962",
-            nisn: "0111144048",
-            nama: "JERO MADE PATAN ADNYANA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5963",
-            nisn: "0118636417",
-            nama: "NI KADE DIAN SASMITA",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5964",
-            nisn: "0118288334",
-            nama: "NI KADE DWI AULIA STARIYANI",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5065",
-            nisn: "0103834218",
-            nama: "NI KADEK SUCI",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5966",
-            nisn: "0119766877",
-            nama: "NI KADEK YUNITA DILA PUTRI",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5967",
-            nisn: "0113106148",
-            nama: "NI KETUT AGUSTINI",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5968",
-            nisn: "0119208411",
-            nama: "NI KETUT CATUR FEBRI ANGRENI",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5969",
-            nisn: "0117231591",
-            nama: "NI KETUT DEWI SUPRIANINGSIH",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5970",
-            nisn: "0119170100",
-            nama: "NI KETUT MELANI PUTRI",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5971",
-            nisn: "0115754910",
-            nama: "NI KOMANG DWI PUSPITAYANTI",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5972",
-            nisn: "0101908480",
-            nama: "NI KOMANG NADIA REGITA CAHYANI",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5973",
-            nisn: "0112170689",
-            nama: "NI KOMANG YUNIANINGSIH",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5974",
-            nisn: "0117271920",
-            nama: "NI LUH SRI DEWI ADNYANI",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5975",
-            nisn: "0114703167",
-            nama: "NI NENGAH ASTI KHARISMAYANI",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5976",
-            nisn: "0114472387",
-            nama: "NI NENGAH WIDIASIH",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5977",
-            nisn: "0111744505",
-            nama: "NI PUTU DIAH PRISTA BYAN PUTRI",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5978",
-            nisn: "0116288194",
-            nama: "NI WAYAN LISTYANI",
-            kelas: "IX A",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5979",
-            nisn: "0108788531",
-            nama: "I GEDE AGUS ARIMBAWA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5980",
-            nisn: "0111053829",
-            nama: "I GEDE AGUS SARNATA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5981",
-            nisn: "0112061891",
-            nama: "I GEDE BAGIA ARTA WIJAYA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5982",
-            nisn: "0105616128",
-            nama: "I GEDE SUPARTIKA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5983",
-            nisn: "0114682419",
-            nama: "I GEDE SURYA DARMA WIJAWAN",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5984",
-            nisn: "0105248352",
-            nama: "I KETUT TAMAN ADE PRADNYANA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5985",
-            nisn: "0091275470",
-            nama: "I KOMANG BUDIARTAWAN",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5986",
-            nisn: "0111562822",
-            nama: "I MADE ANDIKA AGUSTAMA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5987",
-            nisn: "0118368251",
-            nama: "I MADE BAYU SASTERA UTAMA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5988",
-            nisn: "0107004900",
-            nama: "I NENGAH WIDI ASTRA JAYA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5989",
-            nisn: "0117774743",
-            nama: "I PUTU AGUS PUTRA SENTANU",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5990",
-            nisn: "0114085924",
-            nama: "I PUTU EKA PRANATA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5991",
-            nisn: "0113127648",
-            nama: "I PUTU RIYAN SAPUTRA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5992",
-            nisn: "0103439058",
-            nama: "I WAYAN ARTHA WIDI PRATAMA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5993",
-            nisn: "0102146751",
-            nama: "I WAYAN BAYU RADITYA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5994",
-            nisn: "0116007542",
-            nama: "I WAYAN MERTA YASA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5995",
-            nisn: "0112366805",
-            nama: "I WAYAN SUDIARTAWAN",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5996",
-            nisn: "0101996276",
-            nama: "KADEK JULI SAPUTRA",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5997",
-            nisn: "0104647221",
-            nama: "NI KADE DWI INDAH CAHYANI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5998",
-            nisn: "0115236655",
-            nama: "NI KADE MIRA PERMATA DEVI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5999",
-            nisn: "0104471182",
-            nama: "NI KADE SANTI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6000",
-            nisn: "0105261543",
-            nama: "NI KADEK AYU RASPA DEWI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6001",
-            nisn: "0107741660",
-            nama: "NI KETUT AYU DIAH PRAMESTI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6002",
-            nisn: "0102245316",
-            nama: "NI KETUT EKA NOPIANTARI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6003",
-            nisn: "0103132565",
-            nama: "NI KETUT JUNIANTARI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6004",
-            nisn: "0114187104",
-            nama: "NI KETUT YAMUNA SAHANI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6005",
-            nisn: "0114146406",
-            nama: "NI KETUT YUNITA NOPI ARTINI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6006",
-            nisn: "0116657287",
-            nama: "NI KOMANG TIARA SANTIKA TRI UTAMI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6007",
-            nisn: "0114471159",
-            nama: "NI LUH JULI ANDANI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6008",
-            nisn: "0111722837",
-            nama: "NI LUH PUTU APRIL LIANI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6009",
-            nisn: "0106656885",
-            nama: "NI LUH YUNIARI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6010",
-            nisn: "0114611608",
-            nama: "NI MADE MERTANINGSIH",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6011",
-            nisn: "0117696853",
-            nama: "NI NENGAH WIDYA JULIANTARI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6012",
-            nisn: "0108700745",
-            nama: "NI NYOMAN NOVIANTARI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6013",
-            nisn: "0118323716",
-            nama: "NI PUTU AYU BEBY CARISA PUTRI",
-            kelas: "IX B",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6014",
-            nisn: "0109807538",
-            nama: "I GUSTI NGURAH ADITYA PRAMANA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6015",
-            nisn: "0112744461",
-            nama: "I KADE ARIS JUNIARTA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6016",
-            nisn: "0101601010",
-            nama: "I KADE FAREL DWIKA AGUSTAMA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6017",
-            nisn: "0108062697",
-            nama: "I KADE MAS DVESA SHASTRAWAN",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6018",
-            nisn: "0108084158",
-            nama: "I KADEK AGUS ARTANA PUTRA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6019",
-            nisn: "0102626729",
-            nama: "I KADEK GOHAN YUDIKA PUTRA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6020",
-            nisn: "0105254390",
-            nama: "I KETUT ARYANA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6021",
-            nisn: "0106071226",
-            nama: "I KETUT SUARDANA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6022",
-            nisn: "0109203210",
-            nama: "I KETUT SUDARSANA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6023",
-            nisn: "0113933506",
-            nama: "I KOMANG AGUS SUYASA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6024",
-            nisn: "0108799098",
-            nama: "I KOMANG BAGUS RISKY CIPTA PURNAMA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "2025",
-            nisn: "0105975572",
-            nama: "I KOMANG DARMA MERTAYASA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6026",
-            nisn: "0106893893",
-            nama: "I MADE SUARDIVA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6027",
-            nisn: "0106917476",
-            nama: "I NENGAH AGUSTINA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6028",
-            nisn: "0111074391",
-            nama: "I NENGAH SUPARTAWAN",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6029",
-            nisn: "0103295089",
-            nama: "I NENGAH WIRA SURYA ADINATA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6030",
-            nisn: "0109105690",
-            nama: "KADEK AYU ANTARI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6031",
-            nisn: "0105534471",
-            nama: "KETUT PURNARIANI SINTYA DEWI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6032",
-            nisn: "0101598530",
-            nama: "MIKHA ANANDA RIZKY DI PATRIA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6033",
-            nisn: "0117651247",
-            nama: "NI KADE DEVI SUARMITA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6034",
-            nisn: "0129208854",
-            nama: "NI KADEK SUCIPTA DEWI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6035",
-            nisn: "0109300681",
-            nama: "NI KETUT DESI ARIANTINI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6036",
-            nisn: "0116049770",
-            nama: "NI KETUT YENI PUSPITA",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6037",
-            nisn: "0114101209",
-            nama: "NI KOMANG AYU DINANINGSIH",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6038",
-            nisn: "0102832307",
-            nama: "NI KOMANG CIKA ARISTA PUTRI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6039",
-            nisn: "0104391157",
-            nama: "NI LUH DESI PUSPITA SARI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6040",
-            nisn: "0103678882",
-            nama: "NI LUH PUTU SUGIANTARI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6041",
-            nisn: "0097797833",
-            nama: "NI NENGAH APRIANI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6042",
-            nisn: "0118803063",
-            nama: "NI NENGAH DEWI KERTIASIH",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6043",
-            nisn: "0114249484",
-            nama: "NI NYOMAN CINTYA APRILIANI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6044",
-            nisn: "0101895797",
-            nama: "NI NYOMAN YULIA WERDIYANI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6045",
-            nisn: "0114478470",
-            nama: "NI PUTU CHINTYA FANI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6046",
-            nisn: "0111460890",
-            nama: "NI PUTU LIA PRASINI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6047",
-            nisn: "0111106967",
-            nama: "NI PUTU METRIANI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6048",
-            nisn: "0102457931",
-            nama: "NI WAYAN DEVI ANTARI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6049",
-            nisn: "0105233020",
-            nama: "PUTU DIARA MAHESWARI",
-            kelas: "IX C",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6050",
-            nisn: "0108889028",
-            nama: "I GEDE AGUS WIDIARSA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6051",
-            nisn: "0107257041",
-            nama: "I GEDE NOVA SUKAJAYA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6052",
-            nisn: "0116981846",
-            nama: "I GEDE SUTAMA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6053",
-            nisn: "0102015519",
-            nama: "I GEDE TEGUH SATRIA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6054",
-            nisn: "0108244253",
-            nama: "I GUSTI AGUNG DWI RAHAYU",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6055",
-            nisn: "0114235451",
-            nama: "I KADE DAVA BRAMESTYA PUTRA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6056",
-            nisn: "0106531386",
-            nama: "I KADE PRADITA RESTA WIBAWA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6057",
-            nisn: "0105033754",
-            nama: "I KETUT ASTINA JAYA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "5058",
-            nisn: "0098569530",
-            nama: "I KETUT WARDANA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6059",
-            nisn: "0101556135",
-            nama: "I KOMANG SUARDANA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6060",
-            nisn: "0103922204",
-            nama: "I MADE ANGGA WIJAYA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6061",
-            nisn: "0111622238",
-            nama: "I NENGAH AGUS WIDIARTA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6062",
-            nisn: "0118924237",
-            nama: "I NENGAH MERTA YASA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6063",
-            nisn: "0109236125",
-            nama: "I NENGAH SUDIARNATA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6064",
-            nisn: "0112090486",
-            nama: "I NENGAH YUDA RENDI SURATMAJA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6065",
-            nisn: "0117476537",
-            nama: "I NYOMAN DHYANA WIDHI ARTA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6066",
-            nisn: "0104277477",
-            nama: "I PUTU DECO YUDIKA PUTRA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6067",
-            nisn: "0105456746",
-            nama: "I PUTU RENDY ASTAWAN",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6068",
-            nisn: "0108169042",
-            nama: "I WAYAN AGUS SURYATAMA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6069",
-            nisn: "0118612421",
-            nama: "KADEK FEBY DWI MAHARANI",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6070",
-            nisn: "0107979021",
-            nama: "NI KADE OKY LESINTYA DEWI",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6071",
-            nisn: "0106797223",
-            nama: "NI KADE YUNI LESTARI DEWI",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6072",
-            nisn: "0119050106",
-            nama: "NI KADEK NOVA WIDIANTARI",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6073",
-            nisn: "0112051778",
-            nama: "NI KETUT JENIA MARTY TRIFARISA",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6074",
-            nisn: "0092597937",
-            nama: "NI KOMANG CAHYANI",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6075",
-            nisn: "0106674093",
-            nama: "NI KOMANG DEPI WAHYUNI",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6076",
-            nisn: "0115040871",
-            nama: "NI LUH AYU PARWATI PUTRI",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6077",
-            nisn: "0101989878",
-            nama: "NI LUH DESY WIDIANTARI",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6078",
-            nisn: "0117659778",
-            nama: "NI NYOMAN SURYANINGSIH",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6079",
-            nisn: "0105335373",
-            nama: "NI NYOMAN YULI MENTARI",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6080",
-            nisn: "0119119642",
-            nama: "NI PUTU KRISTINA DEWI",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6081",
-            nisn: "0106703215",
-            nama: "NI PUTU SRI WULAN DANI",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6082",
-            nisn: "0117987322",
-            nama: "NI WAYAN PUJI MORI",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6083",
-            nisn: "0102629718",
-            nama: "NI WAYAN SARI DANIASIH",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6084",
-            nisn: "0113254548",
-            nama: "NI WAYAN WIDHYTIA KUSUMA PRADNYANI",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6085",
-            nisn: "0108848086",
-            nama: "PANDE PUTU RAITUSAN",
-            kelas: "IX D",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6086",
-            nisn: "0105677556",
-            nama: "I GEDE ANDY PRATAMA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6087",
-            nisn: "0106010257",
-            nama: "I GEDE DANA JAYA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6088",
-            nisn: "0118790106",
-            nama: "I GEDE DANU ARTA WIDYA GUNA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6089",
-            nisn: "0105609708",
-            nama: "I GEDE RAFA PUTRA SUGIARTA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6090",
-            nisn: "0114884608",
-            nama: "I GEDE WIRA ADITYA MAHARDIKA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6091",
-            nisn: "0116411315",
-            nama: "I GEDE YUDA ADI PRATAMA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6092",
-            nisn: "0108314264",
-            nama: "I GUSTI AYU INDI PRADNYANDARI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6093",
-            nisn: "0109800796",
-            nama: "I KADE DWI ADITYA MANDUANG",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6094",
-            nisn: "0112008079",
-            nama: "I KADEK EDY ARYA TAMA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6095",
-            nisn: "0112006341",
-            nama: "I KETUT ARDIANA PUTRA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6096",
-            nisn: "0117977094",
-            nama: "I KETUT SUASTAWA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6097",
-            nisn: "0102068311",
-            nama: "I KOMANG ARTANA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6098",
-            nisn: "0117319344",
-            nama: "I KOMANG BUDINDRA PRASTA PUTRA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6099",
-            nisn: "0109125747",
-            nama: "I MADE BRAMASENA KANWA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6100",
-            nisn: "0117123401",
-            nama: "I MADE WAHYU MAHARTHA WIJAYA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6101",
-            nisn: "0111974962",
-            nama: "I NENGAH JULI DARMAWAN",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6102",
-            nisn: "0112022110",
-            nama: "I PUTU ADITYA PRANATA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6103",
-            nisn: "0114718704",
-            nama: "I WAYAN SWADYANA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6156",
-            nisn: "0112565808",
-            nama: "NI KADE SRI BUMI AYU PADMI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6104",
-            nisn: "0109129938",
-            nama: "NI KETUT LEONI SUMASTIANI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6105",
-            nisn: "0116513577",
-            nama: "NI KOMANG INDRAYANI DEWI UTAMI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6106",
-            nisn: "0108727816",
-            nama: "NI KOMANG JUNIANTARI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6107",
-            nisn: "0118038525",
-            nama: "NI KOMANG SANTI CAHYANI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6108",
-            nisn: "0113021203",
-            nama: "NI KOMANG TANIA MAHESWARI WIDYANDHANI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6109",
-            nisn: "0112640678",
-            nama: "NI LUH PUTU AYU APRILIYANI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6110",
-            nisn: "0115866448",
-            nama: "NI PUTU MULIARTINI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6111",
-            nisn: "0112705205",
-            nama: "NI PUTU PRADNYAN FRAMI GAYATRI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6112",
-            nisn: "0109099585",
-            nama: "NI PUTU SERI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6113",
-            nisn: "0117661376",
-            nama: "NI WAYAN PUSPITA DEWI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6114",
-            nisn: "0106402379",
-            nama: "NI WAYAN PUTRI ANTARI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6115",
-            nisn: "0108240835",
-            nama: "NI WAYAN SRI DIAN SEPTIARINI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6116",
-            nisn: "0093228984",
-            nama: "NI WAYAN SRI WAHYUNI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6117",
-            nisn: "0117627079",
-            nama: "PUTU AYU LAKSMI DEWANI PUTRI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6118",
-            nisn: "0114524712",
-            nama: "PUTU DEDE APRIYANTARA",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6119",
-            nisn: "0117823679",
-            nama: "PUTU DINA CAHYA MEKSIKORI",
-            kelas: "IX E",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6120",
-            nisn: "0117086085",
-            nama: "GEDE EDY ARSANA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6121",
-            nisn: "0108593479",
-            nama: "I GEDE AGUS SUMANJAYA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6122",
-            nisn: "0116135486",
-            nama: "I GEDE PARTA WIJAYA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6123",
-            nisn: "0113573753",
-            nama: "I GEDE SUARTAPA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6124",
-            nisn: "0109816668",
-            nama: "I GUSTI AYU INTAN SEPTIARI",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6125",
-            nisn: "0105810975",
-            nama: "I KADE AGUS KUSUMAYOGA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6126",
-            nisn: "0108085926",
-            nama: "I KADE ONXYANTARA PUTRA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6127",
-            nisn: "0116311915",
-            nama: "I KADEK MERTAYASA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6128",
-            nisn: "0106534788",
-            nama: "I KETUT PURNAWAN ADI SANTOSA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6129",
-            nisn: "0114832299",
-            nama: "I KETUT SASA KERTA YASA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6130",
-            nisn: "0115386839",
-            nama: "I KETUT WIRA ADNYANA PUTRA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6131",
-            nisn: "0113784463",
-            nama: "I KOMANG KRISHNA SATRIA ARYA REMINGTON",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6132",
-            nisn: "0112351501",
-            nama: "I KOMANG WIDIARSA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6133",
-            nisn: "0116016454",
-            nama: "I NENGAH RADIT SAPUTRA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6135",
-            nisn: "0112614763",
-            nama: "I PUTU RISKI SATYA KUSUMANATA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6136",
-            nisn: "0113287104",
-            nama: "I PUTU WAHYU MAHENDRA JAYA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6137",
-            nisn: "0104178901",
-            nama: "I WAYAN EKA AGUSTINA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6139",
-            nisn: "0102304864",
-            nama: "KADE DODI ARTANA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6140",
-            nisn: "0111271171",
-            nama: "NI KADE ARI SUSANTI",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6141",
-            nisn: "0101266771",
-            nama: "NI KADEK AYU DWI PRATIWI",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6142",
-            nisn: "0113836350",
-            nama: "NI KADEK CHINTYA INDAH SARI",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6143",
-            nisn: "0119480150",
-            nama: "NI KADEK SINTYA CAHYANI",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6145",
-            nisn: "0116787779",
-            nama: "NI KETUT JULIANI",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6146",
-            nisn: "0118764514",
-            nama: "NI KETUT RANI VIRGINIA VALENTINA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6147",
-            nisn: "0116355150",
-            nama: "NI KETUT TRIANI SUSILA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6148",
-            nisn: "0104551910",
-            nama: "NI LUH PUTU LISTIA DEWI",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6149",
-            nisn: "0117346667",
-            nama: "NI LUH SAVITRI SAKTIARI",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6150",
-            nisn: "0109244704",
-            nama: "NI LUH YARA CAHYA DERVANI",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6151",
-            nisn: "0113992987",
-            nama: "NI NENGAH ITA FEBRIANI",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6152",
-            nisn: "0103625098",
-            nama: "NI PUTU EKA ARIANI",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6153",
-            nisn: "0094389764",
-            nama: "NI PUTU ROSINTA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6154",
-            nisn: "0116446148",
-            nama: "NI WAYAN AYUDIA PRATIWI",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6155",
-            nisn: "0118672630",
-            nama: "NI WAYAN MERTA ASIH",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-        {
-            nis: "6134",
-            nisn: "0102375174",
-            nama: "PUTU ADITYA PRATAMA",
-            kelas: "IX F",
-            status: "LULUS",
-            pesan: "Selamat dan sukses Ananda Telah Menyelesaikan Pendidikan di SMP Negeri 4 Amlapura.",
-            link_skl: "https://drive.google.com/file/d/10JqEvWMx_U74qNQZ3qP6RJIxWazfd6h7/view?usp=sharing"
-        },
-];
+    // DATA 210 SISWA
+    const students = [
+        { n: "I Gede Bagus Arinata", nis: "5945", nisn: "0108263744", g: "Laki-Laki", ttl: "Karangasem, 16 Mei 2010" },
+        { n: "I Gede Putu Aditya Widiadnyana", nis: "5946", nisn: "0116947706", g: "Laki-Laki", ttl: "Karangasem, 23 Juli 2011" },
+        { n: "I Kade Aditya", nis: "5947", nisn: "0101334696", g: "Laki-Laki", ttl: "Karangasem, 17 Mei 2010" },
+        { n: "I Kade Bagus Restu Marta Dwipayana", nis: "5948", nisn: "0107375477", g: "Laki-Laki", ttl: "Karangasem, 21 November 2010" },
+        { n: "I Komang Agus Yudiarta", nis: "5949", nisn: "0105494568", g: "Laki-Laki", ttl: "Karangasem, 12 Maret 2010" },
+        { n: "I Komang Ardi Triadinata", nis: "5950", nisn: "0113617757", g: "Laki-Laki", ttl: "Perasi, 10 Februari 2011" },
+        { n: "I Komang Suardika", nis: "5951", nisn: "0109587925", g: "Laki-Laki", ttl: "Bugbug, 26 Oktober 2010" },
+        { n: "I KOMANG YUDI KRISNA", nis: "5952", nisn: "0112873665", g: "Laki-Laki", ttl: "Karangasem, 8 Januari 2011" },
+        { n: "I Made Rizky Yuda Artana", nis: "5953", nisn: "0119919461", g: "Laki-Laki", ttl: "Sampiyang, 2 Mei 2011" },
+        { n: "I Nengah Nova Ardi Widnyana", nis: "5954", nisn: "0107106374", g: "Laki-Laki", ttl: "Karangasem, 3 November 2010" },
+        { n: "I Nengah Okta Dwi Ardika", nis: "5955", nisn: "0109905386", g: "Laki-Laki", ttl: "Bugbug, 3 Oktober 2010" },
+        { n: "I Putu Aditya Pratidimna", nis: "5956", nisn: "0102327279", g: "Laki-Laki", ttl: "Amlapura, 15 September 2010" },
+        { n: "I Putu Agus Adi Pratama Putra", nis: "5957", nisn: "0107193309", g: "Laki-Laki", ttl: "Bugbug, 9 Juni 2010" },
+        { n: "I Putu Kari Suardiana", nis: "5958", nisn: "0102061731", g: "Laki-Laki", ttl: "Bugbug, 25 Desember 2010" },
+        { n: "I Wayan Agus Mertadana", nis: "5959", nisn: "0102527524", g: "Laki-Laki", ttl: "Perasi, 26 Juni 2010" },
+        { n: "I Wayan Agus Saputra", nis: "5960", nisn: "0104731792", g: "Laki-Laki", ttl: "Perasi, 29 Agustus 2010" },
+        { n: "I Wayan Arta Wiguna", nis: "5961", nisn: "0117540870", g: "Laki-Laki", ttl: "Jasri, 20 Maret 2011" },
+        { n: "Jero Made Patan Adnyana", nis: "5962", nisn: "0111144048", g: "Laki-Laki", ttl: "Karangasem, 26 Januari 2011" },
+        { n: "Ni Kade Dian Sasmita", nis: "5963", nisn: "0118636417", g: "Perempuan", ttl: "Karangasem, 24 Juni 2011" },
+        { n: "Ni Kade Dwi Aulia Stariyani", nis: "5964", nisn: "0118288334", g: "Perempuan", ttl: "Bugbug, 29 Mei 2011" },
+        { n: "Ni Kadek Suci", nis: "5065", nisn: "0103834218", g: "Perempuan", ttl: "Samuh, 1 November 2010" },
+        { n: "Ni Kadek Yunita Dila Putri", nis: "5966", nisn: "0119766877", g: "Perempuan", ttl: "Perasi, 20 Januari 2011" },
+        { n: "Ni Ketut Agustini", nis: "5967", nisn: "0113106148", g: "Perempuan", ttl: "Jasri, 10 Agustus 2011" },
+        { n: "Ni Ketut Catur Febri Angreni", nis: "5968", nisn: "0119208411", g: "Perempuan", ttl: "Bugbug, 27 Februari 2011" },
+        { n: "Ni Ketut Dewi Suprianingsih", nis: "5969", nisn: "0117231591", g: "Perempuan", ttl: "Bugbug, 10 Juli 2011" },
+        { n: "Ni Ketut Melani Putri", nis: "5970", nisn: "0119170100", g: "Perempuan", ttl: "Bugbug, 10 Mei 2011" },
+        { n: "Ni Komang Dwi Puspitayanti", nis: "5971", nisn: "0115754910", g: "Perempuan", ttl: "Amlapura, 23 Maret 2011" },
+        { n: "Ni Komang Nadia Regita Cahyani", nis: "5972", nisn: "0101908480", g: "Perempuan", ttl: "Denpasar, 19 Agustus 2010" },
+        { n: "Ni Komang Yunianingsih", nis: "5973", nisn: "0112170689", g: "Perempuan", ttl: "Sampyang Jasri, 22 Juni 2011" },
+        { n: "Ni Luh Sri Dewi Adnyani", nis: "5974", nisn: "0117271920", g: "Perempuan", ttl: "Bugbug, 16 April 2011" },
+        { n: "Ni Nengah Asti Kharismayani", nis: "5975", nisn: "0114703167", g: "Perempuan", ttl: "Bugbug, 20 Februari 2011" },
+        { n: "Ni Nengah Widiasih", nis: "5976", nisn: "0114472387", g: "Perempuan", ttl: "Perasi, 24 Juli 2011" },
+        { n: "Ni Putu Diah Prista Byan Putri", nis: "5977", nisn: "0111744505", g: "Perempuan", ttl: "Karangasem, 24 April 2011" },
+        { n: "NI WAYAN LISTYANI", nis: "5978", nisn: "0116288194", g: "Perempuan", ttl: "Perasi, 5 Januari 2011" },
+        { n: "I Gede Agus Arimbawa", nis: "5979", nisn: "0108788531", g: "Laki-Laki", ttl: "Bugbug, 13 November 2010" },
+        { n: "I GEDE AGUS SARNATA", nis: "5980", nisn: "0111053829", g: "Laki-Laki", ttl: "Perasi, 26 Februari 2011" },
+        { n: "I Gede Bagia Arta Wijaya", nis: "5981", nisn: "0112061891", g: "Laki-Laki", ttl: "Bugbug, 28 Mei 2011" },
+        { n: "I Gede Supartika", nis: "5982", nisn: "0105616128", g: "Laki-Laki", ttl: "Bugbug, 26 Desember 2010" },
+        { n: "I Gede Surya Darma Wijawan", nis: "5983", nisn: "0114682419", g: "Laki-Laki", ttl: "Karangasem, 1 April 2011" },
+        { n: "I Ketut Taman Ade Pradnyana", nis: "5984", nisn: "0105248352", g: "Laki-Laki", ttl: "Bugbug, 14 Agustus 2010" },
+        { n: "I Komang Budiartawan", nis: "5985", nisn: "0091275470", g: "Laki-Laki", ttl: "Samuh, 21 Mei 2009" },
+        { n: "I Made Andika Agustama", nis: "5986", nisn: "0111562822", g: "Laki-Laki", ttl: "Bugbug, 23 Agustus 2011" },
+        { n: "I Made Bayu Sastera Utama", nis: "5987", nisn: "0118368251", g: "Laki-Laki", ttl: "Samuh, 24 April 2011" },
+        { n: "I Nengah Widi Astra Jaya", nis: "5988", nisn: "0107004900", g: "Laki-Laki", ttl: "Bugbug, 31 Desember 2010" },
+        { n: "I Putu Agus Putra Sentanu", nis: "5989", nisn: "0117774743", g: "Laki-Laki", ttl: "Bugbug, 27 Agustus 2011" },
+        { n: "I Putu Eka Pranata", nis: "5990", nisn: "0114085924", g: "Laki-Laki", ttl: "Karangasem, 21 Januari 2011" },
+        { n: "I Putu Riyan Saputra", nis: "5991", nisn: "0113127648", g: "Laki-Laki", ttl: "Samuh, 12 Juni 2011" },
+        { n: "I Wayan Artha Widi Pratama", nis: "5992", nisn: "0103439058", g: "Laki-Laki", ttl: "Bugbug, 19 Juli 2010" },
+        { n: "I Wayan Bayu Raditya", nis: "5993", nisn: "0102146751", g: "Laki-Laki", ttl: "Perasi, 9 September 2010" },
+        { n: "I Wayan Merta Yasa", nis: "5994", nisn: "0116007542", g: "Laki-Laki", ttl: "Karangasem, 25 Mei 2011" },
+        { n: "I Wayan Sudiartawan", nis: "5995", nisn: "0112366805", g: "Laki-Laki", ttl: "Perasi, 4 Januari 2011" },
+        { n: "Kadek Juli Saputra", nis: "5996", nisn: "0101996276", g: "Laki-Laki", ttl: "Bugbug, 22 Juli 2010" },
+        { n: "Ni Kade Dwi Indah Cahyani", nis: "5997", nisn: "0104647221", g: "Perempuan", ttl: "Sampyang, 31 Mei 2010" },
+        { n: "Ni Kade Mira Permata Devi", nis: "5998", nisn: "0115236655", g: "Perempuan", ttl: "Amlapura, 10 Mei 2011" },
+        { n: "Ni Kade Santi", nis: "5999", nisn: "0104471182", g: "Perempuan", ttl: "Karangasem, 9 September 2010" },
+        { n: "Ni Kadek Ayu Raspa Dewi", nis: "6000", nisn: "0105261543", g: "Perempuan", ttl: "Karangasem, 16 Mei 2010" },
+        { n: "Ni Ketut Ayu Diah Pramesti", nis: "6001", nisn: "0107741660", g: "Perempuan", ttl: "Karangasem, 1 Juli 2010" },
+        { n: "Ni Ketut Eka Nopiantari", nis: "6002", nisn: "0102245316", g: "Perempuan", ttl: "Karangasem, 1 November 2010" },
+        { n: "Ni Ketut Juniantari", nis: "6003", nisn: "0103132565", g: "Perempuan", ttl: "Karangasem, 29 Juni 2010" },
+        { n: "Ni Ketut Yamuna Sahani", nis: "6004", nisn: "0114187104", g: "Perempuan", ttl: "Denpasar, 6 Juni 2011" },
+        { n: "Ni Ketut Yunita Nopi Artini", nis: "6005", nisn: "0114146406", g: "Perempuan", ttl: "Bugbug, 20 Juni 2011" },
+        { n: "Ni Komang Tiara Santika Tri Utami", nis: "6006", nisn: "0116657287", g: "Perempuan", ttl: "Bugbug, 23 Januari 2011" },
+        { n: "Ni Luh Juli Andani", nis: "6007", nisn: "0114471159", g: "Perempuan", ttl: "Bugbug, 2 Juli 2011" },
+        { n: "NI LUH PUTU APRIL LIANI", nis: "6008", nisn: "0111722837", g: "Perempuan", ttl: "Samuh, 11 April 2011" },
+        { n: "Ni Luh Yuniari", nis: "6009", nisn: "0106656885", g: "Perempuan", ttl: "Samuh, 16 Desember 2010" },
+        { n: "Ni Made Mertaningsih", nis: "6010", nisn: "0114611608", g: "Perempuan", ttl: "Perasi Kelod, 25 Maret 2011" },
+        { n: "Ni Nengah Widya Juliantari", nis: "6011", nisn: "0117696853", g: "Perempuan", ttl: "Bugbug, 15 Juli 2011" },
+        { n: "Ni Nyoman Noviantari", nis: "6012", nisn: "0108700745", g: "Perempuan", ttl: "Bugbug, 14 November 2010" },
+        { n: "Ni Putu Ayu Beby Carisa Putri", nis: "6013", nisn: "0118323716", g: "Perempuan", ttl: "Sampiyang, 9 Juni 2011" },
+        { n: "I GUSTI NGURAH ADITYA PRAMANA", nis: "6014", nisn: "0109807538", g: "Laki-Laki", ttl: "Badung, 3 Oktober 2010" },
+        { n: "I Kade Aris Juniarta", nis: "6015", nisn: "0112744461", g: "Laki-Laki", ttl: "Karangasem, 9 Juni 2011" },
+        { n: "I Kade Farel Dwika Agustama", nis: "6016", nisn: "0101601010", g: "Laki-Laki", ttl: "Bugbug, 2 Agustus 2010" },
+        { n: "I Kade Mas Dvesa Shastrawan", nis: "6017", nisn: "0108062697", g: "Laki-Laki", ttl: "Bugbug, 6 November 2010" },
+        { n: "I Kadek Agus Artana Putra", nis: "6018", nisn: "0108084158", g: "Laki-Laki", ttl: "Amlapura, 23 Agustus 2010" },
+        { n: "I Kadek Gohan Yudika Putra", nis: "6019", nisn: "0102626729", g: "Laki-Laki", ttl: "Samuh, 2 Desember 2010" },
+        { n: "I Ketut Aryana", nis: "6020", nisn: "0105254390", g: "Laki-Laki", ttl: "Perasi, 6 April 2010" },
+        { n: "I Ketut Suardana", nis: "6021", nisn: "0106071226", g: "Laki-Laki", ttl: "Bugbug, 12 November 2010" },
+        { n: "I Ketut Sudarsana", nis: "6022", nisn: "0109203210", g: "Laki-Laki", ttl: "Samuh, 11 April 2010" },
+        { n: "I Komang Agus Suyasa", nis: "6023", nisn: "0113933506", g: "Laki-Laki", ttl: "Bugbug, 1 November 2011" },
+        { n: "I Komang Bagus Risky Cipta Purnama", nis: "6024", nisn: "0108799098", g: "Laki-Laki", ttl: "Karangasem, 21 November 2010" },
+        { n: "I KOMANG DARMA MERTAYASA", nis: "2025", nisn: "0105975572", g: "Laki-Laki", ttl: "Perasi, 18 Februari 2010" },
+        { n: "I Made Suardiva", nis: "6026", nisn: "0106893893", g: "Laki-Laki", ttl: "Karangasem, 24 September 2010" },
+        { n: "I Nengah Agustina", nis: "6027", nisn: "0106917476", g: "Laki-Laki", ttl: "Bugbug, 14 Agustus 2010" },
+        { n: "I Nengah Supartawan", nis: "6028", nisn: "0111074391", g: "Laki-Laki", ttl: "Karangasem, 15 Januari 2011" },
+        { n: "I Nengah Wira Surya Adinata", nis: "6029", nisn: "0103295089", g: "Laki-Laki", ttl: "Sampyang, 2 November 2010" },
+        { n: "Kadek Ayu Antari", nis: "6030", nisn: "0109105690", g: "Perempuan", ttl: "Buleleng, 14 November 2010" },
+        { n: "Ketut Purnariani Sintya Dewi", nis: "6031", nisn: "0105534471", g: "Perempuan", ttl: "Bugbug, 16 Agustus 2010" },
+        { n: "Mikha Ananda Rizky Di Patria", nis: "6032", nisn: "0101598530", g: "Perempuan", ttl: "Rembang, 12 Desember 2010" },
+        { n: "Ni Kade Devi Suarmita", nis: "6033", nisn: "0117651247", g: "Perempuan", ttl: "Amlapura, 13 Desember 2011" },
+        { n: "Ni Kadek Sucipta Dewi", nis: "6034", nisn: "0129208854", g: "Perempuan", ttl: "Karangasem, 25 Oktober 2011" },
+        { n: "Ni Ketut Desi Ariantini", nis: "6035", nisn: "0109300681", g: "Perempuan", ttl: "Perasi, 4 Desember 2010" },
+        { n: "Ni Ketut Yeni Puspita", nis: "6036", nisn: "0116049770", g: "Perempuan", ttl: "Bugbug, 1 April 2011" },
+        { n: "Ni Komang Ayu Dinaningsih", nis: "6037", nisn: "0114101209", g: "Perempuan", ttl: "Karangasem, 16 Juli 2011" },
+        { n: "Ni Komang Cika Arista Putri", nis: "6038", nisn: "0102832307", g: "Perempuan", ttl: "Samuh, 18 Agustus 2010" },
+        { n: "Ni Luh Desi Puspita Sari", nis: "6039", nisn: "0104391157", g: "Perempuan", ttl: "Perasi, 29 Desember 2010" },
+        { n: "Ni Luh Putu Sugiantari", nis: "6040", nisn: "0103678882", g: "Perempuan", ttl: "Bugbug, 3 Desember 2010" },
+        { n: "Ni Nengah Apriani", nis: "6041", nisn: "0097797833", g: "Perempuan", ttl: "Babakan, 26 April 2009" },
+        { n: "Ni Nengah Dewi Kertiasih", nis: "6042", nisn: "0118803063", g: "Perempuan", ttl: "Bugbug, 23 Juni 2011" },
+        { n: "NI NYOMAN CINTYA APRILIANI", nis: "6043", nisn: "0114249484", g: "Perempuan", ttl: "Perasi, 25 April 2011" },
+        { n: "Ni Nyoman Yulia Werdiyani", nis: "6044", nisn: "0101895797", g: "Perempuan", ttl: "Perasi, 14 Juli 2010" },
+        { n: "Ni Putu Chintya Fani", nis: "6045", nisn: "0114478470", g: "Perempuan", ttl: "Denpasar, 30 Mei 2011" },
+        { n: "Ni Putu Lia Prasini", nis: "6046", nisn: "0111460890", g: "Perempuan", ttl: "Bugbug, 28 April 2011" },
+        { n: "Ni Putu Metriani", nis: "6047", nisn: "0111106967", g: "Perempuan", ttl: "Perasi, 29 Mei 2011" },
+        { n: "Ni Wayan Devi Antari", nis: "6048", nisn: "0102457931", g: "Perempuan", ttl: "Bugbug, 18 Desember 2010" },
+        { n: "Putu Diara Maheswari", nis: "6049", nisn: "0105233020", g: "Perempuan", ttl: "Bugbug, 6 Desember 2010" },
+        { n: "I Gede Agus Widiarsa", nis: "6050", nisn: "0108889028", g: "Laki-Laki", ttl: "Bugbug, 18 Oktober 2010" },
+        { n: "I Gede Nova Sukajaya", nis: "6051", nisn: "0107257041", g: "Laki-Laki", ttl: "Karangasem, 8 November 2010" },
+        { n: "I Gede Sutama", nis: "6052", nisn: "0116981846", g: "Laki-Laki", ttl: "Karangasem, 18 Januari 2011" },
+        { n: "I Gede Teguh Satria", nis: "6053", nisn: "0102015519", g: "Laki-Laki", ttl: "Bugbug, 22 November 2010" },
+        { n: "I GUSTI AGUNG DWI RAHAYU", nis: "6054", nisn: "0108244253", g: "Perempuan", ttl: "Denpasar, 8 Agustus 2010" },
+        { n: "I Kade Dava Bramestya Putra", nis: "6055", nisn: "0114235451", g: "Laki-Laki", ttl: "Bugbug, 25 Maret 2011" },
+        { n: "I Kade Pradita Resta Wibawa", nis: "6056", nisn: "0106531386", g: "Laki-Laki", ttl: "Bugbug, 28 Agustus 2010" },
+        { n: "I Ketut Astina Jaya", nis: "6057", nisn: "0105033754", g: "Laki-Laki", ttl: "Bugbug, 10 Juni 2010" },
+        { n: "I Ketut Wardana", nis: "5058", nisn: "0098569530", g: "Laki-Laki", ttl: "Jasri, 10 Maret 2009" },
+        { n: "I Komang Suardana", nis: "6059", nisn: "0101556135", g: "Laki-Laki", ttl: "Samuh, 26 September 2010" },
+        { n: "I Made Angga Wijaya", nis: "6060", nisn: "0103922204", g: "Laki-Laki", ttl: "Perasi, 10 Agustus 2010" },
+        { n: "I Nengah Agus Widiarta", nis: "6061", nisn: "0111622238", g: "Laki-Laki", ttl: "Karangasem, 7 Maret 2011" },
+        { n: "I Nengah Merta Yasa", nis: "6062", nisn: "0118924237", g: "Laki-Laki", ttl: "Bugbug, 12 Februari 2011" },
+        { n: "I Nengah Sudiarnata", nis: "6063", nisn: "0109236125", g: "Laki-Laki", ttl: "Bugbug, 29 September 2010" },
+        { n: "I Nengah Yuda Rendi Suratmaja", nis: "6064", nisn: "0112090486", g: "Laki-Laki", ttl: "Bugbug, 14 Februari 2011" },
+        { n: "I Nyoman Dhyana Widhi Arta", nis: "6065", nisn: "0117476537", g: "Laki-Laki", ttl: "Bugbug, 17 Februari 2011" },
+        { n: "I Putu Deco Yudika Putra", nis: "6066", nisn: "0104277477", g: "Laki-Laki", ttl: "Karangasem, 17 Agustus 2010" },
+        { n: "I PUTU RENDY ASTAWAN", nis: "6067", nisn: "0105456746", g: "Laki-Laki", ttl: "Perasi, 4 Maret 2010" },
+        { n: "I Wayan Agus Suryatama", nis: "6068", nisn: "0108169042", g: "Laki-Laki", ttl: "Karangasem, 23 Agustus 2010" },
+        { n: "Kadek Feby Dwi Maharani", nis: "6069", nisn: "0118612421", g: "Perempuan", ttl: "Bugbug, 12 Februari 2011" },
+        { n: "Ni Kade Oky Lesintya Dewi", nis: "6070", nisn: "0107979021", g: "Perempuan", ttl: "Bugbug, 28 Oktober 2010" },
+        { n: "NI KADE YUNI LESTARI DEWI", nis: "6071", nisn: "0106797223", g: "Perempuan", ttl: "Bugbug Kaleran, 13 Juni 2010" },
+        { n: "Ni Kadek Nova Widiantari", nis: "6072", nisn: "0119050106", g: "Perempuan", ttl: "Bugbug, 4 September 2011" },
+        { n: "Ni Ketut Jenia Marty Trifarisa", nis: "6073", nisn: "0112051778", g: "Perempuan", ttl: "Perasi, 19 Maret 2011" },
+        { n: "Ni Komang Cahyani", nis: "6074", nisn: "0092597937", g: "Perempuan", ttl: "Bugbug, 23 Agustus 2009" },
+        { n: "Ni Komang Depi Wahyuni", nis: "6075", nisn: "0106674093", g: "Perempuan", ttl: "Karangasem, 18 September 2010" },
+        { n: "Ni Luh Ayu Parwati Putri", nis: "6076", nisn: "0115040871", g: "Perempuan", ttl: "Karangasem, 29 Januari 2011" },
+        { n: "Ni Luh Desy Widiantari", nis: "6077", nisn: "0101989878", g: "Perempuan", ttl: "Bugbug, 18 Desember 2010" },
+        { n: "Ni Nyoman Suryaningsih", nis: "6078", nisn: "0117659778", g: "Perempuan", ttl: "Bugbug, 22 Mei 2011" },
+        { n: "Ni Nyoman Yuli Mentari", nis: "6079", nisn: "0105335373", g: "Perempuan", ttl: "Bugbug, 22 Juli 2010" },
+        { n: "Ni Putu Kristina Dewi", nis: "6080", nisn: "0119119642", g: "Perempuan", ttl: "Karangasem, 13 Februari 2011" },
+        { n: "Ni Putu Sri Wulan Dani", nis: "6081", nisn: "0106703215", g: "Perempuan", ttl: "Karangasem, 5 November 2010" },
+        { n: "NI WAYAN PUJI MORI", nis: "6082", nisn: "0117987322", g: "Perempuan", ttl: "Karangasem, 10 Juli 2011" },
+        { n: "Ni Wayan Sari Daniasih", nis: "6083", nisn: "0102629718", g: "Perempuan", ttl: "Karangasem, 23 Juli 2010" },
+        { n: "Ni Wayan Widhytia Kusuma Pradnyani", nis: "6084", nisn: "0113254548", g: "Perempuan", ttl: "Perasi, 13 Juni 2011" },
+        { n: "Pande Putu Raitusan", nis: "6085", nisn: "0108848086", g: "Laki-Laki", ttl: "Jembrana, 18 Desember 2010" },
+        { n: "I Gede Andy Pratama", nis: "6086", nisn: "0105677556", g: "Laki-Laki", ttl: "Karangasem, 30 September 2010" },
+        { n: "I Gede Dana Jaya", nis: "6087", nisn: "0106010257", g: "Laki-Laki", ttl: "Denpasar, 28 Juni 2010" },
+        { n: "I Gede Danu Arta Widya Guna", nis: "6088", nisn: "0118790106", g: "Laki-Laki", ttl: "Perasi, 7 Juni 2011" },
+        { n: "I Gede Rafa Putra Sugiarta", nis: "6089", nisn: "0105609708", g: "Laki-Laki", ttl: "Denpasar, 11 Agustus 2010" },
+        { n: "I Gede Wira Aditya Mahardika", nis: "6090", nisn: "0114884608", g: "Laki-Laki", ttl: "Bugbug, 1 Maret 2011" },
+        { n: "I Gede Yuda Adi Pratama", nis: "6091", nisn: "0116411315", g: "Laki-Laki", ttl: "Karangasem, 30 Januari 2011" },
+        { n: "I GUSTI AYU INDI PRADNYANDARI", nis: "6092", nisn: "0108314264", g: "Perempuan", ttl: "Perasi Tengah, 19 Agustus 2010" },
+        { n: "I Kade Dwi Aditya Manduang", nis: "6093", nisn: "0109800796", g: "Laki-Laki", ttl: "Bugbug, 28 November 2010" },
+        { n: "I Kadek Edy Arya Tama", nis: "6094", nisn: "0112008079", g: "Laki-Laki", ttl: "Samuh, 24 Januari 2011" },
+        { n: "I Ketut Ardiana Putra", nis: "6095", nisn: "0112006341", g: "Laki-Laki", ttl: "Karangasem, 16 April 2011" },
+        { n: "I Ketut Suastawa", nis: "6096", nisn: "0117977094", g: "Laki-Laki", ttl: "Amlapura, 31 Maret 2011" },
+        { n: "I Komang Artana", nis: "6097", nisn: "0102068311", g: "Laki-Laki", ttl: "Karangasem, 7 Juli 2010" },
+        { n: "I Komang Budindra Prasta Putra", nis: "6098", nisn: "0117319344", g: "Laki-Laki", ttl: "Karangasem, 23 Juni 2011" },
+        { n: "I MADE BRAMASENA KANWA", nis: "6099", nisn: "0109125747", g: "Laki-Laki", ttl: "Karangasem, 18 Juni 2010" },
+        { n: "I Made Wahyu Mahartha Wijaya", nis: "6100", nisn: "0117123401", g: "Laki-Laki", ttl: "Perasi, 4 Juni 2011" },
+        { n: "I Nengah Juli Darmawan", nis: "6101", nisn: "0111974962", g: "Laki-Laki", ttl: "Bugbug, 9 Juli 2011" },
+        { n: "I Putu Aditya Pranata", nis: "6102", nisn: "0112022110", g: "Laki-Laki", ttl: "Bugbug, 26 Februari 2011" },
+        { n: "I Wayan Swadyana", nis: "6103", nisn: "0114718704", g: "Laki-Laki", ttl: "Bugbug, 31 Mei 2011" },
+        { n: "Ni Kade Sri Bumi Ayu Padmi", nis: "6156", nisn: "0112565808", g: "Perempuan", ttl: "Karangasem, 24 Februari 2011" },
+        { n: "Ni Ketut Leoni Sumastiani", nis: "6104", nisn: "0109129938", g: "Perempuan", ttl: "Perasi, 21 Agustus 2010" },
+        { n: "Ni Komang Indrayani Dewi Utami", nis: "6105", nisn: "0116513577", g: "Perempuan", ttl: "Samuh, 2 Mei 2011" },
+        { n: "Ni Komang Juniantari", nis: "6106", nisn: "0108727816", g: "Perempuan", ttl: "Bugbug, 3 Juni 2010" },
+        { n: "Ni Komang Santi Cahyani", nis: "6107", nisn: "0118038525", g: "Perempuan", ttl: "Jasri, 24 April 2011" },
+        { n: "Ni Komang Tania Maheswari Widyandhani", nis: "6108", nisn: "0113021203", g: "Perempuan", ttl: "Bugbug, 6 Januari 2011" },
+        { n: "Ni Luh Putu Ayu Apriliyani", nis: "6109", nisn: "0112640678", g: "Perempuan", ttl: "Semarapura, 12 April 2011" },
+        { n: "Ni Putu Muliartini", nis: "6110", nisn: "0115866448", g: "Perempuan", ttl: "Perasi, 23 Juni 2011" },
+        { n: "Ni Putu Pradnyan Frami Gayatri", nis: "6111", nisn: "0112705205", g: "Perempuan", ttl: "Karangasem, 15 Januari 2011" },
+        { n: "NI PUTU SERI", nis: "6112", nisn: "0109099585", g: "Perempuan", ttl: "Karangasem, 22 Maret 2010" },
+        { n: "Ni Wayan Puspita Dewi", nis: "6113", nisn: "0117661376", g: "Perempuan", ttl: "Karangasem, 9 September 2011" },
+        { n: "Ni Wayan Putri Antari", nis: "6114", nisn: "0106402379", g: "Perempuan", ttl: "Bugbug, 18 Oktober 2010" },
+        { n: "Ni Wayan Sri Dian Septiarini", nis: "6115", nisn: "0108240835", g: "Perempuan", ttl: "Bugbug, 30 September 2011" },
+        { n: "Ni Wayan Sri Wahyuni", nis: "6116", nisn: "0093228984", g: "Perempuan", ttl: "Karangasem, 7 September 2009" },
+        { n: "Putu Ayu Laksmi Dewani Putri", nis: "6117", nisn: "0117627079", g: "Perempuan", ttl: "Karangasem, 19 Juni 2011" },
+        { n: "Putu Dede Apriyantara", nis: "6118", nisn: "0114524712", g: "Laki-Laki", ttl: "Amlapura, 1 April 2011" },
+        { n: "Putu Dina Cahya Meksikori", nis: "6119", nisn: "0117823679", g: "Perempuan", ttl: "Karangasem, 17 Mei 2011" },
+        { n: "Gede Edy Arsana", nis: "6120", nisn: "0117086085", g: "Laki-Laki", ttl: "Karangasem, 2 Mei 2011" },
+        { n: "I Gede Agus Sumanjaya", nis: "6121", nisn: "0108593479", g: "Laki-Laki", ttl: "Karangasem, 28 Agustus 2010" },
+        { n: "I Gede Parta Wijaya", nis: "6122", nisn: "0116135486", g: "Laki-Laki", ttl: "Karangasem, 17 Juli 2011" },
+        { n: "I Gede Suartapa", nis: "6123", nisn: "0113573753", g: "Laki-Laki", ttl: "Karangasem, 29 April 2011" },
+        { n: "I GUSTI AYU INTAN SEPTIARI", nis: "6124", nisn: "0109816668", g: "Perempuan", ttl: "Karangasem, 19 September 2010" },
+        { n: "I Kade Agus Kusumayoga", nis: "6125", nisn: "0105810975", g: "Laki-Laki", ttl: "Bugbug, 2 Agustus 2010" },
+        { n: "I Kade Onxyantara Putra", nis: "6126", nisn: "0108085926", g: "Laki-Laki", ttl: "Karangasem, 15 Oktober 2010" },
+        { n: "I Kadek Mertayasa", nis: "6127", nisn: "0116311915", g: "Laki-Laki", ttl: "Karangasem, 27 Juni 2011" },
+        { n: "I KETUT PURNAWAN ADI SANTOSA", nis: "6128", nisn: "0106534788", g: "Laki-Laki", ttl: "Karangasem, 8 November 2010" },
+        { n: "I KETUT SASA KERTA YASA", nis: "6129", nisn: "0114832299", g: "Laki-Laki", ttl: "Karangasem, 23 Mei 2011" },
+        { n: "I Ketut Wira Adnyana Putra", nis: "6130", nisn: "0115386839", g: "Laki-Laki", ttl: "Perasi, 6 Januari 2011" },
+        { n: "I Komang Krishna Satria Arya Remington", nis: "6131", nisn: "0113784463", g: "Laki-Laki", ttl: "Amlapura, 24 Februari 2011" },
+        { n: "I Komang Widiarsa", nis: "6132", nisn: "0112351501", g: "Laki-Laki", ttl: "Bugbug, 27 Mei 2011" },
+        { n: "I Nengah Radit Saputra", nis: "6133", nisn: "0116016454", g: "Laki-Laki", ttl: "Jasri, 27 Maret 2011" },
+        { n: "I Putu Riski satya Kusumanata", nis: "6135", nisn: "0112614763", g: "Laki-Laki", ttl: "Amlapura, 22 Februari 2011" },
+        { n: "I Putu Wahyu Mahendra Jaya", nis: "6136", nisn: "0113287104", g: "Laki-Laki", ttl: "Bugbug, 1 Februari 2011" },
+        { n: "I Wayan Eka Agustina", nis: "6137", nisn: "0104178901", g: "Laki-Laki", ttl: "Samuh, 25 Agustus 2010" },
+        { n: "Kade Dodi Artana", nis: "6139", nisn: "0102304864", g: "Laki-Laki", ttl: "Bugbug, 5 November 2010" },
+        { n: "Ni Kade Ari Susanti", nis: "6140", nisn: "0111271171", g: "Perempuan", ttl: "Karangasem, 18 Februari 2011" },
+        { n: "Ni Kadek Ayu Dwi Pratiwi", nis: "6141", nisn: "0101266771", g: "Perempuan", ttl: "Karangasem, 30 September 2010" },
+        { n: "Ni Kadek Chintya Indah Sari", nis: "6142", nisn: "0113836350", g: "Perempuan", ttl: "Bugbug, 1 Juni 2011" },
+        { n: "Ni Kadek Sintya Cahyani", nis: "6143", nisn: "0119480150", g: "Perempuan", ttl: "Karangasem, 30 Agustus 2011" },
+        { n: "Ni Ketut Juliani", nis: "6145", nisn: "0116787779", g: "Perempuan", ttl: "Amlapura, 5 Juli 2011" },
+        { n: "Ni Ketut Rani Virginia Valentina", nis: "6146", nisn: "0118764514", g: "Perempuan", ttl: "Karangasem, 14 Februari 2011" },
+        { n: "Ni Ketut Triani Susila", nis: "6147", nisn: "0116355150", g: "Perempuan", ttl: "Karangasem, 27 Mei 2011" },
+        { n: "Ni Luh Putu Listia Dewi", nis: "6148", nisn: "0104551910", g: "Perempuan", ttl: "Samuh, 10 April 2010" },
+        { n: "Ni Luh Savitri Saktiari", nis: "6149", nisn: "0117346667", g: "Perempuan", ttl: "Amlapura, 29 Mei 2011" },
+        { n: "Ni Luh Yara Cahya Dervani", nis: "6150", nisn: "0109244704", g: "Perempuan", ttl: "Karangasem, 16 September 2010" },
+        { n: "Ni Nengah Ita Febriani", nis: "6151", nisn: "0113992987", g: "Perempuan", ttl: "Karangasem, 1 Februari 2011" },
+        { n: "Ni Putu Eka Ariani", nis: "6152", nisn: "0103625098", g: "Perempuan", ttl: "Karangasem, 18 Agustus 2010" },
+        { n: "Ni Putu Rosinta", nis: "6153", nisn: "0094389764", g: "Perempuan", ttl: "Bugbug, 14 Juli 2009" },
+        { n: "Ni Wayan Ayudia Pratiwi", nis: "6154", nisn: "0116446148", g: "Perempuan", ttl: "Bugbug, 5 April 2011" },
+        { n: "Ni Wayan Merta Asih", nis: "6155", nisn: "0118672630", g: "Perempuan", ttl: "Karangasem, 14 April 2011" },
+        { n: "Putu Aditya Pratama", nis: "6134", nisn: "0102375174", g: "Laki-Laki", ttl: "Bugbug, 13 Oktober 2010" }
+    ];
 
-    function periksaKelulusan() {
-        const inputNisn = document.getElementById('inputNisn').value.trim();
-        const errorBox = document.getElementById('errorBox');
-        const resultPanel = document.getElementById('resultPanel');
+    const motivations = [
+        "Pendidikan adalah paspor menuju masa depan, karena hari esok milik mereka yang mempersiapkannya hari ini.",
+        "Masa depan adalah milik mereka yang percaya pada keindahan impian mereka.",
+        "Hiduplah seolah engkau mati besok. Belajarlah seolah engkau hidup selamanya.",
+        "Kesuksesan bukanlah akhir, kegagalan bukanlah fatal: Keberanian untuk berlanjutlah yang utama.",
+        "Investasi terbaik yang bisa kamu lakukan adalah investasi pada dirimu sendiri melalui pendidikan.",
+        "Tembaklah ke bulan. Bahkan jika kamu meleset, kamu akan mendarat di antara bintang-bintang.",
+        "Jangan biarkan apa yang tidak bisa kamu lakukan menghalangi apa yang bisa kamu lakukan.",
+        "Jadilah yang terbaik dari apa pun kamu saat ini."
+    ];
 
-        // Sembunyikan panel hasil dan error terlebih dahulu saat memeriksa ulang
-        errorBox.style.display = 'none';
-        resultPanel.style.display = 'none';
+    const injector = document.getElementById('slide-injector');
+    const bar = document.getElementById('bar');
+    let idx = 0;
+    const slideDuration = 17140; // Tepat 17,14 Detik per siswa (agar total 210 siswa = 60 menit)
 
-        // Validasi input kosong
-        if (inputNisn === "") {
-            errorBox.innerText = "⚠️ Mohon masukkan NISN terlebih dahulu!";
-            errorBox.style.display = 'block';
-            return;
-        }
+    function render() {
+        const s = students[idx];
+        const m = motivations[idx % motivations.length];
+        
+        injector.innerHTML = `
+            <div class="slide" id="active-slide">
+                <div class="content-side">
+                    <div class="header-tag">Selamat Atas Kelulusan</div>
+                    <h1 class="student-name">${s.n}</h1>
+                    <div class="info-grid">
+                        <div class="info-row"><div class="info-label">Nama</div><div class="info-value">${s.n}</div></div>
+                        <div class="info-row"><div class="info-label">Jenis Kelamin</div><div class="info-value">${s.g}</div></div>
+                        <div class="info-row"><div class="info-label">NIS</div><div class="info-value">${s.nis}</div></div>
+                        <div class="info-row"><div class="info-label">NISN</div><div class="info-value">${s.nisn}</div></div>
+                        <div class="info-row"><div class="info-label">TTL</div><div class="info-value">${s.ttl}</div></div>
+                    </div>
+                    <div class="quote-box">
+                        <p class="quote-text">"${m}"</p>
+                    </div>
+                </div>
+                <div class="photo-side">
+                    <div class="photo-frame">
+                        <img src="images/${s.nisn}.JPG" onerror="this.src='https://via.placeholder.com/500x700/1e1b4b/facc15?text=Foto+Belum+Ada'" alt="${s.n}">
+                    </div>
+                </div>
+                <div class="counter">${idx + 1} / ${students.length}</div>
+                <i class="fa-solid fa-graduation-cap decoration-icon"></i>
+            </div>
+        `;
 
-        // Cari data berdasarkan NISN
-        const siswa = dataSiswa.find(s => s.nisn === inputNisn);
+        setTimeout(() => document.getElementById('active-slide').classList.add('active'), 50);
 
-        if (siswa) {
-            // Isi data ke elemen HTML hasil
-            document.getElementById('resNama').innerText = siswa.nama;
-            document.getElementById('resNisn').innerText = siswa.nisn;
-            document.getElementById('resKelas').innerText = siswa.kelas;
-            document.getElementById('resPesan').innerText = siswa.pesan;
-            
-            // Konfigurasi Link SKL
-            const linkBtn = document.getElementById('resLink');
-            if(siswa.link_skl && siswa.link_skl !== "#") {
-                linkBtn.href = siswa.link_skl;
-                linkBtn.style.display = 'inline-block';
-            } else {
-                linkBtn.style.display = 'none';
-            }
-
-            // Atur Badge Status
-            const statusBadge = document.getElementById('resStatus');
-            statusBadge.innerText = siswa.status.toUpperCase();
-            
-            if (siswa.status.toUpperCase() === "LULUS") {
-                statusBadge.className = "badge-status lulus";
-            } else {
-                statusBadge.className = "badge-status tidak-lulus";
-            }
-
-            // Tampilkan Panel Hasil
-            resultPanel.style.display = 'block';
-
-        } else {
-            // Jika NISN tidak ditemukan
-            errorBox.innerText = "❌ Data NISN tidak ditemukan. Periksa kembali nomor yang Anda masukkan atau hubungi pihak sekolah.";
-            errorBox.style.display = 'block';
-        }
+        // Progress Bar Animasi (Disinkronkan dengan slideDuration)
+        bar.style.transition = 'none';
+        bar.style.width = '0%';
+        setTimeout(() => {
+            bar.style.transition = `width ${slideDuration}ms linear`;
+            bar.style.width = '100%';
+        }, 50);
     }
-</script>
 
+    render();
+    setInterval(() => {
+        idx = (idx + 1) % students.length;
+        render();
+    }, slideDuration);
+</script>
 </body>
 </html>
