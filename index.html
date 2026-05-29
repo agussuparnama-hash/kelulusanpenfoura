@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selamat Atas Kelulusan Siswa Kelas IX</title>
+    <title>Selebrasi Kelulusan Kelas IX</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* 1. CORE DESIGN PRINCIPLES */
         :root {
-            --primary-navy: #1e1b4b;
-            --accent-gold: #facc15;
-            --rose-accent: #f43f5e;
-            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            --slide-w: 1280px;
-            --slide-h: 720px;
+            --primary: #0f172a;
+            --accent: #fbbf24; /* Gold */
+            --rose: #e11d48;
+            --glass: rgba(255, 255, 255, 0.05);
+            --slide-duration: 17143ms; /* Total 60 Menit / 210 Siswa */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,149 +26,197 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
-            font-family: 'Lato', sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        /* 2. PRESENTATION STAGE */
+        /* 1. STAGE & BACKGROUND */
         .stage {
-            width: var(--slide-w);
-            height: var(--slide-h);
-            background: var(--bg-gradient);
+            width: 1280px;
+            height: 720px;
             position: relative;
+            background: #0f172a;
             overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
             display: flex;
             justify-content: center;
             align-items: center;
+            border: 2px solid rgba(255,255,255,0.1);
         }
 
-        /* Semarak Background Decoration */
-        .stage::before {
-            content: ""; position: absolute; top: -10%; right: -5%;
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(250, 204, 21, 0.12) 0%, transparent 70%);
-            border-radius: 50%; z-index: 0;
+        /* Mesh Gradient Background */
+        .mesh-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.5) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(159, 18, 57, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(251, 191, 36, 0.1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(88, 28, 135, 0.4) 0px, transparent 50%);
+            z-index: 0;
         }
 
-        /* 3. SLIDE STRUCTURE */
+        .floating-shape {
+            position: absolute;
+            background: linear-gradient(45deg, var(--rose), var(--accent));
+            filter: blur(80px);
+            border-radius: 50%;
+            opacity: 0.2;
+            z-index: 0;
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 50px); }
+        }
+
+        /* 2. SLIDE ANIMATION (TRANSLATION) */
         .slide {
             position: absolute;
-            width: 100%; height: 100%;
-            padding: 60px 80px;
+            width: 100%;
+            height: 100%;
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 50px;
+            grid-template-columns: 1fr 1fr;
+            padding: 50px 80px;
+            gap: 40px;
             align-items: center;
+            z-index: 2;
             opacity: 0;
-            transition: opacity 0.8s ease-in-out;
+            transform: translateY(30px);
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
             visibility: hidden;
-            z-index: 1;
         }
 
-        .slide.active { opacity: 1; visibility: visible; z-index: 2; }
+        .slide.active {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
 
-        /* Left Side Content */
-        .header-tag {
-            display: inline-block;
-            background: var(--rose-accent);
+        /* 3. CONTENT STYLING */
+        .text-content {
+            display: flex;
+            flex-direction: column;
+            z-index: 5;
+        }
+
+        .badge {
+            background: var(--rose);
             color: white;
-            padding: 8px 25px;
-            border-radius: 50px;
-            font-family: 'Poppins', sans-serif;
+            padding: 6px 20px;
+            border-radius: 4px;
             font-weight: 700;
+            font-size: 14px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            font-size: 16px;
-            box-shadow: 0 5px 15px rgba(244, 63, 94, 0.4);
+            letter-spacing: 3px;
+            width: fit-content;
+            margin-bottom: 20px;
         }
 
         .student-name {
             font-family: 'Poppins', sans-serif;
-            font-size: 44px;
-            color: #ffffff;
+            font-size: 42px;
+            color: #fff;
+            font-weight: 700;
             line-height: 1.2;
             margin-bottom: 30px;
-            font-weight: 700;
         }
 
-        .info-grid {
-            width: 100%;
+        /* Info Grid - Clean & Elegant */
+        .info-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
             margin-bottom: 30px;
         }
 
-        .info-row {
+        .info-item {
             display: flex;
+            justify-content: space-between;
             padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            font-size: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .info-label { color: #94a3b8; width: 220px; font-weight: 700; }
-        .info-value { color: var(--accent-gold); font-weight: 700; }
+        .info-item:last-child { border: none; }
 
-        .quote-box {
-            margin-top: 20px;
-            padding-left: 20px;
-            border-left: 4px solid var(--accent-gold);
-        }
+        .label { color: #94a3b8; font-weight: 400; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
+        .value { color: var(--accent); font-weight: 600; font-size: 18px; text-align: right; }
 
-        .quote-text {
-            color: #cbd5e1;
+        .motivation {
             font-style: italic;
-            font-size: 19px;
-            line-height: 1.5;
+            color: #cbd5e1;
+            font-size: 17px;
+            line-height: 1.6;
+            border-left: 3px solid var(--accent);
+            padding-left: 20px;
         }
 
-        /* Right Side Photo */
+        /* 4. PHOTO STYLING */
         .photo-frame {
-            width: 100%;
+            width: 480px;
             height: 520px;
-            background: rgba(255,255,255,0.03);
-            border: 2px solid rgba(255,255,255,0.1);
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+        }
+
+        .photo-frame::before {
+            content: "";
+            position: absolute;
+            top: -15px; left: -15px; right: 15px; bottom: 15px;
+            border: 2px solid var(--accent);
             border-radius: 20px;
-            padding: 12px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            z-index: -1;
         }
 
         .photo-frame img {
-            width: 100%; height: 100%;
-            object-fit: cover; border-radius: 12px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            border: 8px solid rgba(255,255,255,0.05);
         }
 
-        /* Progress Bar & Counter */
+        /* 5. UI ELEMENTS */
         .progress-container {
             position: absolute; bottom: 0; left: 0;
             width: 100%; height: 6px;
-            background: rgba(255,255,255,0.1); z-index: 10;
+            background: rgba(255,255,255,0.05); z-index: 100;
         }
 
         .progress-bar {
-            height: 100%; background: var(--accent-gold);
-            width: 0%;
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--accent), var(--rose));
         }
 
         .counter {
             position: absolute; top: 30px; right: 40px;
-            color: rgba(255,255,255,0.3); font-weight: 700; font-size: 18px;
+            color: rgba(255,255,255,0.2); font-size: 14px; font-weight: 700;
         }
 
-        .decoration-icon {
-            position: absolute; bottom: 30px; right: 40px;
-            font-size: 150px; color: rgba(255,255,255,0.02);
-            pointer-events: none;
+        .bottom-decoration {
+            position: absolute; bottom: 20px; left: 80px;
+            color: rgba(255,255,255,0.1); font-size: 12px; letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
 
 <div class="stage" id="stage">
+    <div class="mesh-bg"></div>
+    <div class="floating-shape" style="width: 400px; height: 400px; top: -100px; left: -100px;"></div>
+    <div class="floating-shape" style="width: 300px; height: 300px; bottom: -50px; right: -50px; animation-delay: -5s;"></div>
+
     <div id="slide-injector"></div>
+    
     <div class="progress-container"><div class="progress-bar" id="bar"></div></div>
+    <div class="bottom-decoration">SMP NEGERI - KELULUSAN TAHUN AJARAN 2023/2024</div>
 </div>
 
 <script>
-    // DATA 210 SISWA
+    // DATA LENGKAP 210 SISWA
     const students = [
         { n: "I Gede Bagus Arinata", nis: "5945", nisn: "0108263744", g: "Laki-Laki", ttl: "Karangasem, 16 Mei 2010" },
         { n: "I Gede Putu Aditya Widiadnyana", nis: "5946", nisn: "0116947706", g: "Laki-Laki", ttl: "Karangasem, 23 Juli 2011" },
@@ -398,7 +444,7 @@
     const injector = document.getElementById('slide-injector');
     const bar = document.getElementById('bar');
     let idx = 0;
-    const slideDuration = 17140; // Tepat 17,14 Detik per siswa (agar total 210 siswa = 60 menit)
+    const slideDuration = 17143; // 17,143 Detik per siswa (Agar total 210 siswa = 60 menit)
 
     function render() {
         const s = students[idx];
@@ -410,7 +456,6 @@
                     <div class="header-tag">Selamat Atas Kelulusan</div>
                     <h1 class="student-name">${s.n}</h1>
                     <div class="info-grid">
-                        <div class="info-row"><div class="info-label">Nama</div><div class="info-value">${s.n}</div></div>
                         <div class="info-row"><div class="info-label">Jenis Kelamin</div><div class="info-value">${s.g}</div></div>
                         <div class="info-row"><div class="info-label">NIS</div><div class="info-value">${s.nis}</div></div>
                         <div class="info-row"><div class="info-label">NISN</div><div class="info-value">${s.nisn}</div></div>
@@ -430,9 +475,13 @@
             </div>
         `;
 
-        setTimeout(() => document.getElementById('active-slide').classList.add('active'), 50);
+        // Animasi Translation (Slide up + Fade)
+        setTimeout(() => {
+            const dom = document.getElementById('active-slide');
+            if(dom) dom.classList.add('active');
+        }, 50);
 
-        // Progress Bar Animasi (Disinkronkan dengan slideDuration)
+        // Progress Bar
         bar.style.transition = 'none';
         bar.style.width = '0%';
         setTimeout(() => {
