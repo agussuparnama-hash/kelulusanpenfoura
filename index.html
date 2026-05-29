@@ -17,7 +17,7 @@
             --accent-rose: #e11d48;
             --text-light: #f8fafc;
             --text-muted: #cbd5e1;
-            --slide-duration: 17143ms; /* Pas 60 menit untuk 209 siswa */
+            --slide-duration: 17143ms; /* Pas 60 menit untuk 210 siswa */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,6 +41,7 @@
             overflow: hidden;
             border: 3px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            cursor: pointer; /* Mengubah kursor menjadi icon tangan saat diarahkan ke slide */
         }
 
         /* BACKGROUND MESH GRADIENT */
@@ -102,20 +103,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 20px;
             width: 100%;
         }
 
         .school-logo {
-            width: 55px;
-            height: 55px;
             object-fit: contain;
         }
 
         .school-name {
             font-family: 'Poppins', sans-serif;
-            font-size: 22px;
             font-weight: 700;
             color: #ffffff;
             letter-spacing: 1px;
@@ -213,8 +209,8 @@
         /* 5. PHOTO FRAME (UKURAN DIPERKECIL SEDIKIT) */
         .photo-wrapper {
             display: inline-block;
-            width: 350px; /* Diperkecil dari 400px */
-            height: 455px; /* Diperkecil dari 520px agar rasio 3:4 tetap pas */
+            width: 350px; 
+            height: 455px; 
             position: relative;
         }
 
@@ -253,11 +249,21 @@
             position: absolute; top: 35px; right: 45px;
             color: rgba(255, 255, 255, 0.2); font-size: 16px; font-weight: 700;
         }
+
+        /* STATUS PAUSE INDIKATOR */
+        .pause-indicator {
+            position: absolute; bottom: 20px; left: 75px;
+            color: var(--accent-rose); font-size: 14px; font-weight: 700;
+            letter-spacing: 1px; z-index: 10; background: rgba(0,0,0,0.6);
+            padding: 5px 12px; border-radius: 20px; display: none;
+            border: 1px solid rgba(225, 29, 72, 0.3);
+            font-family: 'Poppins', sans-serif;
+        }
     </style>
 </head>
 <body>
 
-<div class="slide-container">
+<div class="slide-container" id="main-container">
     <div class="background-pattern"></div>
     <div class="glow-orb" style="width: 450px; height: 450px; top: -150px; left: -100px;"></div>
     <div class="glow-orb" style="width: 350px; height: 350px; bottom: -80px; right: -50px; animation-delay: -6s;"></div>
@@ -266,10 +272,11 @@
     
     <div class="progress-line-container"><div class="progress-line-bar" id="load-bar"></div></div>
     <div class="slide-counter" id="num-counter">0 / 210</div>
+    <div class="pause-indicator" id="pause-status">⏸ SLIDE DI-PAUSE (Klik lagi untuk melanjutkan)</div>
 </div>
 
 <script>
-    // DATA ORIGINAL 210 SISWA SESUAI KETENTUAN ASLI
+    // DATA ORIGINAL 210 SISWA
     const students = [
         { n: "I Gede Bagus Arinata", nis: "5945", nisn: "0108263744", k: "IX A", g: "Laki-Laki", ttl: "Karangasem, 16 Mei 2010" },
         { n: "I Gede Putu Aditya Widiadnyana", nis: "5946", nisn: "0116947706", k: "IX A", g: "Laki-Laki", ttl: "Karangasem, 23 Juli 2011" },
@@ -294,6 +301,7 @@
         { n: "Ni Kadek Suci", nis: "5065", nisn: "0103834218", k: "IX A", g: "Perempuan", ttl: "Samuh, 1 November 2010" },
         { n: "Ni Kadek Yunita Dila Putri", nis: "5966", nisn: "0119766877", k: "IX A", g: "Perempuan", ttl: "Perasi, 20 Januari 2011" },
         { n: "Ni Ketut Agustini", nis: "5967", nisn: "0113106148", k: "IX A", g: "Perempuan", ttl: "Jasri, 10 Agustus 2011" },
+        { n: "Ni Ketut Catur Febri Angreni", nis: "5968", nisn: "0119208411", k: "IX A", g: "Perempuan", ttl: "Bugbug, 27 Februari 2011" },
         { n: "Ni Ketut Dewi Suprianingsih", nis: "5969", nisn: "0117231591", k: "IX A", g: "Perempuan", ttl: "Bugbug, 10 Juli 2011" },
         { n: "Ni Ketut Melani Putri", nis: "5970", nisn: "0119170100", k: "IX A", g: "Perempuan", ttl: "Bugbug, 10 Mei 2011" },
         { n: "Ni Komang Dwi Puspitayanti", nis: "5971", nisn: "0115754910", k: "IX A", g: "Perempuan", ttl: "Amlapura, 23 Maret 2011" },
@@ -496,8 +504,13 @@
     const slideWrapper = document.getElementById('slide-wrapper');
     const loadBar = document.getElementById('load-bar');
     const counterText = document.getElementById('num-counter');
+    const mainContainer = document.getElementById('main-container');
+    const pauseStatus = document.getElementById('pause-status');
+    
     let currentIdx = 0;
-    const intervalTime = 17143; // 17.143 detik
+    const intervalTime = 17143; // 17.143 detik per siswa
+    let slideTimer = null;
+    let isPaused = false;
 
     function renderSlide() {
         const s = students[currentIdx];
@@ -537,12 +550,12 @@
                 </div>
                 
                 <div class="right-column">
-<div class="school-branding" style="margin-top: -60px; margin-bottom: 40px; gap: 20px;">
-    <img class="school-logo" src="logo.png" style="width: 80px; height: 80px;" 
-         onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23fbbf24\'><path d=\'M12 3L1 9l11 6 9-4.91V17h2V9L12 3z\'/><path d=\'M20 12.38l-8 4.36-8-4.36V17l8 4.36 8-4.36v-4.62z\'/></svg>'" 
-         alt="Logo Sekolah">
-    <div class="school-name" style="font-size: 28px; white-space: nowrap; border-bottom: 2px solid var(--accent-gold); padding-bottom: 5px;">SMP Negeri 4 Amlapura</div>
-</div>
+                    <div class="school-branding" style="margin-top: -60px; margin-bottom: 40px; gap: 20px;">
+                        <img class="school-logo" src="logo.png" style="width: 80px; height: 80px;" 
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23fbbf24\'><path d=\'M12 3L1 9l11 6 9-4.91V17h2V9L12 3z\'/><path d=\'M20 12.38l-8 4.36-8-4.36V17l8 4.36 8-4.36v-4.62z\'/></svg>'" 
+                             alt="Logo Sekolah">
+                        <div class="school-name" style="font-size: 28px; white-space: nowrap; border-bottom: 2px solid var(--accent-gold); padding-bottom: 5px;">SMP Negeri 4 Amlapura</div>
+                    </div>
                     
                     <div class="photo-wrapper">
                         <img src="images/${s.nisn}.JPG" 
@@ -553,30 +566,77 @@
             </div>
         `;
 
-        // Update Counter
         counterText.innerText = `${currentIdx + 1} / ${students.length}`;
 
-        // Aktifkan Efek Translasi & Fade In
         setTimeout(() => {
             const dom = document.getElementById('active-slide');
             if(dom) dom.classList.add('active');
         }, 50);
 
-        // Reset & Jalankan Progress Bar
+        // Atur animasi progress bar waktu berjalan
         loadBar.style.transition = 'none';
         loadBar.style.width = '0%';
-        setTimeout(() => {
-            loadBar.style.transition = `width ${intervalTime}ms linear`;
-            loadBar.style.width = '100%';
-        }, 50);
+        
+        if (!isPaused) {
+            setTimeout(() => {
+                loadBar.style.transition = `width ${intervalTime}ms linear`;
+                loadBar.style.width = '100%';
+            }, 50);
+        }
     }
 
-    renderSlide();
+    // FUNGSI UNTUK MENJALANKAN AUTOMATISASI TIMING SLIDE
+    function startSlideShow() {
+        slideTimer = setInterval(() => {
+            currentIdx = (currentIdx + 1) % students.length;
+            renderSlide();
+        }, intervalTime);
+    }
 
-    setInterval(() => {
-        currentIdx = (currentIdx + 1) % students.length;
-        renderSlide();
-    }, intervalTime);
+    // FUNGSI UNTUK MENGHENTIKAN TIMING SLIDE
+    function stopSlideShow() {
+        clearInterval(slideTimer);
+    }
+
+    // PERINTAH UTAMA: KETIKA AREA SLIDE DI-KLIK (PAUSE & PLAY)
+    mainContainer.addEventListener('click', () => {
+        if (!isPaused) {
+            // EKSEKUSI PAUSE
+            isPaused = true;
+            stopSlideShow(); // stop interval ganti siswa
+            pauseStatus.style.display = 'block'; // Tampilkan tulisan "DI-PAUSE"
+            
+            // Hentikan gerakan animasi Progress Bar di posisi terakhirnya berada saat diklik
+            const computedStyle = window.getComputedStyle(loadBar);
+            const currentWidth = computedStyle.getPropertyValue('width');
+            loadBar.style.transition = 'none';
+            loadBar.style.width = currentWidth;
+        } else {
+            // EKSEKUSI PLAY KEMBALI
+            isPaused = false;
+            pauseStatus.style.display = 'none'; // Sembunyikan status "DI-PAUSE"
+            
+            // Lanjutkan sisa waktu progress bar ke 100% sebelum pindah ke siswa berikutnya
+            const totalWidth = mainContainer.offsetWidth;
+            const currentWidthPx = parseFloat(window.getComputedStyle(loadBar).width);
+            const percentageLeft = 1 - (currentWidthPx / totalWidth);
+            const remainingTime = intervalTime * percentageLeft;
+
+            loadBar.style.transition = `width ${remainingTime}ms linear`;
+            loadBar.style.width = '100%';
+
+            // Set timeout sementara untuk menyelesaikan sisa waktu siswa saat ini sebelum kembali ke interval normal
+            slideTimer = setTimeout(() => {
+                currentIdx = (currentIdx + 1) % students.length;
+                renderSlide();
+                startSlideShow(); // kembali ke putaran otomatis 17 detik normal
+            }, remainingTime);
+        }
+    });
+
+    // Jalankan slide pertama kali saat sistem dibuka
+    renderSlide();
+    startSlideShow();
 </script>
 </body>
 </html>
